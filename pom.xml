@@ -30,6 +30,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<!-- 测试mock -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -72,13 +77,15 @@
 
 	<!-- 需要把spring-boot-maven-plugin添加到pom.xml中才能创建可执行jar -->
 	<build>
+		<finalName>CourseManage</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<defaultGoal>compile</defaultGoal>
 	</build>
 
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 </project>

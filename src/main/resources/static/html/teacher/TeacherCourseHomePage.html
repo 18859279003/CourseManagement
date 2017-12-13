@@ -12,9 +12,9 @@
                 课堂管理系统
             </div>
             <div class="icon">
-                <img src="../../Img/home.png">首页
-                <img src="../../Img/help.png">帮助
-                <img src="../../Img/exit.png">退出
+            <a href="/TeacherHomePage"><img src="../../Img/home.png">首页 </a>
+            <img src="../../Img/help.png">帮助
+            <a href="/WechatLoginPage"><img src="../../Img/exit.png">退出</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -23,24 +23,23 @@
                 <div class="title">导航</div>
                 <div class="line"></div>
                 <div class="courseIntroduction">
-           <a class="guidefont" href="#">基本信息</a>
-                  <a class="guidefont" href="#">课程信息</a>
-                  <a class="guidefont" href="#">新建课程</a>
+                <a class="guidefont" href="/TeacherHomePage">基本信息</a>
+                 <a class="guidefont" href="/TeacherCourseHomePage">课程信息</a>
+                <a class="guidefont" href="/TeacherCreateCoursePage">新建课程</a>
                 </div>
             </div>
             <div class="content">
               <div class="title">课程信息</div>
               <hr class="line"/>
 
-<div id=courselist>
-</div>
-
-
-
-            <div class="main_box_right_content">
-                <img class="addcourse" src="../../Img/add.png">
-                
+            <div id=courselist>
             </div>
+            <a href="/TeacherCreateCoursePage">
+            <div class="main_box_right_content" style="cursor:pointer" >
+                <img class="addcourse" src="../../Img/add.png">
+             
+            </div>
+            </a>   
             </div>
             
            
@@ -48,6 +47,6 @@
         </div>
     <!-- jQuery Js -->
     <script src="../../../../../../webjars/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../../js/teacher/course.js"></script>
+    <script src="../../js/teacher/TeacherCourseHome.js"></script>
 </body>
 </html>

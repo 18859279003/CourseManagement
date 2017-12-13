@@ -47,7 +47,7 @@ function init(){
 function chooseTopic()
 {
 	if 
-	(confirm("您确定要选择该话题吗？")){	
+	(!confirm("您确定要选择该话题吗？")){	
 	alert("选择成功");
 	}
 	else{alert("选择失败");}

@@ -12,9 +12,9 @@
         		课堂管理系统
         	</div>
         	<div class="icon">
-        		<img src="../../Img/home.png">首页
-        		<img src="../../Img/help.png">帮助
-        		<img src="../../Img/exit.png">退出
+        		<a href="/StudentCourseHome"><img src="../../Img/home.png">首页</a>
+			<a href="###"><img src="../../Img/help.png">帮助</a>
+			<a href="/WechatLoginPage"><img src="../../Img/exit.png">退出</a>
         	</div>
         	<div class="clear"></div>
     	</div>
@@ -22,42 +22,44 @@
             <div class="navigation">
                 <div class="title">导航</div>
                 <div class="line"></div>
-                <div class="courseIntroduction"><a class="guidefont" href="#">基本信息</a>
-                  <a class="guidefont" href="#">课程信息</a>
-                  <a class="guidefont" href="#">选择课程</a>
+                <div class="courseIntroduction">
+                <a class="guidefont" href="StudentHomePage.html">基本信息</a>
+                  <a class="guidefont" href="StudentCourseHome.html">课程信息</a>
+                  <a class="guidefont" href="StudentChooseCoursePage.html">选择课程</a>
                 </div>
             </div>
             <div class="content">
             
                <div class="title">基本信息</div>
                <div class="line"></div>
-                <div class="imgarea"><img class="img" src="../../Img/link.jpg"/></div>
+                <div class="imgarea"><img class="img" src="../../Img/link.jpg" id="img"/></div>
                 
                  <div class="info">
         <table class="table">
         <tr class="itemName">
-        <td >用户名：<span>12345678978</span></td>
-        <td>学号：<span>12345678978</span></td>
+        <td >用户名：<span id="username">12345678978</span></td>
+        <td>学号：<span id="stuffNum">12345678978</span></td>
         </tr>
         <tr class="itemName">
-        <td>姓名：<span>12345678978</span></td>
-        <td>性别：<span>12345678978</span></td>
+        <td>姓名：<span id="name">12345678978</span></td>
+        <td>性别：<span id="gender">12345678978</span></td>
         </tr>
         <tr class="itemName">
-        <td>学校：<span>12345678978</span></td>
-        <td>学历：<span>12345678978</span></td>
+        <td>学校：<span id="school">12345678978</span></td>
+        <td>学历：<span id="education">本科</span></td>
         </tr>
         <tr class="itemName">
-        <td>E-mail：<span>12345678978</span></td>
-        <td>联系方式：<span>12345678978</span></td>
+        <td>E-mail：<span id="email">12345678978</span></td>
+        <td>联系方式：<span id="tel">12345678978</span></td>
         </tr>
         </table>
         <br/>
         <br/>
         <br/>
         <br/>
-        <div class="button">
-        <button>修改</button>
+                <a href="/StudentInfoModifyPage" class="button">
+                    <button style='cursor: pointer;'>修改</button>
+                </a>
         </div>
         </div>
             </div>
@@ -65,5 +67,8 @@
            
             <div class="clear"></div>
         </div>
+        
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script src="../../js/student/StudentHome.js"></script>
 </body>
 </html>
