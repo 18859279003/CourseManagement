@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="xmu.crms.mapper.TopicMapper">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+    <select id="getTopicByTopicId" resultType="xmu.crms.entity.Topic">
+        SELECT
+        id,
+        name,
+        description,
+        group_number_limit,
+        group_student_limit,
+        seminar_id 
+        FROM topic
+        WHERE id= #{topicId};
+    </select>
+</mapper>
