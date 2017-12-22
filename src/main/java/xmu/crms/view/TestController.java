@@ -1,6 +1,7 @@
 package xmu.crms.view;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.model.User;
+import xmu.crms.service.TestService;
 
 @RestController
 public class TestController {
@@ -30,6 +32,12 @@ public class TestController {
 	public User getUser() {
 		return new User();
 	}
-	
+	//测试mybatis
+	@RequestMapping(value="/mybatis",method=RequestMethod.GET)
+	public List<User> getUserId()
+	{
+		TestService test = new TestService();
+		return test.getAll();
+	}
 }
 	

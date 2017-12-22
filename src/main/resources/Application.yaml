@@ -1,0 +1,18 @@
+server:
+ port: 8080
+ 
+spring:
+  
+ datasource: 
+  url: jdbc:mysql://120.77.173.98:3306/xmu8203?characterEncoding=utf8
+  username: xmu8203
+  password: fc8581a2
+  driver-class-name: com.mysql.jdbc.Driver
+  
+ mybatis:
+  mapper-location: classpath:mapper/*.xml
+  type-aliases-package: xmu.crms.model
+  configuration: 
+  map-underscore-camel-case: true
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+ 
