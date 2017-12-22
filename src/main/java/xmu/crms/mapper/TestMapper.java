@@ -6,5 +6,5 @@ import xmu.crms.model.User;
 
 public interface TestMapper {
 
-	public List<User> getUserId();
+	public List<User> getUser();
 }

@@ -1,4 +1,4 @@
-package xmu.crms.view;
+package xmu.crms.controller;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;

@@ -11,7 +11,7 @@ public class TestService {
 	public TestMapper test;
 	 public List<User> getAll() {
 	        // TODO Auto-generated method stub
-	        return test.getUserId();
+	        return test.getUser();
 	    }
 
 }

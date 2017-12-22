@@ -1,4 +1,4 @@
-package xmu.crms.view;
+package xmu.crms.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
