@@ -10,6 +10,15 @@ public class Topic {
 	private Integer groupStudentLimit;
 	private Seminar seminar;
 	
+	public Topic(BigInteger id, String name, String description, Integer groupNumberLimit, Integer groupStudentLimit) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.groupNumberLimit = groupNumberLimit;
+		this.groupStudentLimit = groupStudentLimit;
+	}
+
 	public BigInteger getId() {
 		return id;
 	}

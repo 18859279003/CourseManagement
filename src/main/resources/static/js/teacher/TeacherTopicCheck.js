@@ -4,7 +4,7 @@
 }(jQuery));
 
 function init(){
-	var id;
+	var id=1;
 	//获取左侧课程基本信息	
 	$.ajax({			
 		url: "/course/"+id,

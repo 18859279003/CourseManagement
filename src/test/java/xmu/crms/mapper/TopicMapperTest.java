@@ -1,6 +1,7 @@
 package xmu.crms.mapper;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,8 +26,28 @@ public class TopicMapperTest {
 	@Test
 public	void getTopicByTopicIdTest()throws  Exception
 	{
-		Topic topic= topicMapper.getTopicByTopicId(new BigInteger("1"));
+		Topic topic1= topicMapper.getTopicByTopicId(new BigInteger("1"));
+		log.info(topic1);
+	}
+	
+	@Test
+	public	void updateTopicByTopicIdTest()throws  Exception	
+	{
+		Topic topic=new Topic(new BigInteger("2"),new String("testname"),new String("testDescription"),new Integer("100"),new Integer("100"));
+		topicMapper.updateTopicByTopicId(new BigInteger("2"), topic);
 		log.info(topic);
 	}
-
+	
+	@Test
+	public	void deleteTopicByTopicIdTest()throws  Exception
+		{
+			topicMapper.deleteTopicByTopicId(new BigInteger("2"));
+		}
+	@Test
+	public	void listTopicBySeminarIdTest()throws  Exception
+		{
+			List<Topic> topics=topicMapper.listTopicBySeminarId(new BigInteger("1"));
+			log.info(topics);
+		}
+		
 }

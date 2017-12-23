@@ -33,7 +33,9 @@ public class TopicController {
 	//按ID修改话题，传入话题id和json
 	@RequestMapping(value="/{topicId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void updateTopicById(@PathParam("topicId") Integer topicId, @RequestBody Topic topic){
+	public void updateTopicById(@PathParam("topicId") BigInteger topicId, @RequestBody xmu.crms.entity.Topic topic) throws IllegalArgumentException, TopicNotFoundException{
+		TopicServiceImpl topicServiceImpl = new TopicServiceImpl();
+		topicServiceImpl.updateTopicByTopicId(topicId, topic);
 	}
 	
 	//按ID删除话题，传入话题id

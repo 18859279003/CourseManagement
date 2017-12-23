@@ -11,11 +11,54 @@
         name,
         description,
         group_number_limit,
-        group_student_limit,
-        seminar_id 
+        group_student_limit
         FROM topic
         WHERE id= #{topicId};
     </select>
+    
+    <update id="updateTopicByTopicId"  parameterType="xmu.crms.entity.Topic">
+       UPDATE  topic
+       SET
+        name = #{topic.name},
+        description = #{topic.description},
+        group_number_limit =#{topic.groupNumberLimit},
+        group_student_limit =#{topic.groupStudentLimit}
+ 		WHERE id= #{topicId};
+    </update>
+    
+    <delete id="deleteTopicByTopicId"  parameterType="xmu.crms.entity.Topic">
+       DELETE FROM topic
+ 	   WHERE id= #{topicId};
+    </delete>
+    
+    <select id="listTopicBySeminarId" resultType="xmu.crms.entity.Topic">
+        SELECT
+        id,
+        name,
+        description,
+        group_number_limit,
+        group_student_limit
+        FROM topic
+        WHERE seminar_id= #{seminarId};
+    </select>
+    
+     <insert id="deleteTopicByTopicId"  parameterType="xmu.crms.entity.Topic">
+       INSERT INTO topic(
+        id,
+        name,
+        description,
+        group_number_limit,
+        group_student_limit
+        )
+ 	  	VALUES(
+ 	  	#{topic.id},
+ 	  	#{topic.name},
+ 	  	#{topic.description},
+ 	  	#{topic.groupNumberLimit},
+ 	  	#{topic.groupStudentLimit},
+ 	  	)
+ 	   ;
+    </insert>
 </mapper>
 
  

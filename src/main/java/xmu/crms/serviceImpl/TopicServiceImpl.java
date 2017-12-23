@@ -29,7 +29,7 @@ public class TopicServiceImpl implements TopicService
 	@Override
 	public void updateTopicByTopicId(BigInteger topicId, Topic topic)
 			throws TopicNotFoundException, IllegalArgumentException {
-		// TODO Auto-generated method stub
+		topicMapper.updateTopicByTopicId(topicId, topic);
 		
 	}
 
