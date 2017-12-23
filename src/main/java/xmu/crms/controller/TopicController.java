@@ -1,5 +1,6 @@
 package xmu.crms.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import xmu.crms.exception.TopicNotFoundException;
 import xmu.crms.model.Group;
 import xmu.crms.model.Topic;
+import xmu.crms.serviceImpl.TopicServiceImpl;
 
 @RestController
 @RequestMapping("/topic")
@@ -21,9 +24,10 @@ public class TopicController {
 
 	//按ID获取话题，传入话题id，返回话题对象
 	@RequestMapping(value="/{topicId}", method=RequestMethod.GET)
-	public Topic getTopicById(@PathParam("topicId") Integer topicId){
-		Topic topic=new Topic(257,"A","领域模型与模块","Domain model与模块划分",5,6,2);//假的
-		return topic;
+	public xmu.crms.entity.Topic getTopicById(@PathParam("topicId") BigInteger topicId) throws IllegalArgumentException, TopicNotFoundException{
+		//Topic topic=new Topic(257,"A","领域模型与模块","Domain model与模块划分",5,6,2);
+		TopicServiceImpl topicServiceImpl = new TopicServiceImpl();
+		return topicServiceImpl.getTopicByTopicId(topicId);
 	}
 
 	//按ID修改话题，传入话题id和json
