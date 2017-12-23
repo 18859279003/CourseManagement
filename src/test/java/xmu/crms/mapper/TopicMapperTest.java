@@ -23,7 +23,7 @@ public class TopicMapperTest {
     private TopicMapper topicMapper;
 	private static Log log = LogFactory.getLog(TopicMapperTest.class);
 	@Test
-public	void testGetTopicByTopicId()throws  Exception
+public	void getTopicByTopicIdTest()throws  Exception
 	{
 		Topic topic= topicMapper.getTopicByTopicId(new BigInteger("1"));
 		log.info(topic);
