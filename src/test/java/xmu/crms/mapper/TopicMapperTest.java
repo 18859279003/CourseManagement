@@ -41,7 +41,7 @@ public	void getTopicByTopicIdTest()throws  Exception
 	@Test
 	public	void deleteTopicByTopicIdTest()throws  Exception
 		{
-			topicMapper.deleteTopicByTopicId(new BigInteger("2"));
+			topicMapper.deleteTopicByTopicId(new BigInteger("6"));
 		}
 	@Test
 	public	void listTopicBySeminarIdTest()throws  Exception
@@ -49,5 +49,20 @@ public	void getTopicByTopicIdTest()throws  Exception
 			List<Topic> topics=topicMapper.listTopicBySeminarId(new BigInteger("1"));
 			log.info(topics);
 		}
-		
+	@Test
+	public	void insertTopicBySeminarIdTest()throws  Exception
+		{
+		    Topic topic=new Topic(new BigInteger("11"),new String("testname"),new String("testDescription"),new Integer("100"),new Integer("100"));
+		    topicMapper.insertTopicBySeminarId(new BigInteger("1"), topic);
+		}	
+	@Test
+	public	void deleteSeminarGroupTopicByIdTest()throws  Exception
+		{
+		    topicMapper.deleteSeminarGroupTopicById(new BigInteger("1"),new BigInteger("1"));
+		}	
+	@Test
+	public	void deleteSeminarGroupTopicByTopicIdTest()throws  Exception
+		{
+		    topicMapper.deleteSeminarGroupTopicByTopicId(new BigInteger("1"));;
+		}	
 }

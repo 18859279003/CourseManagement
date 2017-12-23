@@ -55,7 +55,7 @@ public interface TopicMapper {
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    BigInteger insertTopicBySeminarId(@Param("seminarId") BigInteger seminarId, @Param("topic") Topic topic) ;
+    void insertTopicBySeminarId(@Param("seminarId") BigInteger seminarId, @Param("topic") Topic topic) ;
 
     /**
      * @param groupId 小组Id
@@ -63,7 +63,7 @@ public interface TopicMapper {
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    void deleteTopicById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId) ;
+    void deleteSeminarGroupTopicById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
 
     /**
      * @param topicId 讨论课Id
@@ -87,4 +87,11 @@ public interface TopicMapper {
      * @author zhangzhaoyang  
      */
     void deleteTopicBySeminarId(@Param("seminarId") BigInteger seminarId);
+    
+    /**
+     * @param groupId 组Id
+     * @date 2017/12/20
+     * @author zhangzhaoyang  
+     */
+    List<SeminarGroupTopic> listSeminarGroupTopicByGroupId(@Param("groupId") BigInteger groupId);
 }

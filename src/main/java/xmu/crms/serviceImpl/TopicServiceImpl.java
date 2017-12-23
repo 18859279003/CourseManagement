@@ -52,7 +52,7 @@ public class TopicServiceImpl implements TopicService
 	}
 
 	@Override
-	public void deleteTopicById(BigInteger groupId, BigInteger topicId) throws IllegalArgumentException {
+	public void deleteSeminarGroupTopicById(BigInteger groupId, BigInteger topicId) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -74,6 +74,12 @@ public class TopicServiceImpl implements TopicService
 	public void deleteTopicBySeminarId(BigInteger seminarId) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<SeminarGroupTopic> listSeminarGroupTopicByGroupId(BigInteger groupId) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
