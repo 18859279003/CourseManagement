@@ -35,31 +35,30 @@ public class TopicServiceImpl implements TopicService
 
 	@Override
 	public void deleteTopicByTopicId(BigInteger topicId) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
+		topicMapper.deleteTopicByTopicId(topicId);
 	}
 
 	@Override
 	public List<Topic> listTopicBySeminarId(BigInteger seminarId) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return topicMapper.listTopicBySeminarId(seminarId);
 	}
 
 	@Override
 	public BigInteger insertTopicBySeminarId(BigInteger seminarId, Topic topic) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		topicMapper.insertTopicBySeminarId(seminarId, topic);
+		return topic.getId();
 	}
 
 	@Override
 	public void deleteSeminarGroupTopicById(BigInteger groupId, BigInteger topicId) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		topicMapper.deleteSeminarGroupTopicById(groupId, topicId);
 		
 	}
 
 	@Override
 	public void deleteSeminarGroupTopicByTopicId(BigInteger topicId) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		topicMapper.deleteSeminarGroupTopicByTopicId(topicId);
 		
 	}
 

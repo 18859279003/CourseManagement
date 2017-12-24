@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.exception.TopicNotFoundException;
 import xmu.crms.model.Group;
-import xmu.crms.model.Topic;
 import xmu.crms.serviceImpl.TopicServiceImpl;
 
 @RestController

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import xmu.crms.entity.SeminarGroupTopic;
+
 import xmu.crms.entity.Topic;
 /**
  * Topic Mapper
@@ -73,25 +73,18 @@ public interface TopicMapper {
     void deleteSeminarGroupTopicByTopicId(@Param("topicId") BigInteger topicId) ;
 
     /**
-     * @param topicId 话题id
-     * @param groupId 组id
+     * @param topicId 讨论课Id
+     * @param groupId 组Id
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    SeminarGroupTopic getSeminarGroupTopicById(@Param("topicId") BigInteger topicId,@Param("groupId") BigInteger groupId) ;
-
-
-    /**
-     * @param seminarId 讨论课Id
-     * @date 2017/12/20
-     * @author zhangzhaoyang  
-     */
-    void deleteTopicBySeminarId(@Param("seminarId") BigInteger seminarId);
+    BigInteger getSeminarGroupTopicIdById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
     
     /**
+     * @param topicId 讨论课Id
      * @param groupId 组Id
      * @date 2017/12/20
-     * @author zhangzhaoyang  
+     * @author zhangzhaoyang
      */
-    List<SeminarGroupTopic> listSeminarGroupTopicByGroupId(@Param("groupId") BigInteger groupId);
+    Integer getSeminarGroupTopicPresentationGradeById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
 }

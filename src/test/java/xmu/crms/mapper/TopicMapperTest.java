@@ -52,7 +52,7 @@ public	void getTopicByTopicIdTest()throws  Exception
 	@Test
 	public	void insertTopicBySeminarIdTest()throws  Exception
 		{
-		    Topic topic=new Topic(new BigInteger("11"),new String("testname"),new String("testDescription"),new Integer("100"),new Integer("100"));
+		    Topic topic=new Topic(new BigInteger("12"),new String("testname"),new String("testDescription"),new Integer("100"),new Integer("100"));
 		    topicMapper.insertTopicBySeminarId(new BigInteger("1"), topic);
 		}	
 	@Test
@@ -63,6 +63,18 @@ public	void getTopicByTopicIdTest()throws  Exception
 	@Test
 	public	void deleteSeminarGroupTopicByTopicIdTest()throws  Exception
 		{
-		    topicMapper.deleteSeminarGroupTopicByTopicId(new BigInteger("1"));;
-		}	
+		    topicMapper.deleteSeminarGroupTopicByTopicId(new BigInteger("1"));
+		}
+	@Test
+	public	void getSeminarGroupTopicIdById()throws  Exception
+		{
+		   BigInteger id= topicMapper.getSeminarGroupTopicIdById(new BigInteger("1"), new BigInteger("1"));
+		    log.info(id);
+		}
+	@Test
+	public	void getSeminarGroupTopicPresentationGradeById()throws  Exception
+		{
+		   Integer grade=topicMapper.getSeminarGroupTopicPresentationGradeById(new BigInteger("1"), new BigInteger("1"));
+		   log.info(grade);
+		}
 }
