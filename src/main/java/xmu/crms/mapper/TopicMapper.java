@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-
+import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.Topic;
 /**
  * Topic Mapper
@@ -72,19 +72,20 @@ public interface TopicMapper {
      */
     void deleteSeminarGroupTopicByTopicId(@Param("topicId") BigInteger topicId) ;
 
-    /**
-     * @param topicId 讨论课Id
-     * @param groupId 组Id
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+      /**
+     * @param topicId 话题id
+     * @param groupId 组id
+     * @return seminarGroupTopic 讨论课小组选题信息
+     * @exception IllegalArgumentException topicId或groupId格式错误
      */
-    BigInteger getSeminarGroupTopicIdById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
-    
+    SeminarGroupTopic getSeminarGroupTopicById(@Param("topicId") BigInteger topicId, @Param("groupId") BigInteger groupId);
+
     /**
-     * @param topicId 讨论课Id
-     * @param groupId 组Id
-     * @date 2017/12/20
+     * @param groupId 要获取的group的groupId
+     * @return 该group在这节讨论课下的所有话题信息
      * @author zhangzhaoyang
+     * @date 2017/12/20
      */
-    Integer getSeminarGroupTopicPresentationGradeById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
+    List<SeminarGroupTopic> getSeminarGroupTopiclistByGroupId(@Param("groupId") BigInteger groupId);
+  
 }

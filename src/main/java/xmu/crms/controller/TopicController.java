@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,11 @@ import xmu.crms.serviceImpl.TopicServiceImpl;
 @RestController
 @RequestMapping("/topic")
 public class TopicController {
-
+	@Autowired
+	private TopicServiceImpl topicServiceImpl;
 	//按ID获取话题，传入话题id，返回话题对象
 	@RequestMapping(value="/{topicId}", method=RequestMethod.GET)
 	public xmu.crms.entity.Topic getTopicById(@PathParam("topicId") BigInteger topicId) throws IllegalArgumentException, TopicNotFoundException{
-		//Topic topic=new Topic(257,"A","领域模型与模块","Domain model与模块划分",5,6,2);
-		TopicServiceImpl topicServiceImpl = new TopicServiceImpl();
 		return topicServiceImpl.getTopicByTopicId(topicId);
 	}
 
@@ -33,14 +33,14 @@ public class TopicController {
 	@RequestMapping(value="/{topicId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void updateTopicById(@PathParam("topicId") BigInteger topicId, @RequestBody xmu.crms.entity.Topic topic) throws IllegalArgumentException, TopicNotFoundException{
-		TopicServiceImpl topicServiceImpl = new TopicServiceImpl();
 		topicServiceImpl.updateTopicByTopicId(topicId, topic);
 	}
 	
 	//按ID删除话题，传入话题id
 	@RequestMapping(value="/{topicId}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void deleteTopicById(@PathParam("topicId") Integer topicId){
+	public void deleteTopicById(@PathParam("topicId") BigInteger topicId){
+		topicServiceImpl.deleteTopicByTopicId(topicId);
 	}
 	
 	//按话题ID获取选择了该话题的小组

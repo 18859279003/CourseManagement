@@ -73,20 +73,20 @@
  	   WHERE topic_id= #{topicId};
     </delete>
     
-    
-   <select id="getSeminarGroupTopicIdById" resultType="java.math.BigInteger">
-   SELECT id
-   FROM seminar_group_topic
-   WHERE topic_id= #{topicId}
-   AND seminar_group_id=#{groupId};
-   </select>
-   
-    <select id="getSeminarGroupTopicPresentationGradeById" resultType="Integer">
-   SELECT presentation_grade
-   FROM seminar_group_topic
-   WHERE topic_id= #{topicId}
-   AND seminar_group_id=#{groupId};
-   </select>
+    <select id="getSeminarGroupTopicById" resultType="xmu.crms.entity.SeminarGroupTopic">
+	SELECT
+	id,
+	presentation_grade
+	FROM seminar_group_topic
+	WHERE topic_id= #{topicId}
+    AND seminar_group_id=#{groupId};
+	</select>    
+   <select id="getSeminarGroupTopiclistByGroupId" resultType="xmu.crms.entity.SeminarGroupTopic">
+	SELECT
+	topic_id
+	FROM seminar_group_topic
+	WHERE seminar_group_id=#{groupId};
+	</select>    
 </mapper>
 
  

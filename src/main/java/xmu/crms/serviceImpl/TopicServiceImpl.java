@@ -10,6 +10,7 @@ import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.Topic;
 import xmu.crms.exception.TopicNotFoundException;
 import xmu.crms.mapper.TopicMapper;
+import xmu.crms.service.GradeService;
 import xmu.crms.service.TopicService;
 
 /**
@@ -65,20 +66,25 @@ public class TopicServiceImpl implements TopicService
 	@Override
 	public SeminarGroupTopic getSeminarGroupTopicById(BigInteger topicId, BigInteger groupId)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return topicMapper.getSeminarGroupTopicById(topicId, groupId);
 	}
 
 	@Override
 	public void deleteTopicBySeminarId(BigInteger seminarId) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		List<Topic> topics=topicMapper.listTopicBySeminarId(seminarId);
+		for(int i=0;i<topics.size();i++)
+		{
+			topicMapper.deleteSeminarGroupTopicByTopicId(topics.get(i).getId());
+			//GradeService   #deleteStudentScoreGroupByTopicId(BigInteger seminarGroupTopicId)
+		}
 		
 	}
 
 	@Override
 	public List<SeminarGroupTopic> listSeminarGroupTopicByGroupId(BigInteger groupId) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return topicMapper.getSeminarGroupTopiclistByGroupId(groupId);
 	}
 
 }

@@ -10,7 +10,8 @@ id
 FROM fix_group
 WHERE id=#{groupId};
 </select>
-    
+
+
 </mapper>
 
  
