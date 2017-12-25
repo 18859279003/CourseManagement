@@ -66,7 +66,7 @@ public interface UserService {
 
 	/**
 	 * 根据用户名获取用户ID.
-	 * <p>根据用户名获取用户ID<br>
+	 * <p>根据用户名获取用户ID<br> 
 	 * @author qinlingyun
 	 * @param userName 用户名
 	 * @return userId 用户ID
