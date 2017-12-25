@@ -10,7 +10,9 @@ public class Topic {
 	private Integer groupStudentLimit;
 	private Seminar seminar;
 	
-	public Topic(BigInteger id, String name, String description, Integer groupNumberLimit, Integer groupStudentLimit) {
+	
+	public Topic(BigInteger id, String name, String description, Integer groupNumberLimit, Integer groupStudentLimit
+		) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -18,7 +20,6 @@ public class Topic {
 		this.groupNumberLimit = groupNumberLimit;
 		this.groupStudentLimit = groupStudentLimit;
 	}
-
 	public BigInteger getId() {
 		return id;
 	}
@@ -55,14 +56,16 @@ public class Topic {
 	public void setSeminar(Seminar seminar) {
 		this.seminar = seminar;
 	}
-	 @Override
-	    public String toString() {
-	        return "Topic{" +
-	                "id=" + id +	              
-	                ", name='" + name + '\'' +
-	                ", description='" + description + '\'' +
-	                ", groupLimit=" + groupNumberLimit +
-	                ", groupMemberLimit=" + groupStudentLimit +
-	                '}';
-	    }
+
+	@Override
+	public String toString() {
+		return "Topic{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", groupNumberLimit=" + groupNumberLimit +
+				", groupStudentLimit=" + groupStudentLimit +
+				", seminar=" + seminar +
+				'}';
+	}
 }

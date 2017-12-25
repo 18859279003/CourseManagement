@@ -25,6 +25,11 @@ public interface UserMapper {
  * 根据id得到用户
 */
 	User getUserByUserIdBigInteger(@Param("userId") BigInteger userId);
+	/**
+	 * 返回签到序列
+	*/
+	BigInteger getIdByInfo(@Param("classId") BigInteger classId,@Param("seminarId") BigInteger seminarId,@Param("userId")
+	BigInteger userId);
 /**
  * 插入学生签到信息
 */

@@ -31,14 +31,14 @@ public interface TopicMapper {
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    void updateTopicByTopicId ( @Param("topicId") BigInteger topicId,@Param("topic") Topic topic) ;
+    Integer updateTopicByTopicId ( @Param("topicId") BigInteger topicId,@Param("topic") Topic topic) ;
     
     /**
      * @param topicId 要删除的topic的topicId
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    void deleteTopicByTopicId(@Param("topicId") BigInteger topicId);
+    Integer deleteTopicByTopicId(@Param("topicId") BigInteger topicId);
 
     /**
      * @param seminarId 课程Id
@@ -55,7 +55,7 @@ public interface TopicMapper {
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    void insertTopicBySeminarId(@Param("seminarId") BigInteger seminarId, @Param("topic") Topic topic) ;
+    Integer insertTopicBySeminarId(@Param("seminarId") BigInteger seminarId, @Param("topic") Topic topic) ;
 
     /**
      * @param groupId 小组Id
@@ -63,14 +63,14 @@ public interface TopicMapper {
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    void deleteSeminarGroupTopicById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
+    Integer deleteSeminarGroupTopicById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
 
     /**
      * @param topicId 讨论课Id
      * @date 2017/12/20
      * @author zhangzhaoyang
      */
-    void deleteSeminarGroupTopicByTopicId(@Param("topicId") BigInteger topicId) ;
+    Integer deleteSeminarGroupTopicByTopicId(@Param("topicId") BigInteger topicId) ;
 
       /**
      * @param topicId 话题id

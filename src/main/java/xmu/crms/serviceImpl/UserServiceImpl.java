@@ -32,8 +32,11 @@ public class UserServiceImpl implements UserService{
 		double longi=userMapper.getLongitude(seminarId, classId);
 		double lati=userMapper.getLatitude(seminarId, classId);
 	if(longi==longitude&&lati==latitude)
-		userMapper.insertAttendanceById(classId, seminarId, userId);
-	return null;//没有写返回值
+		{
+		userMapper.insertAttendanceById(classId, seminarId, userId);	
+		return userMapper.getIdByInfo(classId, seminarId, userId);
+		}
+	else return null;
 	}
 
 	@Override

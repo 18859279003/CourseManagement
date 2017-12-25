@@ -1,11 +1,13 @@
 package xmu.crms.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +21,13 @@ import xmu.crms.model.Seminar;
 import xmu.crms.model.SeminarDetail;
 import xmu.crms.model.StudentSeminar;
 import xmu.crms.model.Topic;
+import xmu.crms.serviceImpl.TopicServiceImpl;
 
 @RestController
 @RequestMapping("/seminar")
 public class SeminarController {
-
+	@Autowired
+	private TopicServiceImpl topicServiceImpl;
 	//按ID获取讨论课，传入讨论课id，返回讨论课对象
 	@RequestMapping(value="/{seminarId}", method=RequestMethod.GET)
 	public Seminar getSeminarById(@PathParam("seminarId") Integer seminarId){
@@ -61,18 +65,16 @@ public class SeminarController {
     
 	//按ID获取讨论课的话题
 	@RequestMapping(value="/{seminarId}/topic", method=RequestMethod.GET)
-	public List<Topic> getTopicList(@PathParam("seminarId") Integer seminarId){
-		List<Topic> topiclist=new ArrayList<Topic>();//假的
-		topiclist.add(new Topic(257,"A","领域模型与模块","Domain model与模块划分",5,6,2));//测试
-		return topiclist;
+	public List<xmu.crms.entity.Topic> getTopicList(@PathParam("seminarId") BigInteger seminarId){
+		
+		return topicServiceImpl.listTopicBySeminarId(seminarId);
 	}
 	
 	//在指定ID的讨论课创建话题
 	@RequestMapping(value="/{seminarId}/topic", method=RequestMethod.POST)
-	public int createTopic(@PathParam("seminarId") Integer seminarId, @RequestBody Topic topic, HttpServletResponse response){	
-		topic.setId(257);
+	public BigInteger createTopic(@PathParam("seminarId") BigInteger seminarId, @RequestBody xmu.crms.entity.Topic topic, HttpServletResponse response){	
 		response.setStatus(201);
-		return topic.getId();
+		return topicServiceImpl.insertTopicBySeminarId(seminarId, topic);
 	}
 	
 	//按讨论课ID查找小组

@@ -29,6 +29,11 @@
     (class_id,seminar_id,student_id)
     VALUES(#{classId},#{seminarId},#{userId})
     </insert>
+    <select id="getIdByInfo" resultType="BigInteger">
+    SELECT id
+    FROM attendance
+    WHERE class_id=#{classId} AND seminar_id=#{seminarId} AND student_id=#{userId};
+    </select>
     <select id="listAbsenceStudent" resultType="xmu.crms.entity.User">
     SELECT
     id,

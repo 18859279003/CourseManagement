@@ -39,7 +39,7 @@ public class TopicController {
 	//按ID删除话题，传入话题id
 	@RequestMapping(value="/{topicId}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void deleteTopicById(@PathParam("topicId") BigInteger topicId){
+	public void deleteTopicById(@PathParam("topicId") BigInteger topicId) throws IllegalArgumentException, TopicNotFoundException{
 		topicServiceImpl.deleteTopicByTopicId(topicId);
 	}
 	
