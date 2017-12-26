@@ -69,25 +69,15 @@
     (SELECT student_id FROM attendance WHERE class_id=#{classId} AND seminar_id=#{seminarId} AND attendance_status=2);
     </select>
     
-    <select id="listAttendanceById" resultMap="userResultMap">
+    <select id="listAttendanceById" resultType="xmu.crms.entity.Attentance">
      SELECT
     id,
-    phone,
-    wechat_id,
-    openid,
-    avatar,
-    password,
-    name,
-    school_id,
-    gender,
-    type,
-    number,
-    education,
-    title,
-    email
-    FROM user_info
-    WHERE id IN
-    (SELECT student_id FROM attendance WHERE class_id=#{classId} AND seminar_id=#{seminarId});
+    student_id,
+    class_id,
+    seminar_id,
+    attendance_status
+    FROM attendance
+    WHERE class_id=#{classId} AND seminar_id=#{seminarId};
     </select>
    <select id="listCourseByTeacherName" resultMap="courseResultMap">
     SELECT
