@@ -8,7 +8,7 @@ public class StudentSeminarVO {
     private String startTime;
     private String endTime;
     private int classCalling;
-    private boolean isLeader;
+    private boolean leaderSign;
     private boolean areTopicsSelected;
 
     public StudentSeminarVO() {
@@ -24,7 +24,7 @@ public class StudentSeminarVO {
         this.startTime = startTime;
         this.endTime = endTime;
         this.classCalling = classCalling;
-        this.isLeader = isLeader;
+        this.leaderSign = isLeader;
         this.areTopicsSelected = areTopicsSelected;
     }
 
@@ -85,11 +85,11 @@ public class StudentSeminarVO {
     }
 
     public boolean isLeader() {
-        return isLeader;
+        return leaderSign;
     }
 
     public void setLeader(boolean leader) {
-        isLeader = leader;
+        leaderSign = leader;
     }
 
     public boolean isAreTopicsSelected() {
@@ -110,7 +110,7 @@ public class StudentSeminarVO {
                 ", startTime='" + startTime + '\'' +
                 ", endTime='" + endTime + '\'' +
                 ", classCalling=" + classCalling +
-                ", isLeader=" + isLeader +
+                ", isLeader=" + leaderSign +
                 ", areTopicsSelected=" + areTopicsSelected +
                 '}';
     }

@@ -219,7 +219,7 @@ public interface ClassService {
      * @throws SeminarNotFoundException 讨论课没有找到
      * @throws ClassNotFoundException   无此Id的班级
      */
-    BigInteger CallInRollById(Location location)
+    BigInteger callInRollById(Location location)
             throws SeminarNotFoundException, ClassNotFoundException;
 
     /**

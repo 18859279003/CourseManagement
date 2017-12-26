@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService{
 		userMapper.insertAttendanceById(classId, seminarId, userId);	
 		return userMapper.getIdByInfo(classId, seminarId, userId);
 		}
-	else return null;
+	else {return null;}
 	}
 
 	@Override
@@ -110,20 +110,20 @@ public class UserServiceImpl implements UserService{
 	public void updateUserByUserId(BigInteger userId, User user) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 		if(userMapper.selectUser(userId)==null)
-			throw new UserNotFoundException();
+		{	throw new UserNotFoundException();}
 		userMapper.updateUserByUserId(userId, user);
 	}
 
 	@Override
 	public List<User> listUserByClassId(BigInteger classId, String numBeginWith, String nameBeginWith)
 			throws IllegalArgumentException, ClassesNotFoundException, UserNotFoundException {
-		// TODO Auto-generated method stub
+	
 		if(classId.intValue()<0)
-			throw new IllegalArgumentException();
+		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
-			throw new ClassesNotFoundException();
+		{	throw new ClassesNotFoundException();}
 		if(userMapper.listUserByClassId(classId, numBeginWith+"%", nameBeginWith+"%")==null)
-			throw new UserNotFoundException();
+		{	throw new UserNotFoundException();}
 		return userMapper.listUserByClassId(classId, numBeginWith+"%", nameBeginWith+"%");
 	}
 
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService{
 	public List<User> listUserByUserName(String userName) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 		if(userMapper.listUserIdByUserName(userName).size()==0)
-			throw new UserNotFoundException();
+		{	throw new UserNotFoundException();}
 		return userMapper.listUserByUserName(userName);
 	}
 
@@ -140,11 +140,11 @@ public class UserServiceImpl implements UserService{
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
 		if(classId.intValue()<0||seminarId.intValue()<0)
-			throw new IllegalArgumentException();
+		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
-			throw new ClassesNotFoundException();
+		{	throw new ClassesNotFoundException();}
 		if(userMapper.selectSeminar(seminarId)==null)
-			throw new SeminarNotFoundException();
+		{	throw new SeminarNotFoundException();}
 		return userMapper.listPresentStudent(seminarId, classId);
 	}
 
@@ -153,11 +153,11 @@ public class UserServiceImpl implements UserService{
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
 		if(classId.intValue()<0||seminarId.intValue()<0)
-			throw new IllegalArgumentException();
+		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
-			throw new ClassesNotFoundException();
+		{	throw new ClassesNotFoundException();}
 		if(userMapper.selectSeminar(seminarId)==null)
-			throw new SeminarNotFoundException();
+		{	throw new SeminarNotFoundException();}
 		return userMapper.listLateStudent(seminarId, classId);
 	}
 
@@ -166,11 +166,11 @@ public class UserServiceImpl implements UserService{
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
 		if(classId.intValue()<0||seminarId.intValue()<0)
-			throw new IllegalArgumentException();
+		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
-			throw new ClassesNotFoundException();
+		{	throw new ClassesNotFoundException();}
 		if(userMapper.selectSeminar(seminarId)==null)
-			throw new SeminarNotFoundException();
+		{	throw new SeminarNotFoundException();}
 		return userMapper.listAbsenceStudent(seminarId, classId);
 	}
 
@@ -179,9 +179,9 @@ public class UserServiceImpl implements UserService{
 			throws UserNotFoundException, IllegalArgumentException, CourseNotFoundException {
 		// TODO Auto-generated method stub
 		if(listUserByUserName(teacherName)==null)
-			throw new UserNotFoundException();
+		{	throw new UserNotFoundException();}
 		if(userMapper.listCourseByTeacherName(teacherName).size()==0)
-			throw new CourseNotFoundException();
+		{	throw new CourseNotFoundException();}
 		return userMapper.listCourseByTeacherName(teacherName);
 	}
 

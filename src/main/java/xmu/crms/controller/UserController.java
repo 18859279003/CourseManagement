@@ -29,7 +29,7 @@ public class UserController {
 	
 	//微信登录，返回用户基本信息
 	@RequestMapping(value="/signin", method=RequestMethod.GET)
-	public User signin(String code, String state, String success_url, HttpServletResponse response){
+	public User signin(String code, String state, String successUrl, HttpServletResponse response){
         return new User();
 	}
 }
