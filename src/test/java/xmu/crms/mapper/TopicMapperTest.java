@@ -34,7 +34,7 @@ public	void getTopicByTopicIdTest()throws  Exception
 	@Test
 	public	void updateTopicByTopicIdTest()throws  Exception	
 	{
-		Topic topic=new Topic(new BigInteger("2"),new String("testname"),new String("testDescription"),new Integer("100"),new Integer("100"));
+		Topic topic=new Topic();
 		topicMapper.updateTopicByTopicId(new BigInteger("2"), topic);
 		log.info(topic);
 	}
@@ -53,7 +53,7 @@ public	void getTopicByTopicIdTest()throws  Exception
 	@Test
 	public	void insertTopicBySeminarIdTest()throws  Exception
 		{
-		    Topic topic=new Topic(new BigInteger("12"),new String("testname"),new String("testDescription"),new Integer("100"),new Integer("100"));
+		    Topic topic=new Topic();
 		    topicMapper.insertTopicBySeminarId(new BigInteger("1"), topic);
 		}	
 	@Test
