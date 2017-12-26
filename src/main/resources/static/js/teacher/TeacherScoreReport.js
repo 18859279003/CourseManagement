@@ -25,14 +25,15 @@ function checkinput(){
 		alert("请对报告进行打分。");
 		return false;
 	}
-	if(score<3||score>5){
+	
+	if(!(score>=3&&score<=5)){
 		alert("分数应在3到5之间。");
 		return false;		
 	}
 	return true;
 }
 function getGroupInfo(){
-	var id;
+	var id=1;
 	$.ajax({
 		url: "/group/"+id,
 		type: "GET",

@@ -36,16 +36,17 @@ function init(){
 		async: false,
 		success: function(data)
 		{
+			if(data=="") alert(data);
 			var topicInfo=data;
 			$("label#name").append(topicInfo.name);
 			$("label#description").append(topicInfo.description);
-			$("label#groupLimit").append(topicInfo.groupLimit);
-			$("label#groupMemberLimit").append(topicInfo.groupMemberLimit);
-			$("label#groupLeft").append(topicInfo.groupLeft);
+			$("label#groupLimit").append(topicInfo.groupNumberLimit);
+			$("label#groupMemberLimit").append(topicInfo.groupStudentLimit);
+			//$("label#groupLeft").append(topicInfo.groupLeft);
 		},
 		error:function()
 		{
-			alert("获取课程信息失败");
+			alert("获取话题信息失败");
 		}
 		});
 	
@@ -54,7 +55,7 @@ function init(){
 //删除话题
 function deleteTopic()
 {
-	var id;
+	var id=1;
 	if 
 	(confirm("您确定要删除该话题吗？")){		
 	$.ajax({			

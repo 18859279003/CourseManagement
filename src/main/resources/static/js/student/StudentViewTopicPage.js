@@ -4,7 +4,7 @@
 }(jQuery));
 
 function init(){
-	var id;
+	var id=1;
 	//获取左侧课程基本信息	
 	$.ajax({			
 		url: "/course/ "+id,
@@ -36,8 +36,8 @@ function init(){
 			//获取话题名字
 			$("label#name").prepend(topicInfo.name);
 			$("label#description").prepend(topicInfo.description);
-			$("label#groupLimit").prepend(topicInfo.groupLimit);
-			$("label#groupMemberLimit").prepend(topicInfo.groupMemberLimit);
+			$("label#groupLimit").prepend(topicInfo.groupNumberLimit);
+			$("label#groupMemberLimit").prepend(topicInfo.groupStudentLimit);
 		},
 		error:function()
 		{
@@ -54,7 +54,6 @@ function chooseTopic()
 	$.ajax({			
 		url: "/group/1/topic",
 		type: "POST",
-		dataType:'json',
 		data:{"topicId":topicId},
 		async: false,
 		success: function(data)

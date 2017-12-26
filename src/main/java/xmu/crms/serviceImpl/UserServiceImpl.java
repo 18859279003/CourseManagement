@@ -29,6 +29,14 @@ public class UserServiceImpl implements UserService{
 			double latitude)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException, UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(classId.intValue()<0||userId.intValue()<0||seminarId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectClass(classId)==null)
+			throw new ClassesNotFoundException();
+		if(userMapper.selectSeminar(seminarId)==null)
+			throw new SeminarNotFoundException();
+		if(userMapper.selectUser(userId)==null)
+			throw new UserNotFoundException();
 		double longi=userMapper.getLongitude(seminarId, classId);
 		double lati=userMapper.getLatitude(seminarId, classId);
 	if(longi==longitude&&lati==latitude)
@@ -43,6 +51,12 @@ public class UserServiceImpl implements UserService{
 	public List<Attendance> listAttendanceById(BigInteger classId, BigInteger seminarId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
+		if(classId.intValue()<0||seminarId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectClass(classId)==null)
+			throw new ClassesNotFoundException();
+		if(userMapper.selectSeminar(seminarId)==null)
+			throw new SeminarNotFoundException();
 		return userMapper.listAttendanceById(seminarId, classId);
 		
 	}
@@ -50,6 +64,10 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserByUserId(BigInteger userId) throws IllegalArgumentException, UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(userId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectUser(userId)==null)
+			throw new UserNotFoundException();
 		return userMapper.getUserByUserIdBigInteger(userId);
 	}
 
@@ -57,12 +75,16 @@ public class UserServiceImpl implements UserService{
 	public List<BigInteger> listUserIdByUserName(String userName)
 			throws IllegalArgumentException, UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(userMapper.listUserIdByUserName(userName).size()==0)
+			throw new UserNotFoundException();
 		return userMapper.listUserIdByUserName(userName);
 	}
 
 	@Override
 	public void updateUserByUserId(BigInteger userId, User user) throws UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(userMapper.selectUser(userId)==null)
+			throw new UserNotFoundException();
 		userMapper.updateUserByUserId(userId, user);
 	}
 
@@ -70,12 +92,20 @@ public class UserServiceImpl implements UserService{
 	public List<User> listUserByClassId(BigInteger classId, String numBeginWith, String nameBeginWith)
 			throws IllegalArgumentException, ClassesNotFoundException, UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(classId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectClass(classId)==null)
+			throw new ClassesNotFoundException();
+		if(userMapper.listUserByClassId(classId, numBeginWith+"%", nameBeginWith+"%")==null)
+			throw new UserNotFoundException();
 		return userMapper.listUserByClassId(classId, numBeginWith+"%", nameBeginWith+"%");
 	}
 
 	@Override
 	public List<User> listUserByUserName(String userName) throws UserNotFoundException {
 		// TODO Auto-generated method stub
+		if(userMapper.listUserIdByUserName(userName).size()==0)
+			throw new UserNotFoundException();
 		return userMapper.listUserByUserName(userName);
 	}
 
@@ -83,6 +113,12 @@ public class UserServiceImpl implements UserService{
 	public List<User> listPresentStudent(BigInteger seminarId, BigInteger classId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
+		if(classId.intValue()<0||seminarId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectClass(classId)==null)
+			throw new ClassesNotFoundException();
+		if(userMapper.selectSeminar(seminarId)==null)
+			throw new SeminarNotFoundException();
 		return userMapper.listPresentStudent(seminarId, classId);
 	}
 
@@ -90,6 +126,12 @@ public class UserServiceImpl implements UserService{
 	public List<User> listLateStudent(BigInteger seminarId, BigInteger classId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
+		if(classId.intValue()<0||seminarId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectClass(classId)==null)
+			throw new ClassesNotFoundException();
+		if(userMapper.selectSeminar(seminarId)==null)
+			throw new SeminarNotFoundException();
 		return userMapper.listLateStudent(seminarId, classId);
 	}
 
@@ -97,6 +139,12 @@ public class UserServiceImpl implements UserService{
 	public List<User> listAbsenceStudent(BigInteger seminarId, BigInteger classId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
 		// TODO Auto-generated method stub
+		if(classId.intValue()<0||seminarId.intValue()<0)
+			throw new IllegalArgumentException();
+		if(userMapper.selectClass(classId)==null)
+			throw new ClassesNotFoundException();
+		if(userMapper.selectSeminar(seminarId)==null)
+			throw new SeminarNotFoundException();
 		return userMapper.listAbsenceStudent(seminarId, classId);
 	}
 
@@ -104,6 +152,10 @@ public class UserServiceImpl implements UserService{
 	public List<Course> listCourseByTeacherName(String teacherName)
 			throws UserNotFoundException, IllegalArgumentException, CourseNotFoundException {
 		// TODO Auto-generated method stub
+		if(listUserByUserName(teacherName)==null)
+			throw new UserNotFoundException();
+		if(userMapper.listCourseByTeacherName(teacherName).size()==0)
+			throw new CourseNotFoundException();
 		return userMapper.listCourseByTeacherName(teacherName);
 	}
 

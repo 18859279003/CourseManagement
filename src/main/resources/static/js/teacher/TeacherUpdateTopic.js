@@ -5,7 +5,7 @@
 
 function init(){
 	//获取左侧课程基本信息	
-	var id;
+	var id=1;
 	$.ajax({			
 		url: "/course/"+id,
 		type: "GET",
@@ -38,13 +38,13 @@ function init(){
 		{
 			var topicInfo=data;
 			$("div#name").append( "<input type='text' id='topicName' class='bigInput' value='"+topicInfo.name+"'>");
-			$("div#description").append("<textarea class='textStyle' id='description'>"+topicInfo.description+"</textarea>")
-			$("div#groupLimit").append( "<input type='text' id='groupLimit' class='middleInput' value='"+topicInfo.groupLimit+"'>");
-			$("div#number").append( "<input type='text' id='groupLimit' class='middleInput' value='"+topicInfo.groupLimit+"'>");
+			$("div#description").append("<textarea class='textStyle' id='topicDescription'>"+topicInfo.description+"</textarea>")
+			$("div#groupLimit").append( "<input type='text' id='groupNumberLimit' class='middleInput' value='"+topicInfo.groupNumberLimit+"'>");
+			$("div#number").append( "<input type='text' id='groupStudentLimit' class='middleInput' value='"+topicInfo.groupStudentLimit+"'>");
 		},
 		error:function()
 		{
-			alert("获取课程信息失败");
+			alert("获取话题信息失败");
 		}
 		});
 	
@@ -55,14 +55,14 @@ function init(){
 //提交
 function submit()
 {
-	var id;
+	var id=1;
 	var serial="A";	
 	var newTopic={
-			serial:serial,
+			//serial:serial,
 			name : $("#topicName").val(),
-			description:$("#description").val(),
-			groupLimit:$("#groupLimit").val(),
-			groupMemberLimit:$("#groupMemberLimit").val()
+			description:$("#topicDescription").val(),
+			groupNumberLimit:$("#groupNumberLimit").val(),
+			groupStudentLimit:$("#groupStudentLimit").val()
 	};
 	//alert(JSON.stringify(newClass));
 	$.ajax({			
@@ -78,7 +78,7 @@ function submit()
 		},
 		error:function()
 		{
-			alert("添加失败");
+			alert("修改失败");
 		}
 		});	
 }

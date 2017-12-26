@@ -2,13 +2,13 @@ function createTopic(){
 
 	if(!checkinput())
 		return ;
-	var id;
+	var id=1;
 
 	var newTopic={
 			name : $("#topicName").val(),
 			description : $("#description").val(),
-			startTime : $("#groupLimit").val(),
-			endTime : $("#groupMemberLimit").val(),
+			groupNumberLimit : $("#groupLimit").val(),
+			groupStudentLimit : $("#groupMemberLimit").val(),
 	};
 	//alert(JSON.stringify(newTopic));
 	$.ajax({			
