@@ -39,11 +39,7 @@ function init(){
 			var seminarInfo=data;
 			$("div#name").append( "<input type='text' id='seminarName' class='bigInput' value='"+seminarInfo.name+"'>");
 			$("div#description").append("  <textarea class='textStyle' id='description'>"+seminarInfo.description+"</textarea>");
-			$("input#seminarGrade").attr("value",seminarInfo.proportions.presentation);
-			$("input#reportGrade").attr("value",seminarInfo.proportions.report);
-			$("input#seminarGrade5").attr("value",seminarInfo.proportions.c);
-			$("input#seminarGrade4").attr("value",seminarInfo.proportions.b);
-			$("input#seminarGrade3").attr("value",seminarInfo.proportions.a);
+
 		},
 		error:function()
 		{
@@ -58,19 +54,12 @@ function submit()
 {
 	var id;
 	var startTime="",endTime="";	
-	var proportions={
-			report : $("#reportGrade").val(),
-			presentation : $("#seminarGrade").val(),
-			c : $("#seminarGrade3").val(),
-			b : $("#seminarGrade4").val(),
-			a : $("#seminarGrade5").val()		
-	};
+
 	var newSeminar={
 			name : $("#seminarName").val(),
 			description:$("#description").val(),
 			startTime: startTime,
-			endTime:endTime,
-			proportions : proportions
+			endTime:endTime
 	};
 	//alert(JSON.stringify(newClass));
 	$.ajax({			

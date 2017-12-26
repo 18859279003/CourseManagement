@@ -22,7 +22,6 @@ function init(){
 						"<table class='table'>" +
 							"<tr>" +
 								"<td class='tabletext'>班级数：" + course.numClass + "</td>" +
-								"<td class='tabletext'>学生人数：" + course.numStudent + "</td>" +
 							"</tr>" +
 							"<tr>" +
 								"<td class='tabletext'>开始时间：" + course.startTime + "</td>" +

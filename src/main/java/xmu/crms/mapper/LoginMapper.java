@@ -49,13 +49,14 @@ public interface LoginMapper {
 		 */
 		 User signInPhone( @Param(value = "user")User user) ;
 		 
+		 
 		/**
 		 * 手机号注册.
 		 * <p>手机号注册 (.Net使用),User中只有phone和password，userId是注册后才有并且在数据库自增<br> 
 		 * @param user 用户信息(手机号Phone和密码Password)
 		 * @return user 该用户信息
 		 */
-		void signUpPhone( @Param(value = "user")User user);
+		 Integer signUpPhone( @Param(value = "user")User user);
 	 
 	/**
 	 * 用户解绑. 
@@ -64,7 +65,8 @@ public interface LoginMapper {
 	 * @throws java.lang.IllegalArgumentException- 信息不合法，id格式错误
 	 * @throws UserNotFoundException- 未找到对应用户
 	 */
-	void deleteTeacherAccount( @Param(value = "userId") BigInteger userId);
+		
+		Integer deleteTeacherAccount( @Param(value = "userId") BigInteger userId);
 	
 	
 	
@@ -77,6 +79,7 @@ public interface LoginMapper {
      * @exception 格式错误UserNotFoundException - 未找到对应用户
      * @see ClassService.deleteCourseSelectionById(BigInteger userId,BigInteger classId)
      */
-	void deleteStudentAccount( @Param(value = "userId") BigInteger userId);
+
+		Integer deleteStudentAccount( @Param(value = "userId") BigInteger userId);
 
 }

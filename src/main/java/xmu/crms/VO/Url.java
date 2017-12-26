@@ -1,4 +1,4 @@
-package xmu.crms.model;
+package xmu.crms.VO;
 
 public class Url {
 

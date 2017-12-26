@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.Topic;
 
 /**
@@ -68,7 +69,7 @@ public	void getTopicByTopicIdTest()throws  Exception
 	@Test
 	public	void getSeminarGroupTopicByIdTest()throws  Exception
 		{
-		   log.info(topicMapper.getSeminarGroupTopicById(new BigInteger("2"), new BigInteger("1")));
+		   log.info(topicMapper.getSeminarGroupTopicById(new SeminarGroupTopic() ));
 		}
 	@Test
 	public	void getSeminarGroupTopiclistByGroupIdTest()throws  Exception

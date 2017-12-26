@@ -37,26 +37,56 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public User signInPhone(User user) throws UserNotFoundException {
 		// 若user为空，则用户名或密码不正确
-		return loginMapper.signInPhone(user);
+		User userRec=loginMapper.signInPhone(user);
+		if(userRec==null)
+			throw new UserNotFoundException();
+		return userRec;
 	}
 
 	@Override
 	public User signUpPhone(User user) {
 		// TODO Auto-generated method stub
-		loginMapper.signUpPhone(user);
-		return loginMapper.signInPhone(user);
+		User userRec=loginMapper.signInPhone(user);
+		
+		if(userRec==null)
+		{
+			loginMapper.signUpPhone(user);
+			return loginMapper.signInPhone(user);
+		}
+		else
+		{
+		return null;
+		}
 	}
 
 	@Override
 	public void deleteTeacherAccount(BigInteger userId) throws IllegalArgumentException, UserNotFoundException {
-		loginMapper.deleteTeacherAccount(userId);
+		BigInteger a1 = new BigInteger("4294967295");
+		BigInteger a2= new BigInteger("0");
+		if (userId.compareTo(a2)==1&&userId.compareTo(a1)==-1)
+		{
+			throw new IllegalArgumentException();
+		}
+		else if(loginMapper.deleteTeacherAccount(userId)==0)
+		{
+			throw new  UserNotFoundException();
+		}
 		
 	}
 
 	@Override
 	public void deleteStudentAccount(BigInteger userId) throws IllegalArgumentException, UserNotFoundException {
 		// TODO Auto-generated method stub
-		loginMapper.deleteStudentAccount(userId);
+		BigInteger a1 = new BigInteger("4294967295");
+		BigInteger a2= new BigInteger("0");
+		if (userId.compareTo(a2)==1&&userId.compareTo(a1)==-1)
+		{
+			throw new IllegalArgumentException();
+		}
+		else if(loginMapper.deleteTeacherAccount(userId)==0)
+		{
+			throw new  UserNotFoundException();
+		}
 	}
 
 	

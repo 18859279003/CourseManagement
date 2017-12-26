@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import xmu.crms.entity.Topic;
 import xmu.crms.exception.TopicNotFoundException;
-import xmu.crms.model.Group;
+import xmu.crms.VO.GroupVO;
 import xmu.crms.serviceImpl.TopicServiceImpl;
 
 @RestController
@@ -25,14 +26,14 @@ public class TopicController {
 	private TopicServiceImpl topicServiceImpl;
 	//按ID获取话题，传入话题id，返回话题对象
 	@RequestMapping(value="/{topicId}", method=RequestMethod.GET)
-	public xmu.crms.entity.Topic getTopicById(@PathParam("topicId") BigInteger topicId) throws IllegalArgumentException, TopicNotFoundException{
+	public Topic getTopicById(@PathParam("topicId") BigInteger topicId) throws IllegalArgumentException, TopicNotFoundException{
 		return topicServiceImpl.getTopicByTopicId(topicId);
 	}
 
 	//按ID修改话题，传入话题id和json
 	@RequestMapping(value="/{topicId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void updateTopicById(@PathParam("topicId") BigInteger topicId, @RequestBody xmu.crms.entity.Topic topic) throws IllegalArgumentException, TopicNotFoundException{
+	public void updateTopicById(@PathParam("topicId") BigInteger topicId, @RequestBody Topic topic) throws IllegalArgumentException, TopicNotFoundException{
 		topicServiceImpl.updateTopicByTopicId(topicId, topic);
 	}
 	
@@ -46,10 +47,8 @@ public class TopicController {
 	//按话题ID获取选择了该话题的小组
 	@RequestMapping(value="/{topicId}/group", method=RequestMethod.GET)
 	@ResponseStatus(value=HttpStatus.OK)
-	public List<Group> getGroupListByTopicId(@PathParam("topicId") Integer topicId){
-		List<Group> groupList=new ArrayList<Group>();
-		groupList.add(new Group(23,"1A1", null, null, null, null, null));
-		groupList.add(new Group(26, "2A2", null, null, null, null, null));
+	public List<GroupVO> getGroupListByTopicId(@PathParam("topicId") Integer topicId){
+		List<GroupVO> groupList=new ArrayList<GroupVO>();
 		return groupList;
 	}
 }

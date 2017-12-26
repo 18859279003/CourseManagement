@@ -49,22 +49,27 @@ INSERT INTO `user_info` VALUES ('4', '2017-12-16 12:14:09', '2017-12-16 12:14:09
 		school.setName("黄南大学");	
 		school.setId(new BigInteger("1"));;	
 		User user=new User();
-		user.setPhone("17750634707");
+		user.setPhone("17750634777");
 		user.setPassword("wohenpi");
 		user.setName("张昭阳");
 		user.setSchool(school);
 		user.setGender(1);
 		user.setType(0);
-		user.setNumber("24320152202864");
+		user.setNumber("24320152202888");
 		user.setEmail("woshizhaoyangdebaba@qq.com");
-		loginMapper.signUpPhone(user);
-		log.info(loginMapper.signInPhone(user));
+        User userRec=loginMapper.signInPhone(user);
+		if(userRec==null)
+		{
+			loginMapper.signUpPhone(user);
+			log.info(loginMapper.signInPhone(user));
+		}
+		
 	}
 
 
 	@Test
 	public void testDeleteStudentAccount () throws Exception {
-		loginMapper.deleteStudentAccount(new BigInteger("10"));
+		loginMapper.deleteStudentAccount(new BigInteger("90"));
 		}
 	@Test
 	public void testDeleteTeacherAccount () throws Exception {

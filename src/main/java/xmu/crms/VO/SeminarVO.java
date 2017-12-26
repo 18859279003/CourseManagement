@@ -1,36 +1,24 @@
-package xmu.crms.model;
+package xmu.crms.VO;
 
 import java.util.Arrays;
 
-public class Seminar {
+import xmu.crms.entity.Topic;
+
+public class SeminarVO {
     private int id;
     private String name;
     private String description;
     private String groupingMethod;
     private String startTime;
-    public Seminar(int id, String name, String description, String groupingMethod, String startTime, String endTime,
-			int grade, Topic[] topics, Proportions proportions) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.groupingMethod = groupingMethod;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.grade = grade;
-		this.topics = topics;
-		this.proportions = proportions;
-	}
 	private String endTime;
-    private int grade;
     private Topic[] topics;
-    private Proportions proportions;
 
-    public Seminar() {
+    public SeminarVO() {
 
     }
-    public Seminar(int id, String name, String description, String groupingMethod,
-                   String startTime, String endTime, Topic[] topics, Proportions proportions) {
+    public SeminarVO(int id, String name, String description, String groupingMethod, String startTime, String endTime,
+            Topic[] topics) {
+        super();
         this.id = id;
         this.name = name;
         this.description = description;
@@ -38,7 +26,6 @@ public class Seminar {
         this.startTime = startTime;
         this.endTime = endTime;
         this.topics = topics;
-        this.proportions = proportions;
     }
 
     public int getId() {
@@ -97,14 +84,6 @@ public class Seminar {
         this.topics = topics;
     }
 
-    public Proportions getProportions() {
-        return proportions;
-    }
-
-    public void setProportions(Proportions proportions) {
-        this.proportions = proportions;
-    }
-
     @Override
     public String toString() {
         return "Seminar{" +
@@ -115,13 +94,7 @@ public class Seminar {
                 ", startTime='" + startTime + '\'' +
                 ", endTime='" + endTime + '\'' +
                 ", topic=" + Arrays.toString(topics) +
-                ", proportions=" + proportions +
                 '}';
     }
-	public int getGrade() {
-		return grade;
-	}
-	public void setGrade(int grade) {
-		this.grade = grade;
-	}
+
 }

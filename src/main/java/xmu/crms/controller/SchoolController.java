@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import xmu.crms.model.School;
+import xmu.crms.entity.School;
 
 @RestController
 @RequestMapping("/school")
@@ -21,17 +21,14 @@ public class SchoolController {
 	@RequestMapping(value="", method=RequestMethod.GET)//TODO
 	public List<School> getSchoolList(String city){
 		List<School> schoollist=new ArrayList<School>();//假的
-		schoollist.add(new School(32,"厦门大学","福建","厦门"));
-		schoollist.add(new School(37,"厦门软件学院","福建","厦门"));
 		return schoollist;
 	}
 	
 	//添加学校
 	@RequestMapping(value="", method=RequestMethod.POST)//TODO
 	public int createSchool(@RequestBody School school, HttpServletResponse response){
-		school.setId(38);
 		response.setStatus(201);
-		return school.getId();
+		return school.getId().intValue();
 	}
 	
 	//获取省份列表

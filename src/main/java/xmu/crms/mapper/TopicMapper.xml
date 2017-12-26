@@ -4,14 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="xmu.crms.mapper.TopicMapper">
-	<resultMap id="topicResultMap" type="Topic">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="description" column="description"/>
-        <result property="groupNumberLimit" column="group_number_limit"/>
-        <result property="groupStudentLimit" column="group_student_limit"/>
-        <association property="seminar" column="seminar_id" select="xmu.crms.mapper.UtilityMapper.selectSeminar"/>
-    </resultMap>
+	
     <select id="getTopicByTopicId" resultMap="topicResultMap">
         SELECT
         id,
@@ -79,13 +72,7 @@
        DELETE FROM seminar_group_topic
  	   WHERE topic_id= #{topicId};
     </delete>
-   
-     <resultMap id="seminarGroupTopicResultMap" type="SeminarGroupTopic">
-        <id property="id" column="id"/>
-        <result property="presentationGrade" column="presentation_grade"/>
-        <association property="topic"  column="topic_id" select="xmu.crms.mapper.UtilityMapper.selectTopic"/>
-        <association property="seminarGroup" column="seminar_group_id" select="xmu.crms.mapper.UtilityMapper.selectSeminarGroup"/>
-    </resultMap>
+  
     <select id="getSeminarGroupTopicById" resultMap="seminarGroupTopicResultMap">
 	SELECT
 	id,
@@ -93,10 +80,10 @@
 	seminar_group_id,
 	presentation_grade
 	FROM seminar_group_topic
-	WHERE topic_id= #{topicId}
-    AND seminar_group_id=#{groupId};
+	WHERE topic_id= #{seminarGroupTopic.topic.id}
+    AND seminar_group_id=#{seminarGroupTopic.seminarGroup.id};
 	</select>    
-   <select id="listSeminarGroupTopicByGroupId"  resultMap="seminarGroupTopicResultMap">
+   <select id="getSeminarGroupTopiclistByGroupId"  resultMap="seminarGroupTopicResultMap">
     SELECT  
     id,
     topic_id,
@@ -104,7 +91,21 @@
     presentation_grade
     From seminar_group_topic
     WHERE seminar_group_id=#{groupId}
-    </select>    
+    </select>
+      <resultMap id="seminarGroupTopicResultMap" type="xmu.crms.entity.SeminarGroupTopic">
+        <id property="id" column="id"/>
+        <result property="presentationGrade" column="presentation_grade"/>
+        <association property="topic"  column="topic_id" select="xmu.crms.mapper.UtilityMapper.selectTopic"/>
+        <association property="seminarGroup" column="seminar_group_id" select="xmu.crms.mapper.UtilityMapper.selectSeminarGroup"/>
+    </resultMap>    
+    <resultMap id="topicResultMap" type="xmu.crms.entity.Topic">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="groupNumberLimit" column="group_number_limit"/>
+        <result property="groupStudentLimit" column="group_student_limit"/>
+        <association property="seminar" column="seminar_id" select="xmu.crms.mapper.UtilityMapper.selectSeminar"/>
+    </resultMap>
 </mapper>
 
  

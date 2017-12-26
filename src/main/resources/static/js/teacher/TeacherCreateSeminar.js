@@ -4,20 +4,12 @@ function createSeminar(){
 		return ;
 	var id;
 
-	var proportions={
-			report : $("#reportGrade").val(),
-			presentation : $("#seminarGrade").val(),
-			c : $("#seminarGrade3").val(),
-			b : $("#seminarGrade4").val(),
-			a : $("#seminarGrade5").val()		
-	};
 	var newSeminar={
 			name : $("#seminarName").val(),
 			description : $("#description").val(),
 			groupingMethod : $("#groupingMethod").find("option:selected").text(),
 			startTime : $("#startTime").val(),
-			endTime : $("#endTime").val(),
-			proportions : proportions
+			endTime : $("#endTime").val()
 	};
 	//alert(JSON.stringify(newSeminar));
 	$.ajax({			
@@ -44,11 +36,7 @@ function checkinput(){
     var description = $("#seminarDescription").val();
     var begintime = $("#startTime").val();
     var endtime = $("#endTime").val();
-    var report = $("#reportGrade").val();
-	var presentation= $("#seminarGrade").val();
-	var c = $("#seminarGrade3").val();
-	var b = $("#seminarGrade4").val();
-	var a = $("#seminarGrade5").val();
+
     if(warn == null || warn.length == 0){
         if(name == ""){
             warn = "名称不能为空。";
@@ -59,9 +47,7 @@ function checkinput(){
         }else if( endtime  == null){
             warn = "请选择结束时间。";
         }
-        else if(report==""||presentation==""||a==""||b==""||c==""){
-        	warn = "请输入评分规则。"
-        }
+
         if(warn !=null && warn.length !=0){
             alert(warn);
             return false;

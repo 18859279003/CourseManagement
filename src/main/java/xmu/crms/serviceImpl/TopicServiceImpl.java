@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.Topic;
 import xmu.crms.exception.TopicNotFoundException;
@@ -112,7 +113,14 @@ public class TopicServiceImpl implements TopicService
         {
             throw new IllegalArgumentException();
         }
-		return topicMapper.getSeminarGroupTopicById(topicId, groupId);
+		SeminarGroupTopic seminarGroupTopic=new SeminarGroupTopic();
+        SeminarGroup seminarGroup=new SeminarGroup();
+        seminarGroup.setId(groupId);
+        Topic topic=new Topic();
+        topic.setId(topicId);
+        seminarGroupTopic.setTopic(topic);
+        seminarGroupTopic.setSeminarGroup(seminarGroup);
+		return topicMapper.getSeminarGroupTopicById(seminarGroupTopic);
 	}
 
 	@Override

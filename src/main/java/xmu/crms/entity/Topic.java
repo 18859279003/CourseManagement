@@ -11,6 +11,10 @@ public class Topic {
 	private Seminar seminar;
 	
 	
+	public Topic() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Topic(BigInteger id, String name, String description, Integer groupNumberLimit, Integer groupStudentLimit
 		) {
 		super();

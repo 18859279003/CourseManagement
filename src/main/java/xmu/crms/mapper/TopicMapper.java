@@ -78,7 +78,7 @@ public interface TopicMapper {
      * @return seminarGroupTopic 讨论课小组选题信息
      * @exception IllegalArgumentException topicId或groupId格式错误
      */
-    SeminarGroupTopic getSeminarGroupTopicById(@Param("topicId") BigInteger topicId, @Param("groupId") BigInteger groupId);
+    SeminarGroupTopic getSeminarGroupTopicById(@Param("seminarGroupTopic") SeminarGroupTopic seminarGroupTopic);
 
     /**
      * @param groupId 要获取的group的groupId

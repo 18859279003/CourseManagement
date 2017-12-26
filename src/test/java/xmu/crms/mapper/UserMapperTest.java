@@ -24,10 +24,11 @@ private UserMapper userMapper;
 private static Log log =LogFactory.getLog(UserMapperTest.class);
 @Test
 public void getUserByUserIdBigInteger()throws Exception{
-	User user=userMapper.getUserByUserIdBigInteger(new BigInteger("1"));
- log.info(user);
+	User user=userMapper.getUserByUserIdBigInteger(new BigInteger("4"));
+ System.out.println(user.getSchool().getName());
  
 }
+
 @Test
 public void insertAttendanceById()throws Exception{
 	userMapper.insertAttendanceById(new BigInteger("1"),new BigInteger("3"),new BigInteger("2"));

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import xmu.crms.model.Student;
+
 
 @Controller
 @RequestMapping

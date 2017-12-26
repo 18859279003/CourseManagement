@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import xmu.crms.entity.User;
 import xmu.crms.entity.Attendance;
 import xmu.crms.entity.Course;
+import xmu.crms.entity.School;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -21,6 +22,22 @@ import java.util.List;
 @Mapper
 @Component
 public interface UserMapper {
+	 /**
+     * selectUser.
+     *
+     * @author cb
+     * @param id
+     * @return User deleteNumber
+     */
+        User selectUser(BigInteger id);
+    /**
+     * selectSchool.
+     *
+     * @author cb
+     * @param id
+     * @return School deleteNumber
+     */
+        School selectSchool(BigInteger id);
 /**
  * 根据id得到用户
 */
