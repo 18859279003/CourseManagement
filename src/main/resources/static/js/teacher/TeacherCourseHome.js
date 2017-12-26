@@ -24,8 +24,8 @@ function init(){
 								"<td class='tabletext'>班级数：" + course.numClass + "</td>" +
 							"</tr>" +
 							"<tr>" +
-								"<td class='tabletext'>开始时间：" + course.startTime + "</td>" +
-								"<td class='tabletext'>结束时间：" + course.endTime + "</td>" +
+								"<td class='tabletext'>开始时间：" + course.startDate + "</td>" +
+								"<td class='tabletext'>结束时间：" + course.endDate + "</td>" +
 							"</tr>" +
 						"</table>" +
 						"</div><br/>"+
@@ -53,7 +53,6 @@ function deleteCourse(id){
 		success: function(data,status)
 		{
 			alert("删除成功"+status+id);
-			$("#class"+id).remove();
 		},
 		error:function()
 		{

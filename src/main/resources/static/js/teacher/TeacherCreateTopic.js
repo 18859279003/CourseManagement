@@ -14,7 +14,7 @@ function createTopic(){
 	$.ajax({			
 		url:  "/seminar/"+id+"/topic",
 		type: "POST",
-		contentType: "application/json;charest=utf-8",
+		contentType: "application/json;charset=utf-8",
 		data: JSON.stringify(newTopic),
 		success: function(data)
 		{

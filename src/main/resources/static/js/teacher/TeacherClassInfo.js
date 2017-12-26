@@ -1,9 +1,7 @@
 ﻿/**
  * Created by lenovo on 2017/12/6.
  */
-var courseId;
-var classId = 23;
-var url;
+
 //加载页面时，获取班级信息
 window.onload = function(){
 	getCourseInfo();
@@ -12,9 +10,10 @@ window.onload = function(){
 
 //获取课程的具体信息
 function getCourseInfo() {
+	var courseId=1;
     var course;
     $.ajax({
-        url: "/course/{courseId}",
+        url: "/course/"+courseId,
         type: "GET",
         success: function (data) {
             course = data;
@@ -31,9 +30,10 @@ function getCourseInfo() {
 
 //获取班级的具体信息
 function getClassInfo(){
+	var classId=1;
     var classInfo;
     $.ajax({
-        url:"/class/{classId}",
+        url:"/class/"+classId,
         type:"GET",
         success:function(data){
             classInfo = data;
@@ -41,12 +41,12 @@ function getClassInfo(){
             $("#name").html=classInfo.name;
             $("#address").html=classInfo.site;
             $("#time").html=classInfo.time;
-            $("#presentation").html=classInfo.proportions.presentation;
-            $("#report").html=classInfo.proportions.report;
-            $("agrade").html=classInfo.proportions.a;
-            $("bgrade").html=classInfo.proportions.b;
-            $("cgrade").html=classInfo.proportions.c;
-            url=classInfo.rester;
+            $("#presentation").html=classInfo.presentationPercentage;
+            $("#report").html=classInfo.reportPercentage;
+            $("#agrade").html=classInfo.fivePointPercentage;
+            $("#bgrade").html=classInfo.fourPointPercentage;
+            $("#cgrade").html=classInfo.threePointPercentage;
+            
             alert("获取班级信息成功！");
         },
         error:function(){
@@ -65,10 +65,15 @@ function downloadfile(){
    alert("下载成功");
 }
 
+//修改班级
+function updateClass(){
+	window.location.href='/TeacherUpdateClass';
+}
 //删除班级
 function deleteclass(){
+	var classId=1;
     $.ajax({
-        url:"/class/{classId}",
+        url:"/class/"+classId,
         type:"DELETE",
         success:function(data){
             alert("删除班级成功！");

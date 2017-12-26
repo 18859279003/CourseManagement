@@ -1,5 +1,5 @@
-﻿/**
- * 
+/**
+ * zdd
  */
 window.onload = function(){
 	getProvincelist();
@@ -7,8 +7,8 @@ window.onload = function(){
 	getSchool();
 }
 
-//绑定，返回一个老师对象
-function bind(){
+//注册，返回一个用户对象
+function register(){
     var phone = document.getElementById("phoneNum").value;
     var password = document.getElementById("password").value;
     var name = document.getElementById("name").value;
@@ -19,28 +19,33 @@ function bind(){
     var email = document.getElementById("email").value;
     var gender = judgesex();
  
-    
-    var d = { "name":"张三",
-            "phone":"15959236782",
-            "number":"23320152202333",
-            "email":"23320152202333@stu.xmu.edu.cn",
-            "gender":"female",
-            "title":"",
-            "avatar":"/avatar/3486.png"};
-    var t;    //用来接收从controller传回来的数据
-    console.log(JSON.stringify(d));
+    var School={
+    		name:school,
+    		province:province,
+    		city:city
+    };
+    var user = {
+    		phone:phone,
+    		password:password,
+    		name:name,
+    		school:School,
+    		number:stuffnum,
+    		email:email,
+    		gender:gender
+    };
+    alert(JSON.stringify(user));
     $.ajax({
-        url : "/me",
-        type : "PUT",
+        url : "/register",
+        type : "POST",
         contentType:"application/json",
-        data:JSON.stringify(d),   
+        data:JSON.stringify(user),   
         async:false,
         success:function(data){
-            alert("绑定成功！" + data);
-            window.location.href="/TeacherHomePage";
+            alert("注册成功！" + data);
+            window.location.href="/AccountLoginPage";
         },
         error:function(){
-            alert("绑定失败！");
+            alert("注册失败！");
         }
     });
 
@@ -70,7 +75,7 @@ function checkright(){
     if(warn !=null && warn.length !=0)
         alert(warn);
     else{
-       bind();
+       register();
     }
     
     return false;
@@ -106,23 +111,27 @@ function judgesex() {
     var x = document.getElementById("man");
     var gender;
 
-    if (x.checked) {
-        gender = "male";
+    if (x=="男") {
+        gender = "0";
     }
     else {
-        gender = "femala";
+        gender = "1";
     }
     return gender;
 }
 
+//$("#province").bind("change", getCitylist());
+//$("#city").bind("change", getSchool());
 
 //获取学校列表
 function getSchool(){
+	alert("school");
 	var schoollist;
-	
+	var city  = $("city").val();
 	$.ajax({
 		url:"/school",
 		type:"GET",
+        data:{city : city},
 		success:function(data){
 			schoollist = data;
 			$("#school").html="";
@@ -163,10 +172,13 @@ function getProvincelist(){
 
 //获取市列表
 function getCitylist(){
+	alert("city");
+    var province = $("province").val();
 	var citylist;
 	$.ajax({
 		url:"/school/city",
 		type:"GET",
+        data:{province : province},
 		success:function(data){
 			provincelist = data;
 			$("#city").html="";

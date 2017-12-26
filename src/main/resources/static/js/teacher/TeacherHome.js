@@ -10,7 +10,7 @@ function init(){
 		success: function(data)
 		{
 			personinfo=data;
-			var gender=personinfo.gender=="male"?"男":"女";
+			var gender=personinfo.gender=="0"?"男":"女";
 			$("#personinfo table").empty();
 			$("#personinfo table").append(
 					"<tr class='itemName'>" + 

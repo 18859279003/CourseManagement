@@ -2,60 +2,60 @@
 <html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport"
 	content="width=device-width,
                                      initial-scale=1.0,
                                      maximum-scale=1.0,
                                      user-scalable=no">
-<title>��ʦ��ҳ��</title>
+<title>教师绑定页面</title>
 <link href="../../css/teacher/TeacherBindPage.css" rel="stylesheet"
 	type="text/css" />
 </head>
 
 <body>
 	<div class="titleBackground"></div>
-	<div class="title">�γ̹���ϵͳ</div>
+	<div class="title">课程管理系统</div>
 	<div class="icon">
-		<a href="/TeacherHomePage"><img src="../../Img/home.png">��ҳ </a>
-		<a href="###"><img src="../../Img/help.png">���� </a>
-		<a href="/WechatLoginPage"><img src="../../Img/exit.png">�˳� </a>
+		<a href="/TeacherHomePage"><img src="../../Img/home.png">首页 </a>
+		<a href="###"><img src="../../Img/help.png">帮助 </a>
+		<a href="/WechatLoginPage"><img src="../../Img/exit.png">退出 </a>
 	</div>
 	<div class="phoneNum">
-		�ֻ���: <input type="text" name="phoneNum" id="phoneNum" />
+		手机号: <input type="text" name="phoneNum" id="phoneNum" />
 	</div>
 	<div class="password">
-		����: <input type="text" name="password" id="password" />
+		密码: <input type="text" name="password" id="password" />
 	</div>
 	<div class="name">
-		����: <input type="text" name="name" id="name" />
+		姓名: <input type="text" name="name" id="name" />
 	</div>
 	<div class="province">
-		ʡ: <select class="provinceSelect" id="province"></select>
+		省: <select class="provinceSelect" id="province"></select>
 	</div>
 	<div class="city">
-		��: <select class="citySelect" id="city"></select>
+		市: <select class="citySelect" id="city"></select>
 	</div>
 	<div class="school">
-		ѧУ: <select class="schoolSelect" id="school"></select>
-		<div class="createSchool" ><a href="/TeacherCreateSchool">����ѧУ</a></div>
+		学校: <select class="schoolSelect" id="school"></select>
+		<div class="createSchool" ><a href="/TeacherCreateSchool">创建学校</a></div>
 	</div>
-	<div class="gender">�Ա�:</div>
+	<div class="gender">性别:</div>
 	<div class="male">
-		�� <input type="radio" value="��" name="gender" checked="checked"
+		男 <input type="radio" value="男" name="gender" checked="checked"
 			id="man" />
 	</div>
 	<div class="female">
-		Ů <input type="radio" value="Ů" name="gender" id="woman" />
+		女 <input type="radio" value="女" name="gender" id="woman" />
 	</div>
 	<div class="stuffNum">
-		�̹���: <input type="text" name="stuffNum" id="stuffNum" />
+		教工号: <input type="text" name="stuffNum" id="stuffNum" />
 	</div>
 	<div class="eMail">
-		����: <input type="text" name="eMail" id="email" />
+		邮箱: <input type="text" name="eMail" id="email" />
 	</div>
 	<div class="submit">
-		<button onclick="return checkright()">�ύ</button>
+		<button onclick="return checkright()">提交</button>
 	</div>
 
 	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
