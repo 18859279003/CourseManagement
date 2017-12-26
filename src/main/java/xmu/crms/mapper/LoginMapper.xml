@@ -14,7 +14,8 @@
     </select>
     
      <select id="signInPhone" parameterType="xmu.crms.entity.User" resultType="xmu.crms.entity.User">
-        SELECT * 
+        SELECT 
+        id, phone, wechat_id,openid,avatar,password,name,school_id,gender,type,number,education,title,email 
         FROM user_info
         WHERE phone = #{user.phone} AND password=#{user.password};
     </select>

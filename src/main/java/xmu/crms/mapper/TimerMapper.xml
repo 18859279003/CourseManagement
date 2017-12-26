@@ -14,7 +14,7 @@
         WHERE id=#{id}
     </select>
 
-    <insert id="insertEvent" parameterType="Event">
+    <insert id="insertEvent" parameterType="xmu.crms.entity.Event">
         SELECT id,time,bean_name,method_name,parameter
         FROM event
         WHERE id=#{id}
@@ -25,13 +25,13 @@
         WHERE id=#{eventId}
     </delete>
 
-    <update id="updateEvent" parameterType="Event">
+    <update id="updateEvent" parameterType="xmu.crms.entity.Event">
         UPDATE event
         SET time=#{time}
         WHERE id=#{id}
     </update>
 
-    <resultMap id="ExecutableEvents" type="Event">
+    <resultMap id="ExecutableEvents" type="xmu.crms.entity.Event">
         <id column="id" property="id" javaType="java.math.BigInteger"/>
         <result column="time" property="time" javaType="java.util.Date"/>
         <result column="bean_name" property="beanName"/>

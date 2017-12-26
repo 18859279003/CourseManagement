@@ -69,7 +69,7 @@
     (SELECT student_id FROM attendance WHERE class_id=#{classId} AND seminar_id=#{seminarId} AND attendance_status=2);
     </select>
     
-    <select id="listAttendanceById" resultType="xmu.crms.entity.Attentance">
+    <select id="listAttendanceById" resultType="xmu.crms.entity.Attendance">
      SELECT
     id,
     student_id,
