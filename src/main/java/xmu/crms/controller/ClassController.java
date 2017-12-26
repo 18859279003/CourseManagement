@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.User;
-import xmu.crms.VO.ClassGroupVO;
+import xmu.crms.vo.ClassGroupVO;
 
 @RestController
 @RequestMapping("/class")

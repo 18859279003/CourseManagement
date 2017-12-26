@@ -20,11 +20,10 @@ import xmu.crms.entity.User;
 @Component
 public interface FixGroupMapper {
 	/**
-     * @param groupId 要获取的group的groupId
-     * @return 该group
-     * @author zhangzhaoyang
-     * @date 2017/12/20
-     */
+	 * 根据组Id获取固定小组对象
+	 * @param groupId
+	 * @return
+	 */
     FixGroup getFixGroupByGroupId(@Param("groupId") BigInteger groupId);
     /**
      * 按班级Id添加固定分组.

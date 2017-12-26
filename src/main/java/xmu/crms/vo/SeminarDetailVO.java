@@ -1,4 +1,4 @@
-package xmu.crms.VO;
+package xmu.crms.vo;
 
 public class SeminarDetailVO {
     private int id;

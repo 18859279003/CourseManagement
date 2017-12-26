@@ -1,4 +1,4 @@
-package xmu.crms.VO;
+package xmu.crms.vo;
 
 import java.util.Arrays;
 

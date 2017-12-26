@@ -10,82 +10,80 @@ import org.springframework.stereotype.Component;
 import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.Topic;
 /**
- * Topic Mapper
- * @author zhangzhaoyang
- * @date 2017/12/20
+ * 
+ * @author Zhang Zhaoyang
+ *
  */
 @Mapper
 @Component
 public interface TopicMapper {
 	/**
-     * @param topicId 要获取的topic的topicId
-     * @return 该topic
-     * @author zhangzhaoyang
-     * @date 2017/12/20
-     */
+	 * 根据话题Id获得topic对象
+	 * @param topicId
+	 * @return
+	 */
     Topic getTopicByTopicId(@Param("topicId") BigInteger topicId);
     
     /**
-     * @param topicId 讨论课的ID
-     * @param topic   修改后的讨论课
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+     * 根据话题Id和话题对象topic更改话题信息
+     * @param topicId
+     * @param topic
+     * @return
      */
     Integer updateTopicByTopicId ( @Param("topicId") BigInteger topicId,@Param("topic") Topic topic) ;
     
     /**
-     * @param topicId 要删除的topic的topicId
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+     * 根据话题Id删除话题
+     * @param topicId
+     * @return
      */
     Integer deleteTopicByTopicId(@Param("topicId") BigInteger topicId);
 
     /**
-     * @param seminarId 课程Id
-     * @return List<Topic>
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+     * 根据讨论课Id列出所有的话题
+     * @param seminarId
+     * @return
      */
     List<Topic> listTopicBySeminarId(@Param("seminarId") BigInteger seminarId);
     
     /**
-     * @param seminarId 话题所属讨论课的Id
-     * @param topic     话题
-     * @return 新建话题后给topic分配的Id
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+     * 根据讨论课id插入话题
+     * @param seminarId
+     * @param topic
+     * @return
      */
     Integer insertTopicBySeminarId(@Param("seminarId") BigInteger seminarId, @Param("topic") Topic topic) ;
 
     /**
-     * @param groupId 小组Id
-     * @param topicId 话题Id
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+     * 根据小组Id和话题Id删除SeminarGroupTopic中的记录
+     * @param groupId
+     * @param topicId
+     * @return
      */
+    
     Integer deleteSeminarGroupTopicById(@Param("groupId") BigInteger groupId, @Param("topicId") BigInteger topicId);
 
     /**
-     * @param topicId 讨论课Id
-     * @date 2017/12/20
-     * @author zhangzhaoyang
+     * 根据话题Id删除SeminarGroupTopic中的记录
+     * @param topicId
+     * @return
      */
+     
     Integer deleteSeminarGroupTopicByTopicId(@Param("topicId") BigInteger topicId) ;
 
-      /**
-     * @param topicId 话题id
-     * @param groupId 组id
-     * @return seminarGroupTopic 讨论课小组选题信息
-     * @exception IllegalArgumentException topicId或groupId格式错误
+    /**
+     * 传入空SeminarGroupTopic，从数据库装填返回
+     * @param seminarGroupTopic
+     * @return
      */
     SeminarGroupTopic getSeminarGroupTopicById(@Param("seminarGroupTopic") SeminarGroupTopic seminarGroupTopic);
 
     /**
-     * @param groupId 要获取的group的groupId
-     * @return 该group在这节讨论课下的所有话题信息
-     * @author zhangzhaoyang
-     * @date 2017/12/20
+     * 根据小组id返回一组SeminarGroupTopic
+     * @param groupId
+     * @return
      */
+     
     List<SeminarGroupTopic> getSeminarGroupTopiclistByGroupId(@Param("groupId") BigInteger groupId);
   
 }

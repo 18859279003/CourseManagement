@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.Topic;
 import xmu.crms.serviceImpl.TopicServiceImpl;
-import xmu.crms.VO.GroupVO;
-import xmu.crms.VO.SeminarVO;
-import xmu.crms.VO.SeminarDetailVO;
-import xmu.crms.VO.StudentSeminarVO;
+import xmu.crms.vo.GroupVO;
+import xmu.crms.vo.SeminarVO;
+import xmu.crms.vo.SeminarDetailVO;
+import xmu.crms.vo.StudentSeminarVO;
 
 @RestController
 @RequestMapping("/seminar")
