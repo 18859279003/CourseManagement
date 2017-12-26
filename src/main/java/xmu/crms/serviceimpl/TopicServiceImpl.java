@@ -1,4 +1,4 @@
-package xmu.crms.serviceImpl;
+package xmu.crms.serviceimpl;
 
 import java.math.BigInteger;
 import java.util.List;

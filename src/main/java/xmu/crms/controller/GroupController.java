@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.SeminarGroupTopic;
-import xmu.crms.entity.Topic;
 import xmu.crms.entity.User;
-import xmu.crms.serviceImpl.TopicServiceImpl;
+import xmu.crms.serviceimpl.TopicServiceImpl;
 
 @RestController
 @RequestMapping("/group")

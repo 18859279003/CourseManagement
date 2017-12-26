@@ -1,4 +1,4 @@
-package xmu.crms.serviceImpl;
+package xmu.crms.serviceimpl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Service
-public class seminarImpl implements SeminarService{
+public class SeminarImpl implements SeminarService{
 
     @Autowired
     private SeminarDao seminarDao;

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.Topic;
 import xmu.crms.exception.TopicNotFoundException;
-import xmu.crms.vo.GroupVO;
-import xmu.crms.serviceImpl.TopicServiceImpl;
+import xmu.crms.vo.GroupVo;
+import xmu.crms.serviceimpl.TopicServiceImpl;
 
 @RestController
 @RequestMapping("/topic")
@@ -48,8 +48,8 @@ public class TopicController {
 	//按话题ID获取选择了该话题的小组
 	@RequestMapping(value="/{topicId}/group", method=RequestMethod.GET)
 	@ResponseStatus(value=HttpStatus.OK)
-	public List<GroupVO> getGroupListByTopicId(@PathVariable("topicId") int topicId){
-		List<GroupVO> groupList=new ArrayList<GroupVO>();
+	public List<GroupVo> getGroupListByTopicId(@PathVariable("topicId") int topicId){
+		List<GroupVo> groupList=new ArrayList<GroupVo>();
 		return groupList;
 	}
 }

@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 import xmu.crms.entity.User;
 
-public class ClassGroupVO {
+public class ClassGroupVo {
     private User leader;
     private User[] members;
 
-    public ClassGroupVO() {
+    public ClassGroupVo() {
 
     }
-    public ClassGroupVO(User leader, User[] members) {
+    public ClassGroupVo(User leader, User[] members) {
         this.leader = leader;
         this.members = members;
     }

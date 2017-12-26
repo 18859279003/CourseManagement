@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import xmu.crms.entity.Topic;
 
-public class SeminarVO {
+public class SeminarVo {
     private int id;
     private String name;
     private String description;
@@ -13,10 +13,10 @@ public class SeminarVO {
 	private String endTime;
     private Topic[] topics;
 
-    public SeminarVO() {
+    public SeminarVo() {
 
     }
-    public SeminarVO(int id, String name, String description, String groupingMethod, String startTime, String endTime,
+    public SeminarVo(int id, String name, String description, String groupingMethod, String startTime, String endTime,
             Topic[] topics) {
         super();
         this.id = id;

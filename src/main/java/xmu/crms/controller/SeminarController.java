@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.Topic;
-import xmu.crms.serviceImpl.TopicServiceImpl;
-import xmu.crms.vo.GroupVO;
-import xmu.crms.vo.SeminarVO;
-import xmu.crms.vo.SeminarDetailVO;
-import xmu.crms.vo.StudentSeminarVO;
+import xmu.crms.serviceimpl.TopicServiceImpl;
+import xmu.crms.vo.GroupVo;
+import xmu.crms.vo.SeminarVo;
+import xmu.crms.vo.SeminarDetailVo;
+import xmu.crms.vo.StudentSeminarVo;
 
 @RestController
 @RequestMapping("/seminar")
@@ -30,14 +30,14 @@ public class SeminarController {
     private TopicServiceImpl topicServiceImpl;
 	//按ID获取讨论课，传入讨论课id，返回讨论课对象
 	@RequestMapping(value="/{seminarId}", method=RequestMethod.GET)
-	public SeminarVO getSeminarById(@PathVariable("seminarId") int seminarId){
-		return new SeminarVO();
+	public SeminarVo getSeminarById(@PathVariable("seminarId") int seminarId){
+		return new SeminarVo();
 	}
 	
 	//按ID修改讨论课，传入讨论课id和json
 	@RequestMapping(value="/{seminarId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void updateSeminarById(@PathVariable("seminarId") int seminarId, @RequestBody SeminarVO seminar){
+	public void updateSeminarById(@PathVariable("seminarId") int seminarId, @RequestBody SeminarVo seminar){
 	}
 	
 	//按ID删除讨论课，传入讨论课id
@@ -48,15 +48,15 @@ public class SeminarController {
 	
 	//按ID获取与学生有关的讨论课信息
 	@RequestMapping(value="/{seminarId}/my", method=RequestMethod.GET)
-    public StudentSeminarVO getStudentSeminarById(@PathVariable("seminarId") int seminarId){
-	    StudentSeminarVO seminar=new StudentSeminarVO(32,"概要设计","random","OOAD","2017-10-11","2017-10-24",23,true,true);//假的
+    public StudentSeminarVo getStudentSeminarById(@PathVariable("seminarId") int seminarId){
+	    StudentSeminarVo seminar=new StudentSeminarVo(32,"概要设计","random","OOAD","2017-10-11","2017-10-24",23,true,true);//假的
         return seminar;
     }	
 	
 	 //按ID获取讨论课详情
     @RequestMapping(value="/{seminarId}/detail", method=RequestMethod.GET)
-    public SeminarDetailVO getSeminarDetailById(@PathVariable("seminarId") int seminarId){
-        SeminarDetailVO seminar=new SeminarDetailVO(32,"概要设计","2017-10-10","2017-10-24","海韵201","邱明","mingqiu@xmu.edu.cn");//假的
+    public SeminarDetailVo getSeminarDetailById(@PathVariable("seminarId") int seminarId){
+        SeminarDetailVo seminar=new SeminarDetailVo(32,"概要设计","2017-10-10","2017-10-24","海韵201","邱明","mingqiu@xmu.edu.cn");//假的
         return seminar;
     }   
     
@@ -78,9 +78,9 @@ public class SeminarController {
 	//按讨论课ID查找小组
 	//可选参数Boolean gradeable可打分的、int classId此班级的
 	@RequestMapping(value="/{seminarId}/group", method=RequestMethod.GET)
-	public List<GroupVO> getGroupListBySeminarId(
+	public List<GroupVo> getGroupListBySeminarId(
 	        @PathVariable("seminarId") int seminarId, boolean gradeable, int classId){	
-		List<GroupVO> groupList=new ArrayList<GroupVO>();
+		List<GroupVo> groupList=new ArrayList<GroupVo>();
 		return groupList;
 	}
 	

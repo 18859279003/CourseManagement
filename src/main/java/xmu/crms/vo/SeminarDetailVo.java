@@ -1,6 +1,6 @@
 package xmu.crms.vo;
 
-public class SeminarDetailVO {
+public class SeminarDetailVo {
     private int id;
     private String name;
     private String site;
@@ -9,10 +9,10 @@ public class SeminarDetailVO {
     private String teacherName;
     private String teacherEmail;
 
-    public SeminarDetailVO() {
+    public SeminarDetailVo() {
 
     }
-    public SeminarDetailVO(int id, String name, String site, String startTime,
+    public SeminarDetailVo(int id, String name, String site, String startTime,
                          String endTime, String teacherName, String teacherEmail) {
         this.id = id;
         this.name = name;

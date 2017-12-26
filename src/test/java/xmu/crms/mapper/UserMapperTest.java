@@ -14,7 +14,9 @@ import xmu.crms.entity.Course;
 import java.math.BigInteger;
 import java.util.List;
 /**
- * Created by yangkepiao on 2017/12/24.
+ * UserMapperTest
+ * @author yangkepiao
+ * @date 2017/12/26
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)

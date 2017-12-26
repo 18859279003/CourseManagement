@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.User;
-import xmu.crms.vo.ClassGroupVO;
+import xmu.crms.vo.ClassGroupVo;
 
 @RestController
 @RequestMapping("/class")
@@ -71,9 +71,9 @@ public class ClassController {
 	
 	//按ID获取自身所在班级小组
 	@RequestMapping(value="/{classId}/classgroup", method=RequestMethod.GET)
-	public ClassGroupVO getGroupByClassId(@PathVariable("classId") int classId){
+	public ClassGroupVo getGroupByClassId(@PathVariable("classId") int classId){
 
-		return new ClassGroupVO();
+		return new ClassGroupVo();
 	}
 		
 	//班级小组组长辞职

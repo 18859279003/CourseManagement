@@ -1,4 +1,4 @@
-package xmu.crms.serviceImpl;
+package xmu.crms.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +51,8 @@ public class UserServiceImpl implements UserService{
 			
 		double longi=userMapper.getLongitude(seminarId, classId);
 		double lati=userMapper.getLatitude(seminarId, classId);
-	if(longi==longitude&&lati==latitude)
+		 double range=0.5;
+	if(Math.abs(longi-longitude)<range&&Math.abs(lati-latitude)<range)
 		{
 		userMapper.insertAttendanceById(classId, seminarId, userId);	
 		return userMapper.getIdByInfo(classId, seminarId, userId);
@@ -108,7 +109,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateUserByUserId(BigInteger userId, User user) throws UserNotFoundException {
-		// TODO Auto-generated method stub
 		if(userMapper.selectUser(userId)==null)
 		{	throw new UserNotFoundException();}
 		userMapper.updateUserByUserId(userId, user);
@@ -117,19 +117,19 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> listUserByClassId(BigInteger classId, String numBeginWith, String nameBeginWith)
 			throws IllegalArgumentException, ClassesNotFoundException, UserNotFoundException {
-	
+		String search="%";
 		if(classId.intValue()<0)
 		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
 		{	throw new ClassesNotFoundException();}
-		if(userMapper.listUserByClassId(classId, numBeginWith+"%", nameBeginWith+"%")==null)
+		if(userMapper.listUserByClassId(classId, numBeginWith+search, nameBeginWith+search)==null)
 		{	throw new UserNotFoundException();}
 		return userMapper.listUserByClassId(classId, numBeginWith+"%", nameBeginWith+"%");
 	}
 
 	@Override
 	public List<User> listUserByUserName(String userName) throws UserNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(userMapper.listUserIdByUserName(userName).size()==0)
 		{	throw new UserNotFoundException();}
 		return userMapper.listUserByUserName(userName);
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> listPresentStudent(BigInteger seminarId, BigInteger classId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(classId.intValue()<0||seminarId.intValue()<0)
 		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> listLateStudent(BigInteger seminarId, BigInteger classId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(classId.intValue()<0||seminarId.intValue()<0)
 		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> listAbsenceStudent(BigInteger seminarId, BigInteger classId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(classId.intValue()<0||seminarId.intValue()<0)
 		{	throw new IllegalArgumentException();}
 		if(userMapper.selectClass(classId)==null)
@@ -177,7 +177,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<Course> listCourseByTeacherName(String teacherName)
 			throws UserNotFoundException, IllegalArgumentException, CourseNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(listUserByUserName(teacherName)==null)
 		{	throw new UserNotFoundException();}
 		if(userMapper.listCourseByTeacherName(teacherName).size()==0)

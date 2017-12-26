@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import xmu.crms.exception.TopicNotFoundException;
-import xmu.crms.serviceImpl.TopicServiceImpl;
+import xmu.crms.serviceimpl.TopicServiceImpl;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

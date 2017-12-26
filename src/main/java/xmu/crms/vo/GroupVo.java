@@ -5,7 +5,7 @@ import java.util.Arrays;
 import xmu.crms.entity.Topic;
 import xmu.crms.entity.User;
 
-public class GroupVO {
+public class GroupVo {
     private int id;
     private String name;
     private User leader;
@@ -13,11 +13,11 @@ public class GroupVO {
     private Topic[] topics;
     private String report;
 
-    public GroupVO() {
+    public GroupVo() {
 
     }
 
-    public GroupVO(int id, String name, User leader, User[] members, Topic[] topics, String report) {
+    public GroupVo(int id, String name, User leader, User[] members, Topic[] topics, String report) {
         super();
         this.id = id;
         this.name = name;

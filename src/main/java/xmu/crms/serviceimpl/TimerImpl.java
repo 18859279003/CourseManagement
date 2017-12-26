@@ -1,4 +1,4 @@
-package xmu.crms.serviceImpl;
+package xmu.crms.serviceimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;

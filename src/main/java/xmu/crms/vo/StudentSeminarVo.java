@@ -1,6 +1,6 @@
 package xmu.crms.vo;
 
-public class StudentSeminarVO {
+public class StudentSeminarVo {
     private int id;
     private String name;
     private String groupingMethod;
@@ -11,10 +11,10 @@ public class StudentSeminarVO {
     private boolean leaderSign;
     private boolean areTopicsSelected;
 
-    public StudentSeminarVO() {
+    public StudentSeminarVo() {
 
     }
-    public StudentSeminarVO(int id, String name, String groupingMethod,
+    public StudentSeminarVo(int id, String name, String groupingMethod,
                           String courseName, String startTime, String endTime,
                           int classCalling, boolean isLeader, boolean areTopicsSelected) {
         this.id = id;
