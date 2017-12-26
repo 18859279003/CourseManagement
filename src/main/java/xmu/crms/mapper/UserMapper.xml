@@ -253,23 +253,31 @@
         SELECT  * From  course WHERE id=#{id}
     </select>
 
-    <select id="selectFixGroup" resultMap="fixGroupResultMap">
-        SELECT  * From  fix_group WHERE id=#{id}
-    </select>
-
+   
     <select id="selectSeminar" resultMap="seminarResultMap">
         SELECT  * From  seminar WHERE id=#{id}
     </select>
 
-    <select id="selectSeminarGroup" resultMap="seminarGroupResultMap">
-        SELECT  * From  seminar_group WHERE id=#{id}
-    </select>
-
-    <select id="selectSeminarGroupTopic" resultMap="seminarGroupTopicResultMap">
-        SELECT  * From  seminar_group_topic WHERE id=#{id}
-    </select>
-
-    <select id="selectTopic" resultMap="topicResultMap">
-        SELECT  * From  topic WHERE id=#{id}
-    </select>
+    <resultMap id="classResultMap" type="xmu.crms.entity.ClassInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="site" column="site"/>
+        <result property="classTime" column="class_time"/>
+        <result property="description" column="description"/>
+        <result property="reportPercentage" column="report_percentage"/>
+        <result property="presentationPercentage" column="presentation_percentage"/>
+        <result property="fivePointPercentage" column="five_point_percentage"/>
+        <result property="fourPointPercentage" column="four_point_percentage"/>
+        <result property="threePointPercentage" column="three_point_percentage"/>
+        <association property="course" column="course_id" select="selectCourse"/>
+     </resultMap>
+      <resultMap id="seminarResultMap" type="xmu.crms.entity.Seminar">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="fixed" column="is_fixed"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <association property="course" column="course_id" select="selectCourse"/>
+    </resultMap>
 </mapper>
