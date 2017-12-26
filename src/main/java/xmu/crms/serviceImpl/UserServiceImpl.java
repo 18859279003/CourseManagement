@@ -28,15 +28,27 @@ public class UserServiceImpl implements UserService{
 	public BigInteger insertAttendanceById(BigInteger classId, BigInteger seminarId, BigInteger userId, double longitude,
 			double latitude)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException, UserNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(classId.intValue()<0||userId.intValue()<0||seminarId.intValue()<0)
+		{
 			throw new IllegalArgumentException();
+		}
+			
 		if(userMapper.selectClass(classId)==null)
+		{
 			throw new ClassesNotFoundException();
+		}
+			
 		if(userMapper.selectSeminar(seminarId)==null)
+		{
 			throw new SeminarNotFoundException();
+		}
+			
 		if(userMapper.selectUser(userId)==null)
+		{
 			throw new UserNotFoundException();
+		}
+			
 		double longi=userMapper.getLongitude(seminarId, classId);
 		double lati=userMapper.getLatitude(seminarId, classId);
 	if(longi==longitude&&lati==latitude)
@@ -50,33 +62,47 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<Attendance> listAttendanceById(BigInteger classId, BigInteger seminarId)
 			throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(classId.intValue()<0||seminarId.intValue()<0)
+		{
 			throw new IllegalArgumentException();
+		}
 		if(userMapper.selectClass(classId)==null)
+		{
 			throw new ClassesNotFoundException();
+		}
 		if(userMapper.selectSeminar(seminarId)==null)
+		{
 			throw new SeminarNotFoundException();
+		}	
+			
 		return userMapper.listAttendanceById(seminarId, classId);
 		
 	}
 
 	@Override
 	public User getUserByUserId(BigInteger userId) throws IllegalArgumentException, UserNotFoundException {
-		// TODO Auto-generated method stub
+		
 		if(userId.intValue()<0)
+		{
 			throw new IllegalArgumentException();
+		}
+			
 		if(userMapper.selectUser(userId)==null)
+		{
 			throw new UserNotFoundException();
+		}
+			
 		return userMapper.getUserByUserIdBigInteger(userId);
 	}
 
 	@Override
-	public List<BigInteger> listUserIdByUserName(String userName)
-			throws IllegalArgumentException, UserNotFoundException {
-		// TODO Auto-generated method stub
+	public List<BigInteger> listUserIdByUserName(String userName) throws IllegalArgumentException, UserNotFoundException {
+		
 		if(userMapper.listUserIdByUserName(userName).size()==0)
+		{
 			throw new UserNotFoundException();
+		}
 		return userMapper.listUserIdByUserName(userName);
 	}
 

@@ -39,7 +39,10 @@ public class LoginServiceImpl implements LoginService{
 		// 若user为空，则用户名或密码不正确
 		User userRec=loginMapper.signInPhone(user);
 		if(userRec==null)
+		{
 			throw new UserNotFoundException();
+		}
+			
 		return userRec;
 	}
 

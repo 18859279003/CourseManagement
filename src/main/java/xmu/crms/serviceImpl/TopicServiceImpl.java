@@ -84,7 +84,11 @@ public class TopicServiceImpl implements TopicService
 		{
 			return new BigInteger("-1");
 		}
-		else return topic.getId();
+		else
+		{
+			return topic.getId();
+		}
+			
 	}
 
 	@Override
