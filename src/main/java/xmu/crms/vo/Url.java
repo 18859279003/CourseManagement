@@ -1,5 +1,9 @@
 package xmu.crms.vo;
-
+/**
+ * 
+ * @author Zhuang Dandan
+ *
+ */
 public class Url {
 
     private String url;

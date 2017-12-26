@@ -11,6 +11,12 @@ import xmu.crms.exception.*;
 
 @ControllerAdvice
 @RestController
+/**
+ * 
+ * @author Administrator
+ *
+ */
+
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = ClassesNotFoundException.class)

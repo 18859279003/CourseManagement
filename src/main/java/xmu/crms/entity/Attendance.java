@@ -1,10 +1,14 @@
 package xmu.crms.entity;
 
 import java.math.BigInteger;
-
+/**
+ * Attendance
+ * @author Administrator
+ *
+ */
 public class Attendance {
 	private BigInteger id;
-	private User student;
+	private User student ;
 	private ClassInfo classInfo;
 	private Seminar seminar;
 	private Integer attendanceStatus;

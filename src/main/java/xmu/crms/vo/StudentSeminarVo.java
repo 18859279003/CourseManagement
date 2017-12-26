@@ -1,5 +1,9 @@
 package xmu.crms.vo;
-
+/**
+ * 
+ * @author Zhuang Dandan
+ *
+ */
 public class StudentSeminarVo {
     private int id;
     private String name;

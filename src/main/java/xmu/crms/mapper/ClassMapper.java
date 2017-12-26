@@ -32,16 +32,20 @@ public interface ClassMapper {
      * @param classId 班级id
      * @return 班级信息
      */
-    //补充/class/{classId}方法
+   
     List<Integer> getStudentNumByClassId(BigInteger classId);
+    /**
+     * 按照班级Id获取班级对象
+     * @param classId
+     * @return
+     */
     ClassInfo getClassByClassId(BigInteger classId);
 
     /**
      * 按班级id和班级修改班级信息.
-     * <p>
-     * 根据班级id修改班级信息<br>
-     *
-     * @param classId 班级ID
+     * @param classId
+     * @param newClass
+     * @return
      */
     Boolean updateClassByClassId(@Param("classId") BigInteger classId, @Param("newClass") ClassInfo newClass);
 
@@ -112,12 +116,9 @@ public interface ClassMapper {
 
 
     /**
-     * 新建班级.
-     * <p>
-     * 根据课程id新建班级<br>
-     *
-     * @return classId 班级Id
-     * @author ixing
+     * 新建班级
+     * @param classInfo
+     * @return
      */
     Boolean insertClassById(@Param("classInfo") ClassInfo classInfo);
 

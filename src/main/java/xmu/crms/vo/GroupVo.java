@@ -4,7 +4,11 @@ import java.util.Arrays;
 
 import xmu.crms.entity.Topic;
 import xmu.crms.entity.User;
-
+/**
+ * 
+ * @author Zhuang Dandan
+ *
+ */
 public class GroupVo {
     private int id;
     private String name;

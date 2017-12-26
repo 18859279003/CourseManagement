@@ -2,7 +2,11 @@ package xmu.crms.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
-
+/**
+ * CourseInfo
+ * @author Administrator
+ *
+ */
 public class Course {
 	private BigInteger id;
 	private String name;

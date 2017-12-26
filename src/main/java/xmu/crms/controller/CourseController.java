@@ -19,60 +19,104 @@ import xmu.crms.entity.Seminar;
 
 @RestController
 @RequestMapping("/course")
+/**
+ * 
+ * @author Zhuang Dandan
+ *
+ */
 public class CourseController {
 
-	//获取与当前用户相关联的课程列表
+	/**
+	 * 获取与当前用户相关联的课程列表
+	 * @return
+	 */
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public List<Course> getCourseList(){
-		List<Course> courselist=new ArrayList<Course>();//假的
+		List<Course> courselist=new ArrayList<Course>();
 		return courselist;
 	}
 	
-	//创建课程，传入json，返回课程id
+	/**
+	 * 创建课程，传入json，返回课程id
+	 * @param course
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public Course createCourse(@RequestBody Course course, HttpServletResponse response){	
-		return course;//假的
+		return course;
 	}
 	
-	//按ID获取课程，传入课程id，返回课程对象
+	/**
+	 * 按ID获取课程，传入课程id，返回课程对象
+	 * @param courseId
+	 * @return
+	 */
 	@RequestMapping(value="/{courseId}", method=RequestMethod.GET)
 	public Course getCourseById(@PathVariable("courseId") int courseId){
 		return new Course();
 	}
 	
-	//按ID修改课程，传入课程id和json
+	/**
+	 * 按ID修改课程，传入课程id和json
+	 * @param courseId
+	 * @param course
+	 */
 	@RequestMapping(value="/{courseId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void updateCourseById(@PathVariable("courseId") int courseId, @RequestBody Course course){
 	}
 	
-	//按ID删除课程，传入课程id
+	/**
+	 * 按ID删除课程，传入课程id
+	 * @param courseId
+	 */
 	@RequestMapping(value="/{courseId}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void deleteCourseById(@PathVariable("courseId") int courseId){
 	}
 		
-	//按ID获取课程的班级列表
+	/**
+	 * 按ID获取课程的班级列表
+	 * @return
+	 */
 	@RequestMapping(value="/{courseId}/class", method=RequestMethod.GET)
 	public List<ClassInfo> getClassListByCourseId(){
 		List<ClassInfo> classList=new ArrayList<ClassInfo>();
 		return classList;
 	}
 	
-	//在指定ID的课程创建班级
+	/**
+	 * 在指定ID的课程创建班级
+	 * @param courseId
+	 * @param clas
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/{courseId}/class", method=RequestMethod.POST)
 	public ClassInfo createTopic(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response){	
-		return clas;//假的
+		return clas;
 	}
 
-	//按ID获取课程的讨论课列表
+	/**
+	 * 按ID获取课程的讨论课列表
+	 * @param courseId
+	 * @param embedGrade
+	 * @return
+	 */
 	@RequestMapping(value="/{courseId}/seminar", method=RequestMethod.GET)
 	public List<Seminar> getSeminarList(@PathVariable("courseId") int courseId, boolean embedGrade){
-		List<Seminar> seminarlist=new ArrayList<Seminar>();//假的
+		List<Seminar> seminarlist=new ArrayList<Seminar>();
 		return seminarlist;
 	}
     
-	//在课程创建讨论课
+	/**
+	 * 在课程创建讨论课
+	 * @param courseId
+	 * @param seminar
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/{courseId}/seminar", method=RequestMethod.POST)
 	public Seminar createSeminar(@PathVariable("courseId") int courseId, @RequestBody Seminar seminar, HttpServletResponse response){
 		return seminar;

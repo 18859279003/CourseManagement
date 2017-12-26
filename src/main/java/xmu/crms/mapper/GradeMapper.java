@@ -11,11 +11,14 @@ import xmu.crms.service.SeminarGroupService;
 import java.math.BigInteger;
 import java.util.List;
 
-/**
- * Created by status200 on 2017/12/19.
- */
+
 @Mapper
 @Component
+/**
+ * 
+ * @author Liu Xin
+ *
+ */
 public interface GradeMapper {
     /**
      * 按seminarGroupTopicId删除学生打分表
@@ -29,14 +32,35 @@ public interface GradeMapper {
      */
     SeminarGroup getSeminarGroupBySeminarGroupId(@Param("seminarGroupId") BigInteger seminarGroupId);
 
+    /**
+     * 根据UserId获取用户
+     * @param userId
+     * @return
+     */
     User getUserByUserId(@Param("userId")BigInteger userId);
-
+    /**
+     * 根据学校Id获取学校
+     * @param schoolId
+     * @return
+     */
     School getSchoolBySchoolId(@Param("schoolId")BigInteger schoolId);
-
+    /**
+     * 根据讨论课Id获取讨论课
+     * @param seminarId
+     * @return
+     */
     Seminar getSeminarBySeminarId(@Param("seminarId")BigInteger seminarId);
-
+    /**
+     * 根据课程Id获取课程
+     * @param courseId
+     * @return
+     */
     Course getCourseByCourseId(@Param("courseId")BigInteger courseId);
-
+    /**
+     * 根据班级Id获取班级信息
+     * @param classId
+     * @return
+     */
     ClassInfo getClassInfoByClassId(@Param("classId")BigInteger classId);
     /**
      * 获取某学生所有讨论课的所有成绩
@@ -55,11 +79,22 @@ public interface GradeMapper {
     List<SeminarGroup> listSeminarGradeByCourseId(@Param("userId")BigInteger userId, @Param("courseId")BigInteger courseId);
     /**
      * 提交对其他小组的打分
+     * @param topicId
+     * @param seminarGroupId
+     * @return
      */
      BigInteger getSeminarGroupTopicId(@Param("topicId")BigInteger topicId,@Param("seminarGroupId")BigInteger seminarGroupId);
+     /**
+      * 通过用户Id插入小组成绩
+      * @param userId
+      * @param seminarGroupTopicId
+      * @param grade
+      */
      void insertGroupGradeByUserId(@Param("userId")BigInteger userId, @Param("groupId")BigInteger seminarGroupTopicId, @Param("grade")BigInteger grade);
     /**
      * 按ID设置小组报告分.
+     * @param seminarGroupId
+     * @param grade
      */
     void updateGroupByGroupId(@Param("seminarGroupId") BigInteger seminarGroupId, @Param("grade") BigInteger grade);
     /**

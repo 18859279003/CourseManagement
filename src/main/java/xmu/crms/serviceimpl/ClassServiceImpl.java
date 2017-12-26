@@ -285,6 +285,7 @@ public class ClassServiceImpl implements ClassService {
     }
 
 
+   
     @Override
     public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException {
 
@@ -293,9 +294,6 @@ public class ClassServiceImpl implements ClassService {
         }
 
         List<ClassInfo> classes = classMapper.listClassByUserId(userId);
-        //if(classes.size() <= 0) {
-            //throw new ClassesNotFoundException(String.format("no classes for userId %d!", userId));
-        //}
 
         return classes;
     }

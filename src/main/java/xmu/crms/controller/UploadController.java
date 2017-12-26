@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import xmu.crms.vo.Url;
 
 @Controller("/upload")
+/**
+ * 上传文件控制器
+ * @author Administrator
+ *
+ */
 public class UploadController {
     
     @RequestMapping(value="/avatar", method=RequestMethod.POST)

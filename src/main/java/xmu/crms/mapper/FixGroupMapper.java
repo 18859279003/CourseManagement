@@ -18,6 +18,12 @@ import xmu.crms.entity.User;
 
 @Mapper
 @Component
+/**
+ * 
+ * @author Administrator
+ *
+ */
+
 public interface FixGroupMapper {
 	/**
 	 * 根据组Id获取固定小组对象

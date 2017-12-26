@@ -3,7 +3,11 @@ package xmu.crms.vo;
 import java.util.Arrays;
 
 import xmu.crms.entity.Topic;
-
+/**
+ * 
+ * @author Zhuang Dandan
+ *
+ */
 public class SeminarVo {
     private int id;
     private String name;

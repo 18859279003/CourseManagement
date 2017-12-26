@@ -3,7 +3,11 @@ package xmu.crms.vo;
 import java.util.Arrays;
 
 import xmu.crms.entity.User;
-
+/**
+ * 
+ * @author Zhuang Dandan
+ *
+ */
 public class ClassGroupVo {
     private User leader;
     private User[] members;
