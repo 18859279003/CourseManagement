@@ -36,13 +36,13 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	public List<String> listProvince() {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<String> listCity(String province) {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

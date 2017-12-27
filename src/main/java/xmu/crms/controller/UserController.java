@@ -24,6 +24,7 @@ import xmu.crms.serviceimpl.UserServiceImpl;
 public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+	@Autowired
 	private LoginServiceImpl loginServiceImpl;
     /**
      * 获得当前用户
@@ -51,13 +52,11 @@ public class UserController {
 	 * @return
 	 * @throws UserNotFoundException 用户不存在或密码不正确
 	 */
-		@RequestMapping(value="/signinByPhone", method=RequestMethod.GET)
-		public User signinByPhone(String phone, String password) throws UserNotFoundException{
-			User me=new User();
-			me.setPhone(phone);
-			me.setPassword(password);
-			User recv=loginServiceImpl.signInPhone(me) ;
-			return recv;
+		@RequestMapping(value="/signin", method=RequestMethod.POST)
+		public User signinByPhone(@RequestBody User user) throws UserNotFoundException{
+			loginServiceImpl.signInPhone(user);
+			System.out.println(user);
+			return user;
 		}
 		
 		/**

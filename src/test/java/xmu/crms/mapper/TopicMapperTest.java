@@ -54,7 +54,13 @@ public	void getTopicByTopicIdTest()throws  Exception
 	public	void insertTopicBySeminarIdTest()throws  Exception
 		{
 		    Topic topic=new Topic();
-		    topicMapper.insertTopicBySeminarId(new BigInteger("1"), topic);
+		    topic.setSerial("A");
+		    topic.setName("123");
+		    topic.setDescription("123");
+		    topic.setGroupNumberLimit(new Integer("1"));
+		    topic.setGroupStudentLimit(new Integer("1"));
+		    
+		    System.out.println("****************"+topicMapper.insertTopicBySeminarId(new BigInteger("3"), topic));
 		}	
 	@Test
 	public	void deleteSeminarGroupTopicByIdTest()throws  Exception

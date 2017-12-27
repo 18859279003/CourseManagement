@@ -1,10 +1,12 @@
 package xmu.crms.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.Course;
 import xmu.crms.entity.Seminar;
+import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.service.UserService;
+import xmu.crms.serviceimpl.CourseServiceImpl;
 
 @RestController
 @RequestMapping("/course")
@@ -25,14 +30,17 @@ import xmu.crms.entity.Seminar;
  *
  */
 public class CourseController {
-
+	@Autowired
+    private CourseServiceImpl courseServiceImpl;
 	/**
 	 * 获取与当前用户相关联的课程列表
 	 * @return
+	 * @throws CourseNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public List<Course> getCourseList(){
-		List<Course> courselist=new ArrayList<Course>();
+	public List<Course> getCourseList(BigInteger userId) throws IllegalArgumentException, CourseNotFoundException{
+		List<Course> courselist=courseServiceImpl.listCourseByUserId(userId);
 		return courselist;
 	}
 	
@@ -43,7 +51,8 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public Course createCourse(@RequestBody Course course, HttpServletResponse response){	
+	public Course createCourse(@RequestBody Course course,BigInteger userId, HttpServletResponse response){
+		courseServiceImpl.insertCourseByUserId(userId, course);
 		return course;
 	}
 	
@@ -74,6 +83,7 @@ public class CourseController {
 	@RequestMapping(value="/{courseId}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void deleteCourseById(@PathVariable("courseId") int courseId){
+		courseServiceImpl.deleteCourseByCourseId(new BigInteger(((Integer)courseId).toString()));
 	}
 		
 	/**
@@ -94,7 +104,7 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping(value="/{courseId}/class", method=RequestMethod.POST)
-	public ClassInfo createTopic(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response){	
+	public ClassInfo createClass(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response){	
 		return clas;
 	}
 

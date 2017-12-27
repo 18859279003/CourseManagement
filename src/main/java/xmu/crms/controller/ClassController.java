@@ -1,10 +1,12 @@
 package xmu.crms.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.User;
+import xmu.crms.exception.ClassesNotFoundException;
+import xmu.crms.serviceimpl.ClassServiceImpl;
 import xmu.crms.vo.ClassGroupVo;
 
 @RestController
@@ -25,7 +29,8 @@ import xmu.crms.vo.ClassGroupVo;
  *
  */
 public class ClassController {
-
+	@Autowired
+	ClassServiceImpl classServiceImpl;
 	/**
 	 * 获取与当前用户相关联的或符合条件的班级列表
 	 * @param courseName
@@ -43,11 +48,11 @@ public class ClassController {
 	 * 按ID获取班级，传入班级id，返回班级对象
 	 * @param classId
 	 * @return
+	 * @throws ClassesNotFoundException 
 	 */
 	@RequestMapping(value="/{classId}", method=RequestMethod.GET)
-	public ClassInfo getClassById(@PathVariable("classId") int classId){
-	    ClassInfo clas=new ClassInfo();
-		return clas;
+	public ClassInfo getClassById(@PathVariable("classId") int classId) throws ClassesNotFoundException{
+		return classServiceImpl.getClassByClassId(new BigInteger(((Integer)classId).toString()));
 	}
 	
 	
@@ -64,10 +69,12 @@ public class ClassController {
 	/**
 	 * 按ID删除班级，传入班级id
 	 * @param classId
+	 * @throws ClassesNotFoundException 
 	 */
 	@RequestMapping(value="/{classId}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void deleteClassById(@PathVariable("classId") int classId){
+	public void deleteClassById(@PathVariable("classId") int classId) throws ClassesNotFoundException{
+		classServiceImpl.deleteClassByClassId(new BigInteger(((Integer)classId).toString()));
 	}
 		
 	/**
