@@ -2,18 +2,24 @@ function createSeminar(){
 
 	if(!checkinput())
 		return ;
-	var id;
+	var courseId=1;
 
+	var fixed;
+	if($("#groupingMethod").find("option:selected").text()=="固定分组")
+		fixed=true;
+	else
+		fixed=false;
+	
 	var newSeminar={
 			name : $("#seminarName").val(),
 			description : $("#description").val(),
-			groupingMethod : $("#groupingMethod").find("option:selected").text(),
+			fixed : fixed,
 			startTime : $("#startTime").val(),
 			endTime : $("#endTime").val()
 	};
 	//alert(JSON.stringify(newSeminar));
 	$.ajax({			
-		url:  "/course/"+id+"/seminar",
+		url:  "/course/"+courseId+"/seminar",
 		type: "POST",
 		contentType: "application/json;charest=utf-8",
 		data: JSON.stringify(newSeminar),

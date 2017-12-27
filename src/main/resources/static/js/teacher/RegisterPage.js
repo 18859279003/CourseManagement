@@ -120,12 +120,8 @@ function judgesex() {
     return gender;
 }
 
-//$("#province").bind("change", getCitylist());
-//$("#city").bind("change", getSchool());
-
 //获取学校列表
 function getSchool(){
-	alert("school");
 	var schoollist;
 	var city  = $("city").val();
 	$.ajax({
@@ -172,7 +168,6 @@ function getProvincelist(){
 
 //获取市列表
 function getCitylist(){
-	alert("city");
     var province = $("province").val();
 	var citylist;
 	$.ajax({
@@ -194,3 +189,50 @@ function getCitylist(){
 		}
 	});
 }
+//更新市列表
+$("#province").change(function(){
+	var p = $("#province").val();
+	var citylist;
+	$.ajax({
+		url:"/school/city",
+		type:"GET",
+        data:{province:p},
+		success:function(data){
+			citylist = data;
+			$("#city").html("");
+			for(var i in citylist){
+				var item = citylist[i];
+				$("#city").append("<option value=\""
+						+ item + "\">"
+						+ item + "</option>")
+			}//end for
+		},
+		error:function(){
+			alert("获取城市列表失败！");
+		}
+	});
+});
+
+//更新学校列表
+$("#city").change(function(){
+	var schoollist;
+	var city  = $("city").val();
+	$.ajax({
+		url:"/school",
+		type:"GET",
+        data:{city:city},
+		success:function(data){
+			schoollist = data;
+			$("#school").html="";
+			for(var i in schoollist){
+				var item = schoollist[i];
+				$("#school").append("<option value=\""
+						+ item.name + "\">"
+						+ item.name + "</option>");
+			}//end for
+		},
+		error:function(){
+			alert("获取学校列表失败！");
+		}
+	});
+})

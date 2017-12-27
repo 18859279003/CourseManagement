@@ -21,7 +21,7 @@ function init(){
 					"<div class='classinfo'>" +
 						"<table class='table'>" +
 							"<tr>" +
-								"<td class='tabletext'>班级数：" + course.numClass + "</td>" +
+								"<td class='tabletext'>班级数：" + ???+ "</td>" +
 							"</tr>" +
 							"<tr>" +
 								"<td class='tabletext'>开始时间：" + course.startDate + "</td>" +

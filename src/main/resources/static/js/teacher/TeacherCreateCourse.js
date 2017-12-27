@@ -11,10 +11,14 @@ function createCourse(){
 	};
 	var newCourse={
 			name:$("#coursename").val(),
-			startTime:$("#begintime").val(),
-			endTime:$("#endtime").val(),
+			startDate:$("#begintime").val(),
+			endDate:$("#endtime").val(),
 			description:$("#courseinfo").val(),
-			proportions:proportions
+			reportPercentage : $("#reportGrade").val(),
+			presentationPercentage : $("#seminarGrade").val(),
+			fivePointPercentage : $("#seminarGrade5").val(),
+			fourPointPercentage : $("#seminarGrade4").val(),
+			threePointPercentage : $("#seminarGrade3").val()
 	};
 	$.ajax({			
 		url:  "/course",

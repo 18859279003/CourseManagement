@@ -51,9 +51,8 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public Course createCourse(@RequestBody Course course,BigInteger userId, HttpServletResponse response){
-		courseServiceImpl.insertCourseByUserId(userId, course);
-		return course;
+	public int createCourse(@RequestBody Course course,BigInteger userId, HttpServletResponse response){
+		return courseServiceImpl.insertCourseByUserId(userId, course).intValue();
 	}
 	
 	/**

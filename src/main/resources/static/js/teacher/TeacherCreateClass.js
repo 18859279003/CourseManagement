@@ -4,29 +4,33 @@ function createClass(){
 
 	if(!checkinput())
 		return ;
-	var id;
+	var courseId;
 	var time="";
 	for(var i=1;i<=count;i++){
 		time+=$("#week"+count).find("option:selected").text()+
 			$("#day"+count).find("option:selected").text()+
 			$("#lesson"+count).find("option:selected").text()+"  ";
 	}
-	var proportions={
-			report : $("#reportGrade").val(),
-			presentation : $("#seminarGrade").val(),
-			c : $("#seminarGrade3").val(),
-			b : $("#seminarGrade4").val(),
-			a : $("#seminarGrade5").val()		
-	};
+//	var proportions={
+//			report : $("#reportGrade").val(),
+//			presentation : $("#seminarGrade").val(),
+//			c : $("#seminarGrade3").val(),
+//			b : $("#seminarGrade4").val(),
+//			a : $("#seminarGrade5").val()		
+//	};
 	var newClass={
 			name : $("#className").val(),
 			site : $("#classSite").val(),
 			time: time,
-			proportions : proportions
+			reportPercentage : $("#reportGrade").val(),
+			presentationPercentage : $("#seminarGrade").val(),
+			fivePointPercentage : $("#seminarGrade5").val(),
+			fourPointPercentage : $("#seminarGrade4").val(),
+			threePointPercentage : $("#seminarGrade3").val()
 	};
 	//alert(JSON.stringify(newClass));
 	$.ajax({			
-		url:  "/course/"+id+"/class",
+		url:  "/course/"+courseId+"/class",
 		type: "POST",
 		//dataType : "JSON",
 		contentType: "application/json;charest=utf-8",

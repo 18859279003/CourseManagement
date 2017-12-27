@@ -13,7 +13,7 @@ function login(){
         data:JSON.stringify(user),   
         async:false,
         success:function(data){
-            alert("登录成功！" + data);
+            alert("登录成功！" + data.phone);
             window.location.href="/TeacherHomePage";
         },
         error:function(){

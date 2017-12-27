@@ -51,13 +51,17 @@ function getCity(){
 
 //添加学校
 function createschool(){
-    var data = {"name":$("#school").val(),"province":$("#province").val(),"city":$("#city")};
-
+    var school = {
+    		"name":$("#school").val(),
+    		"province":$("#province").val(),
+    		"city":$("#city").val()
+    		};
+    alert(JSON.stringify(school));
     $.ajax({
         url:"/school",
         type:"POST",
         contentType:"application/json",
-        data:JSON.stringify(data),
+        data:JSON.stringify(school),
         success:function(data){
             alert("创建学校成功！" + data);
             window.location.href="/TeacherBindPage";
@@ -68,3 +72,26 @@ function createschool(){
     })
 
 }
+//更新城市列表
+$("#province").change(function(){
+	var p = $("#province").val();
+	var citylist;
+	$.ajax({
+		url:"/school/city",
+		type:"GET",
+        data:{province:p},
+		success:function(data){
+			citylist = data;
+			$("#city").html("");
+			for(var i in citylist){
+				var item = citylist[i];
+				$("#city").append("<option value=\""
+						+ item + "\">"
+						+ item + "</option>")
+			}//end for
+		},
+		error:function(){
+			alert("获取城市列表失败！");
+		}
+	});
+});

@@ -2,17 +2,19 @@ function createTopic(){
 
 	if(!checkinput())
 		return ;
-	var id=1;
+	var seminarId=1;
 
 	var newTopic={
 			name : $("#topicName").val(),
+			serial : "A",
 			description : $("#description").val(),
 			groupNumberLimit : $("#groupLimit").val(),
-			groupStudentLimit : $("#groupMemberLimit").val(),
+			groupStudentLimit : $("#groupMemberLimit").val()
+			
 	};
 	//alert(JSON.stringify(newTopic));
 	$.ajax({			
-		url:  "/seminar/"+id+"/topic",
+		url:  "/seminar/"+seminarId+"/topic",
 		type: "POST",
 		contentType: "application/json;charset=utf-8",
 		data: JSON.stringify(newTopic),

@@ -4,8 +4,6 @@
     //各个块的页面跳转还没有写
 var courseId = 12;
 
-
-var courseId;
 //页面加载时获取课程信息，已创建的班级信息和讨论课信息
 window.onload = function(){
 	getCourseInfo();
@@ -17,7 +15,7 @@ window.onload = function(){
 function getCourseInfo() {
     var course;
     $.ajax({
-        url: "/course/{courseId}",
+        url: "/course/"+courseId,
         type: "GET",
         success: function (data) {
             course = data;
@@ -36,7 +34,7 @@ function getCourseInfo() {
 function getClassInfo() {
     var classlist;
     $.ajax({
-        url: "/course/{courseId}/class",
+        url: "/course/"+courseId+"/class",
         type: "GET",
         success: function (data) {
             classlist = data;
@@ -62,7 +60,7 @@ function getSeminarsInfo() {
     var seminarlist;
 
     $.ajax({
-        url: "/course/{courseId}/seminar",
+        url: "/course/"+courseId+"/seminar",
         type: "GET",
         success: function (data) {
             seminarlist = data;
@@ -81,10 +79,6 @@ function getSeminarsInfo() {
             alert("获取讨论课列表失败！");
         }
     })
-}
-
-function hello(){
-    alert("hello!");
 }
 
 function goback(){
