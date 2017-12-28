@@ -19,7 +19,6 @@ import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.Course;
 import xmu.crms.entity.Seminar;
 import xmu.crms.exception.CourseNotFoundException;
-import xmu.crms.service.UserService;
 import xmu.crms.serviceimpl.CourseServiceImpl;
 
 @RestController
@@ -73,6 +72,7 @@ public class CourseController {
 	@RequestMapping(value="/{courseId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void updateCourseById(@PathVariable("courseId") int courseId, @RequestBody Course course){
+		courseServiceImpl.updateCourseByCourseId(new BigInteger(((Integer)courseId).toString()), course);
 	}
 	
 	/**

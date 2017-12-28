@@ -42,7 +42,7 @@
         WHERE seminar_id= #{seminarId};
     </select>
     
-     <insert id="insertTopicBySeminarId"  >
+     <insert id="insertTopicBySeminarId" parameterType="xmu.crms.entity.Topic" useGeneratedKeys="true" keyProperty="topic.id">
        INSERT INTO topic(
         id,
         serial,

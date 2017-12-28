@@ -60,10 +60,12 @@ public class ClassController {
 	 * 按ID修改班级，传入班级id和json
 	 * @param classId
 	 * @param clas
+	 * @throws ClassesNotFoundException 
 	 */
 	@RequestMapping(value="/{classId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void updateClassById(@PathVariable("classId") int classId, @RequestBody ClassInfo clas){
+	public void updateClassById(@PathVariable("classId") int classId, @RequestBody ClassInfo clas) throws ClassesNotFoundException{
+		classServiceImpl.updateClassByClassId(new BigInteger(((Integer)classId).toString()), clas);
 	}
 	
 	/**

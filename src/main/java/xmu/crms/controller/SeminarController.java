@@ -15,11 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import xmu.crms.entity.Seminar;
+import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.Topic;
+import xmu.crms.exception.SeminarNotFoundException;
+import xmu.crms.exception.UserNotFoundException;
+import xmu.crms.serviceimpl.SeminarGroupImpl;
+import xmu.crms.serviceimpl.SeminarImpl;
 import xmu.crms.serviceimpl.TopicServiceImpl;
-import xmu.crms.vo.GroupVo;
+import xmu.crms.serviceimpl.UserServiceImpl;
+import xmu.crms.vo.ScoreVo;
 import xmu.crms.vo.SeminarVo;
-import xmu.crms.vo.SeminarDetailVo;
 import xmu.crms.vo.StudentSeminarVo;
 
 @RestController
@@ -33,24 +39,52 @@ public class SeminarController {
 
     @Autowired
     private TopicServiceImpl topicServiceImpl;
+    @Autowired
+    private SeminarGroupImpl seminarGroupImpl;
+    @Autowired
+    private UserServiceImpl userServiceImpl ;
+    @Autowired
+    private SeminarImpl seminarServiceImpl;
 	/**
 	 * 按ID获取讨论课，传入讨论课id，返回讨论课对象
 	 * @param seminarId
 	 * @return
+	 * @throws SeminarNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{seminarId}", method=RequestMethod.GET)
-	public SeminarVo getSeminarById(@PathVariable("seminarId") int seminarId){
-		return new SeminarVo();
+	public SeminarVo getSeminarById(@PathVariable("seminarId") int seminarId) throws IllegalArgumentException, SeminarNotFoundException{
+		Seminar seminar=seminarServiceImpl.getSeminarBySeminarId(new BigInteger(((Integer)seminarId).toString()));
+    	SeminarVo seminarVo= new SeminarVo();
+    	seminarVo.setName(seminar.getName());
+    	seminarVo.setDescription(seminar.getDescription());
+    	seminarVo.setStartTime(seminar.getStartTime().toString());
+    	seminarVo.setEndTime(seminar.getEndTime().toString());
+    	if(seminar.getFixed())
+    	{
+    		seminarVo.setGroupingMethod("固定分组");
+    	}
+    	else
+    	{
+    		seminarVo.setGroupingMethod("随机分组");
+    	}
+    	List<Topic> topiclist = topicServiceImpl.listTopicBySeminarId(new BigInteger(((Integer)seminarId).toString()));
+    	Topic[] topics = (Topic[])topiclist.toArray(new Topic[topiclist.size()]);
+    	seminarVo.setTopics(topics);
+        return seminarVo;
 	}
 	
 	/**
 	 * 按ID修改讨论课，传入讨论课id和json
 	 * @param seminarId
 	 * @param seminar
+	 * @throws SeminarNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{seminarId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void updateSeminarById(@PathVariable("seminarId") int seminarId, @RequestBody SeminarVo seminar){
+	public void updateSeminarById(@PathVariable("seminarId") int seminarId, @RequestBody Seminar seminar) throws IllegalArgumentException, SeminarNotFoundException{
+		seminarServiceImpl.updateSeminarBySeminarId(new BigInteger(((Integer)seminarId).toString()), seminar);
 	}
 	
 	/**
@@ -77,11 +111,29 @@ public class SeminarController {
 	  * 按ID获取讨论课详情
 	  * @param seminarId
 	  * @return
+	 * @throws SeminarNotFoundException 
+	 * @throws IllegalArgumentException 
 	  */
     @RequestMapping(value="/{seminarId}/detail", method=RequestMethod.GET)
-    public SeminarDetailVo getSeminarDetailById(@PathVariable("seminarId") int seminarId){
-        SeminarDetailVo seminar=new SeminarDetailVo(32,"概要设计","2017-10-10","2017-10-24","海韵201","邱明","mingqiu@xmu.edu.cn");
-        return seminar;
+    public SeminarVo getSeminarDetailById(@PathVariable("seminarId") int seminarId) throws IllegalArgumentException, SeminarNotFoundException{
+    	Seminar seminar=seminarServiceImpl.getSeminarBySeminarId(new BigInteger(((Integer)seminarId).toString()));
+    	SeminarVo seminarVo= new SeminarVo();
+    	seminarVo.setName(seminar.getName());
+    	seminarVo.setDescription(seminar.getDescription());
+    	seminarVo.setStartTime(seminar.getStartTime().toString());
+    	seminarVo.setEndTime(seminar.getEndTime().toString());
+    	if(seminar.getFixed())
+    	{
+    		seminarVo.setGroupingMethod("固定分组");
+    	}
+    	else
+    	{
+    		seminarVo.setGroupingMethod("随机分组");
+    	}
+    	List<Topic> topiclist = topicServiceImpl.listTopicBySeminarId(new BigInteger(((Integer)seminarId).toString()));
+    	Topic[] topics = (Topic[])topiclist.toArray(new Topic[topiclist.size()]);
+    	seminarVo.setTopics(topics);
+        return seminarVo;
     }   
     
 	/**
@@ -116,12 +168,47 @@ public class SeminarController {
 	 * @param gradeable
 	 * @param classId
 	 * @return
+	 * @throws SeminarNotFoundException 
+	 * @throws IllegalArgumentException 
+	 * @throws UserNotFoundException 
 	 */
 	@RequestMapping(value="/{seminarId}/group", method=RequestMethod.GET)
-	public List<GroupVo> getGroupListBySeminarId(
-	        @PathVariable("seminarId") int seminarId, boolean gradeable, int classId){	
-		List<GroupVo> groupList=new ArrayList<GroupVo>();
-		return groupList;
+	public List<ScoreVo> getGroupListBySeminarId(
+	        @PathVariable("seminarId") int seminarId, boolean gradeable, int classId) throws IllegalArgumentException, SeminarNotFoundException, UserNotFoundException{	
+		List<ScoreVo> scoreVoList= new  ArrayList<ScoreVo>();
+		List<SeminarGroup> seminarGrouplist=seminarGroupImpl.listSeminarGroupBySeminarId(new BigInteger(((Integer)seminarId).toString()));
+		for(int i=0;i<seminarGrouplist.size();i++)
+		{
+			
+			if(topicServiceImpl.listSeminarGroupTopicByGroupId(seminarGrouplist.get(i).getId()).size()>1)
+			{
+				for(int j=0;j<topicServiceImpl.listSeminarGroupTopicByGroupId(seminarGrouplist.get(i).getId()).size();j++)
+				{
+					ScoreVo scoreVo= new ScoreVo();
+					scoreVo.setTopic((topicServiceImpl.listSeminarGroupTopicByGroupId(seminarGrouplist.get(i).getId())).get(j).getTopic().getName());
+					scoreVo.setGrade(seminarGrouplist.get(i).getFinalGrade());
+					scoreVo.setGroupName(seminarGrouplist.get(i).getId().toString());
+					scoreVo.setLeaderName(userServiceImpl.getUserByUserId(seminarGrouplist.get(i).getLeader().getId()).getName() );
+					scoreVo.setPresentationGrade(seminarGrouplist.get(i).getPresentationGrade());
+					scoreVo.setReport(seminarGrouplist.get(i).getReport());
+					scoreVo.setReportGrade(seminarGrouplist.get(i).getReportGrade());
+					scoreVoList.add(scoreVo);
+				}
+			}
+			else
+			{
+			ScoreVo scoreVo= new ScoreVo();
+			scoreVo.setTopic((topicServiceImpl.listSeminarGroupTopicByGroupId(seminarGrouplist.get(i).getId())).get(0).getTopic().getName());
+			scoreVo.setGrade(seminarGrouplist.get(i).getFinalGrade());
+			scoreVo.setGroupName(seminarGrouplist.get(i).getId().toString());
+			scoreVo.setLeaderName(userServiceImpl.getUserByUserId(seminarGrouplist.get(i).getLeader().getId()).getName() );
+			scoreVo.setPresentationGrade(seminarGrouplist.get(i).getPresentationGrade());
+			scoreVo.setReport(seminarGrouplist.get(i).getReport());
+			scoreVo.setReportGrade(seminarGrouplist.get(i).getReportGrade());
+			scoreVoList.add(scoreVo);
+			}
+		}
+		return scoreVoList;
 	}
 	
 

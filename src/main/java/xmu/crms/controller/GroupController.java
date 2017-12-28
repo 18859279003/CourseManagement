@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.User;
+import xmu.crms.exception.GroupNotFoundException;
+import xmu.crms.serviceimpl.GradeServiceImpl;
 import xmu.crms.serviceimpl.TopicServiceImpl;
 
 @RestController
@@ -25,6 +27,8 @@ import xmu.crms.serviceimpl.TopicServiceImpl;
 public class GroupController {
     @Autowired
     private TopicServiceImpl topicServiceImpl;
+    @Autowired
+    private GradeServiceImpl gradeServiceImpl;
     
 	/**
 	 * 按ID获取小组详情，传入小组id，返回小组对象
@@ -119,10 +123,13 @@ public class GroupController {
 	 * 按ID设置小组的报告分
 	 * @param groupId
 	 * @param reportGrade
+	 * @throws GroupNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{groupId}/grade/report", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void gradeByGroupId(@PathVariable("groupId") int groupId, String reportGrade){//TODO
+	public void gradeByGroupId(@PathVariable("groupId") int groupId, int reportGrade) throws IllegalArgumentException, GroupNotFoundException{
+		gradeServiceImpl.updateGroupByGroupId(new BigInteger(((Integer)groupId).toString()), new BigInteger(((Integer)reportGrade).toString()));
 	}
 	
 }

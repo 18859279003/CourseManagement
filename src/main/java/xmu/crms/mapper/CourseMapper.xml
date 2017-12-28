@@ -99,7 +99,7 @@
     </select>
 
     <!-- parameterType="BigInteger,xmu.crms.entity.Course"-->
-    <update id="updateCourseByCourseId">
+    <update id="updateCourseByCourseId" >
         update course
         <set>
             <if test="course.name!= null">
