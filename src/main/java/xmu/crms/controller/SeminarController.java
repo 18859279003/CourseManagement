@@ -90,10 +90,13 @@ public class SeminarController {
 	/**
 	 * 按ID删除讨论课，传入讨论课id
 	 * @param seminarId
+	 * @throws SeminarNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{seminarId}", method=RequestMethod.DELETE)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void deleteSeminarById(@PathVariable("seminarId") int seminarId){
+	public void deleteSeminarById(@PathVariable("seminarId") int seminarId) throws IllegalArgumentException, SeminarNotFoundException{
+		seminarServiceImpl.deleteSeminarBySeminarId(new BigInteger(((Integer)seminarId).toString()));
 	}
 	
 	/**

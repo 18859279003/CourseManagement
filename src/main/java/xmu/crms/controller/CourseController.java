@@ -19,7 +19,9 @@ import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.Course;
 import xmu.crms.entity.Seminar;
 import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.serviceimpl.ClassServiceImpl;
 import xmu.crms.serviceimpl.CourseServiceImpl;
+import xmu.crms.serviceimpl.SeminarImpl;
 
 @RestController
 @RequestMapping("/course")
@@ -31,6 +33,10 @@ import xmu.crms.serviceimpl.CourseServiceImpl;
 public class CourseController {
 	@Autowired
     private CourseServiceImpl courseServiceImpl;
+	@Autowired
+	private ClassServiceImpl classServiceImpl;
+	@Autowired
+	private SeminarImpl seminarServiceImpl;
 	/**
 	 * 获取与当前用户相关联的课程列表
 	 * @return
@@ -58,10 +64,12 @@ public class CourseController {
 	 * 按ID获取课程，传入课程id，返回课程对象
 	 * @param courseId
 	 * @return
+	 * @throws CourseNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{courseId}", method=RequestMethod.GET)
-	public Course getCourseById(@PathVariable("courseId") int courseId){
-		return new Course();
+	public Course getCourseById(@PathVariable("courseId") int courseId) throws IllegalArgumentException, CourseNotFoundException{
+		return courseServiceImpl.getCourseByCourseId(new BigInteger(((Integer)courseId).toString()));
 	}
 	
 	/**
@@ -101,10 +109,11 @@ public class CourseController {
 	 * @param clas
 	 * @param response
 	 * @return
+	 * @throws CourseNotFoundException 
 	 */
 	@RequestMapping(value="/{courseId}/class", method=RequestMethod.POST)
-	public ClassInfo createClass(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response){	
-		return clas;
+	public BigInteger createClass(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response) throws CourseNotFoundException{	
+		return classServiceImpl.insertClassById(new BigInteger(((Integer)courseId).toString()), clas);
 	}
 
 	/**
@@ -125,10 +134,12 @@ public class CourseController {
 	 * @param seminar
 	 * @param response
 	 * @return
+	 * @throws CourseNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{courseId}/seminar", method=RequestMethod.POST)
-	public Seminar createSeminar(@PathVariable("courseId") int courseId, @RequestBody Seminar seminar, HttpServletResponse response){
-		return seminar;
+	public BigInteger createSeminar(@PathVariable("courseId") int courseId, @RequestBody Seminar seminar, HttpServletResponse response) throws IllegalArgumentException, CourseNotFoundException{
+		return seminarServiceImpl.insertSeminarByCourseId(new BigInteger(((Integer)courseId).toString()), seminar);
 	}
 	
 }
