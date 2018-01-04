@@ -21,18 +21,18 @@ function init(){
 			$("#personinfomodify").append(
 			        "<tr class='itemName'>" + 
 			        "<td>用户名：<span>" + personinfo.phone + "</span></td>" +
-			        "<td>教工号：<input type='text' id='number' value='" + personinfo.number + "'/></td>" +
+			        "<td>学号：<input type='text' id='number' value='" + personinfo.number + "'/></td>" +
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
 			        "<td>姓名：<input type='text' id='name' value='" + personinfo.name + "'/></td>" +
 			        "<td>性别：<input type='text' id='sex' value='" + gender + "'/></td>" +
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
-			        "<td>学校：<input type='text' id='school' value='" + personinfo.school.name + "'/></td>" +
-			        "<td>学历：<input type='text' id='title' value='" + education + "'/></td>" +
+			        "<td>学校：" + personinfo.school.name + "</td>"+
+			        "<td>学历：" + education + "</td>" +
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
-			        "<td>E-mail：<input type='text' id='e-mail' value='" + personinfo.email + "'/></td>" +
+			        "<td>E-mail：<input type='text' id='email' value='" + personinfo.email + "'/></td>" +
 			        "<td>联系方式：<input type='text' id='phone' value='" + personinfo.phone + "'/></td>" +
 			        "</tr>" 
 
@@ -68,17 +68,14 @@ function changePersonInfo(){
 		alert("请输入正确学历：本科、硕士研究生或博士研究生。");
 		return ;		
 	}
-	var school={name :$("#school").val()};
 	var modifyinfo={
-			"number":$("#idnum").val(),
+			"number":$("#number").val(),
 			"name":$("#name").val(),
 			"gender":gender,
-			"school":school,
-			"title":t,
+			"title":title,
 			"email":$("#email").val(),
 			"phone":$("#phone").val()
 	};
-	var modifyinfo={"name": $("#name").val(), "phone": $("#phone").val()};
 
 	$.ajax({			
 		url:  "/me/"+userId,
@@ -101,15 +98,12 @@ function changePersonInfo(){
 function checkinput(){
     var warn = "";
     var name = document.getElementById("name").value;
-    var school = document.getElementById("school").value;
     var number = document.getElementById("number").value;
     if(warn == null || warn.length == 0){
         if(name == ""){
             warn = "姓名不能为空。";
         }else if(number == ""){
             warn = "学号不能为空。";
-        }else if( school  == ""){
-            warn = "学校不能为空。";
         }
         if(warn !=null && warn.length !=0){
             alert(warn);

@@ -1,15 +1,14 @@
 ﻿/**
  * Created by lenovo on 2017/12/4.
  */
-var studentId=1;
+var studentId=3;
 window.onload = getAllClass;
 
 // 获取所有的班级信息
 function getAllClass() {
-	//**************getstudentId
-	studentId = localStorage.getItem("studentId");
+	//**************get studentId
+	//studentId = localStorage.getItem("studentId");
 	var classlist;
-
 	var courseName = $("#course").val();
 	var teacherName = $("#teacher").val();
 	
@@ -57,6 +56,7 @@ function chooseCourse(id) {
 		success : function(data) {
 		
 			alert("选课成功！" + data);
+			$("div#"+id).remove()
 		},
 		error : function() {
 			alert("选课失败！");

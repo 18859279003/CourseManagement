@@ -77,14 +77,14 @@ function back()
 function score()
 {
 	//********save seminarId
-	localStorage("seminarId",seminarId);
+	localStorage.setItem("seminarId",seminarId);
 	window.location.href='/TeacherScoreHome';
 }
 //修改
 function modifySeminar()
 {
 	//********save seminarId
-	localStorage("seminarId",seminarId);
+	localStorage.setItem("seminarId",seminarId);
 	window.location.href='/TeacherUpdateSeminar';
 }
 
@@ -92,14 +92,14 @@ function modifySeminar()
 function concreteTopic(id)
 {
 	//********save topicId
-	localStorage("topicId",topicId);
+	localStorage.setItem("topicId",topicId);
 	window.location.href='/TeacherTopicCheckBefore';
 }
 //添加话题
 function addTopic()
 {
 	//********save seminarId
-	localStorage("seminarId",seminarId);
+	localStorage.setItem("seminarId",seminarId);
 	window.location.href='/TeacherCreateTopic';
 }
 

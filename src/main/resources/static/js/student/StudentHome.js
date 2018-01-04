@@ -34,7 +34,7 @@ function getInformation(){
 
 //判断性别
 function judgesex(g){
-	if(g=="female")
+	if(g=="1")
 		$("#gender").html("女");
 	else
 		$("#gender").html("男");

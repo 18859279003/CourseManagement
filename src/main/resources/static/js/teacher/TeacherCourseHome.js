@@ -1,7 +1,7 @@
 var userId=1;
 myStorage = localStorage;
 window.onload = function(){
-	localStorage.setItem("userId",userId);//记录userId
+	localStorage.getItem("userId");
 	init();
 }
 function init(){

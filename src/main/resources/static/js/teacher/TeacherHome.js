@@ -1,9 +1,10 @@
-var userId=1;
+var userId;
 window.onload=init;
 
 function init(){
 	//*************************************get userId
 	userId=localStorage.getItem("userId");
+	alert(userId);
 	var personinfo;
 	$.ajax({			
 		url:  "/me/"+userId,
