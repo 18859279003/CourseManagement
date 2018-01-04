@@ -56,7 +56,7 @@
         VALUES (#{course.name},
         #{course.startDate},
         #{course.endDate},
-        #{userId},
+        #{course.teacher.id},
         #{course.description},
         #{course.reportPercentage},
         #{course.presentationPercentage},

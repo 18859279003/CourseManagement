@@ -41,7 +41,7 @@ public interface CourseMapper {
      * @return courseId 新建课程的id
      * @exception InfoIllegalException userId格式错误时抛出
      */
-    void insertCourseByUserId(@Param("userId") BigInteger userId,@Param("course") Course course);
+    void insertCourseByUserId(@Param("course") Course course);
 
     /**
      * 按courseId获取课程 .

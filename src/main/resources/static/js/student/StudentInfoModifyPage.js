@@ -1,20 +1,22 @@
-/**
- * 
- */
-
+var userId=3;
 window.onload=init;
 
 function init(){
+	//**************************get userId
+	userId=localStorage.getItem("userId");
 	var personinfo;
 	$.ajax({			
-		url:  "/me",
+		url:  "/me/"+userId,
 		type: "GET",
-		data: {},
 		async: false,
 		success: function(data)
 		{	
 			personinfo=data;
-			var gender=personinfo.gender=="male"?"男":"女";
+			var gender=personinfo.gender=="0"?"男":"女";
+			var education;
+			if(personinfo.education=="1") education="本科";
+			else if(personinfo.education=="2") education="硕士研究生";
+			else if(personinfo.education=="3") education="博士研究生";
 			$("#personinfomodify").empty();
 			$("#personinfomodify").append(
 			        "<tr class='itemName'>" + 
@@ -27,7 +29,7 @@ function init(){
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
 			        "<td>学校：<input type='text' id='school' value='" + personinfo.school.name + "'/></td>" +
-			        "<td>职称：<input type='text' id='title' value='" + personinfo.title + "'/></td>" +
+			        "<td>学历：<input type='text' id='title' value='" + education + "'/></td>" +
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
 			        "<td>E-mail：<input type='text' id='e-mail' value='" + personinfo.email + "'/></td>" +
@@ -48,19 +50,38 @@ function changePersonInfo(){
 
 	if(!checkinput())
 		return ;
+	
+	var gender;
+	var sex=$("#sex").val();
+	if(sex=="男") gender=0;
+	else if(sex=="女") gender=1;
+	else{
+		alert("性别请输男或女。");
+		return ;
+	}
+	var title;
+	var t=$("#title").val();
+	if(t=="本科") title=1;
+	else if(t=="硕士研究生") title=2;
+	else if(t=="博士研究生") title=3;
+	else{
+		alert("请输入正确学历：本科、硕士研究生或博士研究生。");
+		return ;		
+	}
+	var school={name :$("#school").val()};
 	var modifyinfo={
 			"number":$("#idnum").val(),
 			"name":$("#name").val(),
-			"gender":transfersex($("#sex").val()),
-			"school":$("#school").val(),
-			"title":$("#sex").val(),
+			"gender":gender,
+			"school":school,
+			"title":t,
 			"email":$("#email").val(),
 			"phone":$("#phone").val()
 	};
 	var modifyinfo={"name": $("#name").val(), "phone": $("#phone").val()};
 
 	$.ajax({			
-		url:  "/me",
+		url:  "/me/"+userId,
 		type: "PUT",
 		contentType: "application/json",
 		data: JSON.stringify(modifyinfo),
@@ -97,21 +118,4 @@ function checkinput(){
         else
            return true;
     }
-}
-
-//转换性别
-function  transfersex() {
-    var sex = document.getElementById("sex").value;
-    var gender;
-    if (sex=="男") {
-        gender = "male";
-    }
-    else if(sex=="女"){
-        gender = "femala";
-    }
-    else {
-    	alert("性别请输男或女。");
-    	return false;
-    }
-    return gender;
 }

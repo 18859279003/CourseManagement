@@ -254,4 +254,10 @@ public interface ClassService {
 	 * @see ClassService #getClassByClassId(BigInteger classId)
 	 */
 	List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException;
+	
+	/**
+	 * 获取所有班级
+	 * @return
+	 */
+	List<ClassInfo> listAllClass();
 }

@@ -1,27 +1,27 @@
-var count=1;
-
+var count=1;//别动
+var courseId=1;
+window.onload = function(){
+	//************get courseId
+	courseId=localStorage.getItem("courseId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+	$(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
+}
 function createClass(){
 
 	if(!checkinput())
 		return ;
-	var courseId;
+
 	var time="";
 	for(var i=1;i<=count;i++){
 		time+=$("#week"+count).find("option:selected").text()+
 			$("#day"+count).find("option:selected").text()+
 			$("#lesson"+count).find("option:selected").text()+"  ";
 	}
-//	var proportions={
-//			report : $("#reportGrade").val(),
-//			presentation : $("#seminarGrade").val(),
-//			c : $("#seminarGrade3").val(),
-//			b : $("#seminarGrade4").val(),
-//			a : $("#seminarGrade5").val()		
-//	};
+
 	var newClass={
 			name : $("#className").val(),
 			site : $("#classSite").val(),
-			time: time,
+			classTime: time,
 			reportPercentage : $("#reportGrade").val(),
 			presentationPercentage : $("#seminarGrade").val(),
 			fivePointPercentage : $("#seminarGrade5").val(),
@@ -95,6 +95,12 @@ function checkinput(){
         }
         else if(report==""||presentation==""||a==""||b==""||c==""){
         	warn = "请输入评分规则。"
+        }
+        else if((parseInt(report)+parseInt(presentation))!=100){
+        	warn="报告和讨论课分数之和应为100。";
+        }
+        else if((parseInt(c)+parseInt(b)+parseInt(a))!=100){
+        	warn="各阶段分数之和应为100。";
         }
         if(warn !=null && warn.length !=0){
             alert(warn);

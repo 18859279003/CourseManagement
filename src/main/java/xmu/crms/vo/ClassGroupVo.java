@@ -1,5 +1,6 @@
 package xmu.crms.vo;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 import xmu.crms.entity.User;
@@ -9,15 +10,17 @@ import xmu.crms.entity.User;
  *
  */
 public class ClassGroupVo {
+    private BigInteger id;
     private User leader;
     private User[] members;
 
-    public ClassGroupVo() {
-
+    
+    public BigInteger getId() {
+        return id;
     }
-    public ClassGroupVo(User leader, User[] members) {
-        this.leader = leader;
-        this.members = members;
+
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     public User getLeader() {

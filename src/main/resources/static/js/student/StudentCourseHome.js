@@ -1,18 +1,18 @@
 ﻿/**
  * Created by lenovo on 2017/12/4.
  */
-(function ($) {
+var studentId=3;
+window.onload = function(){
+	//************getstudentId
+	studentId=localStorage.getItem("studentId");
 	getClassInformation();
-}(jQuery));
-
-
-var studentId = 1;
+}
 
 //获取班级信息列表
 function getClassInformation(){
     var classlist;
     $.ajax({
-        url:"/class",
+        url:"/class/student/"+studentId,
         type:"GET",
         success:function(data){
             classlist = data;
@@ -25,8 +25,8 @@ function getClassInformation(){
                 $("#content").append(
                 "<div class=\"main_box_right_content\" id=\"class" + item.id + "\"> "+
                 "<h3 class=\"classtitle\">" +
-                "<span onclick='skip()' style='cursor:pointer'>" + item.courseName + "</span>" +
-                "<button onclick='cancelcourse(" + item.id + "," + studentId + ")'>退选课程</button>" +
+                "<span onclick='classinfo("+item.id+")' style='cursor:pointer'>" + item.course.name + "</span>" +
+                "<button onclick='cancelcourse(" + item.id +  ")'>退选课程</button>" +
                 "</h3>" +
                 "<div class=\"divideline\"></div>" +
                 "<div  class=\"classinfo\">" +
@@ -35,7 +35,7 @@ function getClassInformation(){
                 "<td class=\"tabletext\">班级：<span>" + item.name + "</span></td>  <td class=\"tabletext\">课程地点：" + item.site + "</td>" +
             "</tr>" +
             "<tr>" +
-            "<td class=\"tabletext\">教师：" + item.courseTeacher + "/td>  <td class=\"tabletext\"></td>" +
+            "<td class=\"tabletext\">教师：" + item.course.teacher.name + "</td>  <td class=\"tabletext\"></td>" +
             "</tr> </table> </div> </div>"
                 );
             }
@@ -49,12 +49,10 @@ function getClassInformation(){
 }
 
 //退课
-function cancelcourse(classId,studentid){
+function cancelcourse(classId){
 
-
-	var  t= "class" +classId;
     $.ajax({
-        url:"/course/{classId}",
+        url:"/class/"+classId+"/student/"+studentId,
         type:"DELETE",
         success:function(data){
         	$("#class" + classId).remove();
@@ -66,7 +64,9 @@ function cancelcourse(classId,studentid){
     })
 }
 //跳转
-function skip()
+function classinfo(id)
 {
+	//************save classId
+	localStorage.setItem("classId",id);
 	window.location.href='/StudentCourseInformation';
 }

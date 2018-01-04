@@ -1,36 +1,15 @@
-(function ($) {
+var seminarId=1;
+window.onload = function(){
+	//************getseminarId
+	seminarId=localStorage.getItem("seminarId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
 	init();
-
-}(jQuery));
-
+}
 function init(){
-	//获取左侧课程基本信息	
-	var id;
-	$.ajax({			
-		url: "/course/"+id,
-		type: "GET",
-		data: {},
-		async: false,
-		success: function(data)
-		{
-			var courseInfo=data;//要写成数组
-			//获取线上的课程名字
-			$("div.courseName").prepend(
-					courseInfo.name
-			);
-			//获取线下的课程介绍
-			$("div.navigation").append(
-					 "<div class='courseIntroduction'>"+courseInfo.description+"</div>"				
-			);
-		},
-		error:function()
-		{
-			alert("获取课程信息失败");
-		}
-		});
 	//获取讨论课信息
 	$.ajax({			
-		url: "/seminar/"+id,
+		url: "/seminar/"+seminarId,
 		type: "GET",
 		data: {},
 		async: false,
@@ -38,7 +17,7 @@ function init(){
 		{
 			var seminarInfo=data;
 			$("div#name").append( "<input type='text' id='seminarName' class='bigInput' value='"+seminarInfo.name+"'>");
-			$("div#description").append("  <textarea class='textStyle' id='description'>"+seminarInfo.description+"</textarea>");
+			$("div#description").append("  <textarea class='textStyle' id='seminarDescription'>"+seminarInfo.description+"</textarea>");
 
 		},
 		error:function()
@@ -52,18 +31,22 @@ function init(){
 //提交
 function submit()
 {
-	var id;
-	var startTime="",endTime="";	
-
+	var fixed;
+	if($("#groupingMethod").find("option:selected").text()=="固定分组")
+		fixed=true;
+	else
+		fixed=false;
+	
 	var newSeminar={
 			name : $("#seminarName").val(),
-			description:$("#description").val(),
-			startTime: startTime,
-			endTime:endTime
+			description:$("#seminarDescription").val(),
+			fixed : fixed,
+			startTime: $("#startTime").val(),
+			endTime: $("#endTime").val()
 	};
-	//alert(JSON.stringify(newClass));
+	alert(JSON.stringify(newSeminar));
 	$.ajax({			
-		url:  "/seminar/"+id,
+		url:  "/seminar/"+seminarId,
 		type: "PUT",
 		//dataType : "JSON",
 		contentType: "application/json;charest=utf-8",
@@ -82,5 +65,5 @@ function submit()
 //重置
 function reload()
 {
-	window.location.reload()
+	window.location.reload();
 }

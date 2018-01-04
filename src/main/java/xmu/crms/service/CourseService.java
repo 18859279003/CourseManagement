@@ -35,7 +35,7 @@ public interface CourseService {
      * @throws IllegalArgumentException userId格式错误时抛出
      * @author ZhouZhongjun
      */
-    BigInteger insertCourseByUserId(BigInteger userId, Course course) throws IllegalArgumentException;
+    BigInteger insertCourseByUserId(Course course) throws IllegalArgumentException;
 
 
     /**

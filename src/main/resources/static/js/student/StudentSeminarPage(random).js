@@ -74,7 +74,7 @@ function init(){
 			$("label#members").append("<label class='itemName'>"+groupInfo.members[j].name+"</label>&nbsp;");
 			for(var i in groupInfo.topics)
 			{
-				$("div.blockBody").append("<div class='smallblock'><div class='blockFont' style='cursor:pointer' onclick='concreteTopic()'>话题"+(i+1)+"</div></div>")
+				$("div.blockBody").append("<div class='smallblock'><div class='blockFont' style='cursor:pointer' onclick='concreteTopic("+groupInfo.topics[i-1].id+")'>话题"+(i+1)+"</div></div>")
 			}
 		},
 		error:function()
@@ -85,7 +85,7 @@ function init(){
 }
 
 //点击话题
-function concreteTopic()
+function concreteTopic(id)
 {
 	window.location.href='StudentViewTopicPage(fixed).html';
 }

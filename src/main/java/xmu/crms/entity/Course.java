@@ -93,7 +93,7 @@ public class Course {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", startDate=" + startDate +
-				", endDate=" + endDate +
+				", endDate=" + endDate+
 				", teacher=" + teacher +
 				", description='" + description + '\'' +
 				", reportPercentage=" + reportPercentage +

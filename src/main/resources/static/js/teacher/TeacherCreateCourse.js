@@ -1,14 +1,18 @@
+var userId=1;
+window.onload = function(){
+	//*****get userId
+	userId=localStorage.getItem("userId");
+	$("#courseName").html(localStorage.getItem("courseName")) ;
+    $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));
+}
 function createCourse(){
-
+	
 	if(!checkinput())
 		return ;
-	var proportions={
-			report : $("#reportGrade").val(),
-			presentation : $("#seminarGrade").val(),
-			c : $("#seminarGrade3").val(),
-			b : $("#seminarGrade4").val(),
-			a : $("#seminarGrade5").val()		
-	};
+	
+    var teacher={
+    		id : userId
+    };
 	var newCourse={
 			name:$("#coursename").val(),
 			startDate:$("#begintime").val(),
@@ -18,10 +22,12 @@ function createCourse(){
 			presentationPercentage : $("#seminarGrade").val(),
 			fivePointPercentage : $("#seminarGrade5").val(),
 			fourPointPercentage : $("#seminarGrade4").val(),
-			threePointPercentage : $("#seminarGrade3").val()
+			threePointPercentage : $("#seminarGrade3").val(),
+			teacher : teacher
 	};
+	alert(JSON.stringify(newCourse));
 	$.ajax({			
-		url:  "/course",
+		url:  "/course/"+userId,
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(newCourse),
@@ -58,6 +64,12 @@ function checkinput(){
         }
         else if(report==""||presentation==""||a==""||b==""||c==""){
         	warn = "请输入评分规则。"
+        }
+        else if((parseInt(report)+parseInt(presentation))!=100){
+        	warn="报告和讨论课分数之和应为100。";
+        }
+        else if((parseInt(c)+parseInt(b)+parseInt(a))!=100){
+        	warn="各阶段分数之和应为100。";
         }
         if(warn !=null && warn.length !=0){
             alert(warn);

@@ -1,9 +1,12 @@
 package xmu.crms.controller;
 
+import java.math.BigInteger;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,10 +32,12 @@ public class UserController {
     /**
      * 获得当前用户
      * @return User deleteNumber
+     * @throws UserNotFoundException 
+     * @throws IllegalArgumentException 
      */
-	@RequestMapping(value="/me", method=RequestMethod.GET)
-	public User getUser() {
-		return new User();
+	@RequestMapping(value="/me/{userId}", method=RequestMethod.GET)
+	public User getUser(@PathVariable int userId) throws IllegalArgumentException, UserNotFoundException {
+		return userServiceImpl.getUserByUserId(new BigInteger(userId+""));
 	}
 	
 	 /**
@@ -40,10 +45,10 @@ public class UserController {
      * @return
 	 * @throws UserNotFoundException 
      */
-	@RequestMapping(value="/me", method=RequestMethod.PUT)
+	@RequestMapping(value="/me/{userId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	public void updateUser(@RequestBody User user) throws UserNotFoundException {
-     userServiceImpl.updateUserByUserId(user.getId(), user);
+	public void updateUser(@RequestBody User user, @PathVariable int userId) throws UserNotFoundException {
+     userServiceImpl.updateUserByUserId(new BigInteger(userId+""), user);
 	}
 	/**
 	 * 手机号登录，返回用户基本信息
@@ -56,7 +61,7 @@ public class UserController {
 		public User signinByPhone(@RequestBody User user) throws UserNotFoundException{
 			loginServiceImpl.signInPhone(user);
 			System.out.println(user);
-			return user;
+			return loginServiceImpl.signInPhone(user);
 		}
 		
 		/**
@@ -65,7 +70,7 @@ public class UserController {
 		 * @return
 		 * @throws UserNotFoundException
 		 */
-		@RequestMapping(value="/registerByPhone", method=RequestMethod.POST)
+		@RequestMapping(value="/register", method=RequestMethod.POST)
 		@ResponseStatus(value=HttpStatus.NO_CONTENT)
 		public void registerByPhone(@RequestBody User user) throws UserNotFoundException{
 			loginServiceImpl. signUpPhone(user) ;

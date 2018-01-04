@@ -1,8 +1,14 @@
+var courseId=1;
+window.onload = function(){
+	//*****getcourseId
+	courseId=localStorage.getItem("courseId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
+}
 function createSeminar(){
 
 	if(!checkinput())
 		return ;
-	var courseId=1;
 
 	var fixed;
 	if($("#groupingMethod").find("option:selected").text()=="固定分组")
@@ -17,7 +23,7 @@ function createSeminar(){
 			startTime : $("#startTime").val(),
 			endTime : $("#endTime").val()
 	};
-	//alert(JSON.stringify(newSeminar));
+	alert(JSON.stringify(newSeminar));
 	$.ajax({			
 		url:  "/course/"+courseId+"/seminar",
 		type: "POST",

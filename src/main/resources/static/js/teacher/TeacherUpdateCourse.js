@@ -1,24 +1,57 @@
-function updateCourse(){
+var courseId=1;
+window.onload = function(){
+	//************getcourseId
+	courseId=localStorage.getItem("courseId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
+	init();
+}
+function init() {
+	// 获取左侧课程基本信息
+	$.ajax({
+		url : "/course/" + courseId,
+		type : "GET",
+		data : {},
+		async : false,
+		success : function(data) {
+			var courseInfo = data;
+			$("#coursename").attr("value", courseInfo.name);
+			$("#courseinfo").val(courseInfo.description);
+			$("#seminarGrade").attr("value",courseInfo.presentationPercentage);
+			$("#reportGrade").attr("value", courseInfo.reportPercentage);
+			$("#seminarGrade5").attr("value", courseInfo.fivePointPercentage);
+			$("#seminarGrade4").attr("value", courseInfo.fourPointPercentage);
+			$("#seminarGrade3").attr("value", courseInfo.threePointPercentage);
+		},
+		error : function() {
+			alert("获取课程信息失败");
+		}
+	});
+}
 
+function updateCourse(){
+	var userId=localStorage.getItem("userId");
+    var teacher={
+    		id : userId
+    };
 	if(!checkinput())
 		return ;
-	var proportions={
-			report : $("#reportGrade").val(),
-			presentation : $("#seminarGrade").val(),
-			c : $("#seminarGrade3").val(),
-			b : $("#seminarGrade4").val(),
-			a : $("#seminarGrade5").val()		
-	};
 	var modifyinfo={
 			name:$("#coursename").val(),
-			startTime:$("#begintime").val(),
-			endTime:$("#endtime").val(),
+			startDate:$("#begintime").val(),
+			endDate:$("#endtime").val(),
 			description:$("#courseinfo").val(),
-			proportions:proportions
+			reportPercentage : $("#reportGrade").val(),
+			presentationPercentage : $("#seminarGrade").val(),
+			fivePointPercentage : $("#seminarGrade5").val(),
+			fourPointPercentage : $("#seminarGrade4").val(),
+			threePointPercentage : $("#seminarGrade3").val(),
+			teacher : teacher
 	};
+	//alert(JSON.stringify(modifyinfo));
 	$.ajax({			
-		url:  "/course",
-		type: "POST",
+		url:  "/course/"+courseId,
+		type: "PUT",
 		contentType: "application/json",
 		data: JSON.stringify(modifyinfo),
 		success: function(data,status)

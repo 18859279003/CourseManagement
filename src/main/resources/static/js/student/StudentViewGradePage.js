@@ -1,58 +1,34 @@
-(function ($) {
+var seminarId=1;
+var studentId=3;
+window.onload = function(){
+	//*********getseminarId/studentid
+	studentId=localStorage.getItem("studentId");
+	seminarId=localStorage.getItem("seminarId");
+	$("#courseName").html(localStorage.getItem("courseName")) ;
+    $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));
 	init();
-
-}(jQuery));
-
+}
 function init(){
-	var id;
 	var groupinfo;
-	// 获取左侧课程基本信息
 	$.ajax({			
-		url: "/course/"+id,
+		url: "/seminar/"+seminarId+"/my",
 		type: "GET",
-		data: {},
-		async: false,
-		success: function(data)
-		{
-			var courseInfo=data;// 要写成数组
-			// 获取线上的课程名字
-			$("div.courseName").prepend(
-					courseInfo.name
-			);
-			// 获取线下的课程介绍
-			$("div.navigation").append(
-					"<div class='courseIntroduction'>"+courseInfo.description+"</div>"						
-			);
-		},
-		error:function()
-		{
-			alert("获取课程信息失败");
-		}
-		});
-	// 获取小组前三列信息
-	$.ajax({			
-		url: "/group/"+id,
-		type: "GET",
-		data: {},
+		data: {studentId,studentId},
 		async: false,
 		success: function(data)
 		{
 			groupinfo=data;
 			$("table#studenttable").append(
-					"<tr><td>"+groupinfo.topics[0].name+"</td>"+
-					"<td>"+groupinfo.name 
+					"<tr><td>"+groupinfo.seminar.name+"</td>"+
+					"<td>"+"组名"
 					+"</td>"+
 					"<td>"+groupinfo.leader.name 
+					+"</td>"+
+					"<td>"+groupinfo.presentationGrade+"</td>"+
 
-+"</td>"+
-					"<td>"+groupinfo.grade.presentationGrades[0].grade+"</td>"+
-
-					"<td>"+groupinfo.grade.reportGrade+"</td>"+
-					"<td>"+groupinfo.grade.grade+"</td>"+
+					"<td>"+groupinfo.reportGrade+"</td>"+
+					"<td>"+groupinfo.finalGrade+"</td>"+
 					"<td>" );
-
-		
-			
 		},
 		error:function()
 		{

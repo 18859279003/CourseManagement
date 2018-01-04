@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.School;
+import xmu.crms.serviceimpl.SchoolServiceImpl;
 
 @RestController
 @RequestMapping("/school")
@@ -22,29 +24,27 @@ import xmu.crms.entity.School;
  */
 public class SchoolController {
 	
+    @Autowired
+    private SchoolServiceImpl schoolServiceImpl;
 	/**
-	 * TODO
 	 * 获取学校列表（按照城市查找学校
 	 * @param city
 	 * @return
 	 */
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public List<School> getSchoolList(String city){
-		List<School> schoollist=new ArrayList<School>();
-		return schoollist;
+		return schoolServiceImpl.listSchoolByCity(city);
 	}
 	
 	/**
 	 * 添加学校
-	 * TODO
 	 * @param school
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public int createSchool(@RequestBody School school, HttpServletResponse response){
-		response.setStatus(201);
-		return school.getId().intValue();
+		return schoolServiceImpl.insertSchool(school).intValue();
 	}
 	
 	/**

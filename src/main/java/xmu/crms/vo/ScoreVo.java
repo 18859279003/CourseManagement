@@ -1,7 +1,5 @@
 package xmu.crms.vo;
 
-
-
 public class ScoreVo {
 
     private String topic;
@@ -24,14 +22,8 @@ public class ScoreVo {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-   
-    public String getLeaderName() {
-		return leaderName;
-	}
-	public void setLeaderName(String leaderName) {
-		this.leaderName = leaderName;
-	}
-	public Integer getPresentationGrade() {
+
+    public Integer getPresentationGrade() {
         return presentationGrade;
     }
     public void setPresentationGrade(Integer presentationGrade) {
@@ -54,5 +46,11 @@ public class ScoreVo {
     }
     public void setReport(String report) {
         this.report = report;
+    }
+    public String getLeaderName() {
+        return leaderName;
+    }
+    public void setLeaderName(String leaderName) {
+        this.leaderName = leaderName;
     }
 }

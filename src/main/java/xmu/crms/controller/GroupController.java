@@ -1,6 +1,7 @@
 package xmu.crms.controller;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,11 +12,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import xmu.crms.entity.FixGroup;
+import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupTopic;
 import xmu.crms.entity.User;
+import xmu.crms.exception.ClassesNotFoundException;
+import xmu.crms.exception.FixGroupNotFoundException;
 import xmu.crms.exception.GroupNotFoundException;
+import xmu.crms.exception.UserNotFoundException;
+import xmu.crms.service.SeminarGroupService;
+import xmu.crms.serviceimpl.FixGroupServiceImpl;
 import xmu.crms.serviceimpl.GradeServiceImpl;
+import xmu.crms.serviceimpl.SeminarGroupImpl;
 import xmu.crms.serviceimpl.TopicServiceImpl;
+import xmu.crms.vo.ClassGroupVo;
 
 @RestController
 @RequestMapping("/group")
@@ -27,23 +37,38 @@ import xmu.crms.serviceimpl.TopicServiceImpl;
 public class GroupController {
     @Autowired
     private TopicServiceImpl topicServiceImpl;
-    @Autowired
+    
+    @Autowired 
     private GradeServiceImpl gradeServiceImpl;
     
+    @Autowired
+    private SeminarGroupImpl seminarGroupServiceImpl;
+    
+    @Autowired
+    private FixGroupServiceImpl fixGroupServiceImpl;
 	/**
 	 * 按ID获取小组详情，传入小组id，返回小组对象
-     * 是否包含小组选择的话题、是否包含小组的成绩
 	 * @param groupId
-	 * @param embedTopics
-	 * @param embedGrade
 	 * @return
+	 * @throws GroupNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{groupId}", method=RequestMethod.GET)
-	public SeminarGroupTopic getTopicById(@PathVariable("groupId") int groupId, boolean embedTopics, boolean embedGrade){
-
-		return new SeminarGroupTopic();
+	public SeminarGroup getGroupById(@PathVariable("groupId") int groupId) throws IllegalArgumentException, GroupNotFoundException{
+	    return seminarGroupServiceImpl.getSeminarGroupByGroupId(new BigInteger(((Integer)groupId).toString()));
 	}
 
+	@RequestMapping(value="/fixgroup/{groupId}", method=RequestMethod.GET)
+    public ClassGroupVo getGroupByClassId(@PathVariable("classId") int classId,int studentId) throws IllegalArgumentException, ClassesNotFoundException, UserNotFoundException, FixGroupNotFoundException{
+        FixGroup group=fixGroupServiceImpl.getFixedGroupById(new BigInteger(((Integer)studentId).toString()),new BigInteger(((Integer)classId).toString()));
+        ClassGroupVo vo = new ClassGroupVo();
+        vo.setId(group.getId());
+        vo.setLeader(group.getLeader());
+        List<User> members=fixGroupServiceImpl.listFixGroupMemberByGroupId(group.getId());
+        User[] users = (User[])members.toArray(new User[members.size()]);
+        vo.setMembers(users);
+        return vo;
+    }
 	 /**
 	  * 组长辞职
 	  * @param classId
@@ -86,19 +111,20 @@ public class GroupController {
     
     /**
      * 小组按ID选择话题
-     * TODO
      * @param groupId
      * @param topicId
      * @return
+     * @throws GroupNotFoundException 
+     * @throws IllegalArgumentException 
      */
     @RequestMapping(value="/{groupId}/topic", method=RequestMethod.POST)
-    public String chooseTopic(@PathVariable("groupId") int groupId, int topicId){
+    public int chooseTopic(@PathVariable("groupId") int groupId, int topicId) throws IllegalArgumentException, GroupNotFoundException{
         
-        return "/group/27/topic/23";
+        return seminarGroupServiceImpl.insertTopicByGroupId(new BigInteger(((Integer)groupId).toString()), new BigInteger(((Integer)topicId).toString())).intValue();
     }
     
     /**
-     * 取消
+     * 取消选择话题
      * @param groupId
      * @param topicId
      */
@@ -123,13 +149,10 @@ public class GroupController {
 	 * 按ID设置小组的报告分
 	 * @param groupId
 	 * @param reportGrade
-	 * @throws GroupNotFoundException 
-	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{groupId}/grade/report", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void gradeByGroupId(@PathVariable("groupId") int groupId, int reportGrade) throws IllegalArgumentException, GroupNotFoundException{
-		gradeServiceImpl.updateGroupByGroupId(new BigInteger(((Integer)groupId).toString()), new BigInteger(((Integer)reportGrade).toString()));
-	}
-	
+        gradeServiceImpl.updateGroupByGroupId(new BigInteger(((Integer)groupId).toString()), new BigInteger(((Integer)reportGrade).toString()));
+    }
 }

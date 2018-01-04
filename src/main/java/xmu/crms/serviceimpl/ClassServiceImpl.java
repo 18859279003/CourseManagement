@@ -9,6 +9,7 @@ import xmu.crms.service.ClassService;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -60,7 +61,7 @@ public class ClassServiceImpl implements ClassService {
             if(teachers == null) {
                 throw new UserNotFoundException(String.format("User with name \"%s\" not found.",teacherName));
             }
-            teachers.forEach(e -> classInfoListByTeacherName.addAll(classMapper.listClassByUserId(e.getId())));
+            teachers.forEach(e -> classInfoListByTeacherName.addAll(classMapper.listClassByTeacherId(e.getId())));
 
             return classInfoListByTeacherName;
         }
@@ -68,6 +69,12 @@ public class ClassServiceImpl implements ClassService {
 
         // 两个条件均非空
         if (courseName != null) {
+
+            courses = classMapper.listCourseByCourseName(courseName);
+            courses.forEach(e -> classInfoListByCourseName.addAll(classMapper.listClassByCourseId(e.getId())));
+
+            teachers = classMapper.listUserByUsername(teacherName);
+            teachers.forEach(e -> classInfoListByTeacherName.addAll(classMapper.listClassByTeacherId(e.getId())));
 
             List<ClassInfo> intersectClasses = new ArrayList<>();
 
@@ -85,6 +92,7 @@ public class ClassServiceImpl implements ClassService {
 
         return null;
     }
+
 
     @Override
     public List<ClassInfo> listClassByCourseId(BigInteger courseId) throws CourseNotFoundException {
@@ -295,5 +303,10 @@ public class ClassServiceImpl implements ClassService {
         List<ClassInfo> classes = classMapper.listClassByUserId(userId);
 
         return classes;
+    }
+
+    @Override
+    public List<ClassInfo> listAllClass() {
+        return classMapper.listAllClass();
     }
 }

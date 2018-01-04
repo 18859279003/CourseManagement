@@ -1,39 +1,22 @@
-(function ($) {
+var topicId=1;
+var seminarId=1;
+var studentId=3;
+window.onload = function(){
+	//*********gettopicId/studentid/seminarid
+	//$("#courseName").html(?????) ;
+    //$("#courseIntroduction").html(?????);
 	init();
-
-}(jQuery));
-
+}
 function init(){
-	var id=1;
-	//获取左侧课程基本信息	
-	$.ajax({			
-		url: "/course/ "+id,
-		type: "GET",
-		data: {},
-		async: false,
-		success: function(data)
-		{
-			var courseInfo=data;//要写成数组
-			//获取线上的课程名字
-			$("div.courseName").prepend(courseInfo.name);
-			//获取线下的课程介绍
-			$("div.navigation").append("<div class='courseIntroduction'>"+courseInfo.description+"</div>");
-		},
-		error:function()
-		{
-			alert("获取课程信息失败");
-		}
-		});
 	//获取话题信息
 	$.ajax({			
-		url: "/topic/"+id,
+		url: "/topic/"+topicId,
 		type: "GET",
 		data: {},
 		async: false,
 		success: function(data)
 		{
-			var topicInfo=data;//要写成数组
-			//获取话题名字
+			var topicInfo=data;
 			$("label#name").prepend(topicInfo.name);
 			$("label#description").prepend(topicInfo.description);
 			$("label#groupLimit").prepend(topicInfo.groupNumberLimit);
@@ -47,19 +30,31 @@ function init(){
 }
 function chooseTopic()
 {
-	var topicId=1,groupId=1;
-	if 
-	(confirm("您确定要选择该话题吗？")){	
-	
+	if (confirm("您确定要选择该话题吗？")){	
+	var groupId;
 	$.ajax({			
-		url: "/group/1/topic",
-		type: "POST",
-		data:{"topicId":topicId},
+		url: "/seminar/"+seminarId+"/my",
+		type: "GET",
+		data: {studentId,studentId},
 		async: false,
 		success: function(data)
 		{
-			alert("选择成功"+data);
-			window.location.href="StudentSeminarPage(fixed).html";
+			groupId=data.id;
+		},
+		error:function()
+		{
+			alert("获取小组信息失败");
+		}
+		});
+	$.ajax({			
+		url: "/group/"+groupId+"/topic",
+		type: "POST",
+		data:{topicId:topicId},
+		async: false,
+		success: function(data)
+		{
+			alert("选择成功");
+			window.location.href="/StudentSeminarPage(fixed)";
 		},
 		error:function()
 		{

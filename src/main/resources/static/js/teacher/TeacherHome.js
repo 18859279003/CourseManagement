@@ -1,16 +1,22 @@
+var userId=1;
 window.onload=init;
 
 function init(){
+	//*************************************get userId
+	userId=localStorage.getItem("userId");
 	var personinfo;
 	$.ajax({			
-		url:  "/me",
+		url:  "/me/"+userId,
 		type: "GET",
-		data: {},
 		async: false,
 		success: function(data)
 		{
 			personinfo=data;
 			var gender=personinfo.gender=="0"?"男":"女";
+			var title;
+			if(personinfo.title=="1") title="教授";
+			else if(personinfo.title=="2") title="副教授";
+			else if(personinfo.title=="3") title="助理教授";
 			$("#personinfo table").empty();
 			$("#personinfo table").append(
 					"<tr class='itemName'>" + 
@@ -23,7 +29,7 @@ function init(){
 					"</tr>" +
 					"<tr class='itemName'>" + 
 					"<td>学校：<span>" + personinfo.school.name + "</span></td>" + 
-					"<td>职称：<span>" + personinfo.title + "</span></td>" + 
+					"<td>职称：<span>" + title + "</span></td>" + 
 					"</tr>" +
 					"<tr class='itemName'>" + 
 					"<td>E-mail：<span>" + personinfo.email + "</span></td>" + 

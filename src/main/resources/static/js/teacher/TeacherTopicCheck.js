@@ -1,42 +1,22 @@
-(function ($) {
+var topicId=1;
+window.onload = function(){
+	//************get topicId
+	topicId=localStorage.getItem("topicId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
 	init();
-
-}(jQuery));
-
+}
 function init(){
-	var id=1;
-	//获取左侧课程基本信息	
-	$.ajax({			
-		url: "/course/"+id,
-		type: "GET",
-		data: {},
-		async: false,
-		success: function(data)
-		{
-			var courseInfo=data;
-			//获取线上的课程名字
-			$("div.courseName").prepend(
-					courseInfo.name
-			);
-			//获取线下的课程介绍
-			$("div.navigation").append(
-					 "<div class='courseIntroduction'>"+courseInfo.description+"</div>"				
-			);
-		},
-		error:function()
-		{
-			alert("获取课程信息失败");
-		}
-		});
+
 	//获取话题信息
 	$.ajax({			
-		url: "/topic/"+id,
+		url: "/topic/"+topicId,
 		type: "GET",
 		data: {},
 		async: false,
 		success: function(data)
 		{
-			if(data=="") alert(data);
+			//if(data=="") alert(data);
 			var topicInfo=data;
 			$("label#name").append(topicInfo.name);
 			$("label#description").append(topicInfo.description);
@@ -55,11 +35,10 @@ function init(){
 //删除话题
 function deleteTopic()
 {
-	var id=1;
 	if 
 	(confirm("您确定要删除该话题吗？")){		
 	$.ajax({			
-		url: "/topic/"+id,
+		url: "/topic/"+topicId,
 		type: "DELETE",
 		data: {},
 		async: false,
@@ -79,5 +58,7 @@ function deleteTopic()
 //修改话题
 function updateTopic()
 {
-	window.location.href='TeacherUpdateTopic.html'
+	//**************save topicId
+	localStorage.setItem("topicId",topicId);
+	window.location.href='/TeacherUpdateTopic'
 }

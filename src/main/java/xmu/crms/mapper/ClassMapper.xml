@@ -8,6 +8,12 @@
 <mapper namespace="xmu.crms.mapper.ClassMapper">
 
     <resultMap autoMapping="true" id="ClassInfo" type="xmu.crms.entity.ClassInfo">
+        <result property="classTime" column="class_time"/>
+        <result property="reportPercentage" column="report_percentage"/>
+        <result property="presentationPercentage" column="presentation_percentage"/>
+        <result property="fivePointPercentage" column="five_point_percentage"/>
+        <result property="fourPointPercentage" column="four_point_percentage"/>
+        <result property="threePointPercentage" column="three_point_percentage"/>
         <association property="course" column="course_id" select="getCourseById"/>
     </resultMap>
 
@@ -23,6 +29,26 @@
         <association property="course" column="course_id" select="getCourseById" />
     </resultMap>
 
+    <select id="listClassByTeacherId" resultMap="ClassInfo">
+        SELECT
+            class_info.id,
+            class_info.name,
+            course_id,
+            site,
+            class_time,
+            class_info.report_percentage,
+            class_info.presentation_percentage,
+            class_info.five_point_percentage,
+            class_info.four_point_percentage,
+            class_info.three_point_percentage
+        FROM
+            class_info, course
+        WHERE
+            course.teacher_id = #{teacherId}
+            AND
+            class_info.course_id = course.id;
+    </select>
+    
     <select id="getSchoolBySchoolId" resultType="xmu.crms.entity.School">
         SELECT
             id,
@@ -421,4 +447,20 @@
         class_id=#{classId}
     </select>
 
+    <select id="listAllClass" resultMap="ClassInfo">
+        SELECT
+            class_info.id,
+            class_info.name,
+            course_id,
+            site,
+            class_time,
+            class_info.report_percentage,
+            class_info.presentation_percentage,
+            class_info.five_point_percentage,
+            class_info.four_point_percentage,
+            class_info.three_point_percentage
+        FROM
+            class_info
+        
+    </select>
 </mapper>

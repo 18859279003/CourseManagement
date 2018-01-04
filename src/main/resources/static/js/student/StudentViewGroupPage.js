@@ -1,38 +1,18 @@
-(function ($) {
+var classId=1;
+var studentId=3;
+window.onload = function(){
+	//*********getstudentId/classId
+	studentId=localStorage.getItem("studentId");
+	classId=localStorage.getItem("classId");
+	$("#courseName").html(localStorage.getItem("courseName")) ;
+    $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));;
 	init();
-
-}(jQuery));
-
+}
 function init(){
-	var id;
-	//获取左侧课程基本信息	
-	$.ajax({			
-		url: "/course/"+id,
-		type: "GET",
-		data: {},
-		async: false,
-		success: function(data)
-		{
-			var courseInfo=data;//要写成数组
-			//获取线上的课程名字
-			$("div.courseName").prepend(
-					courseInfo.name
-			);
-			//获取线下的课程介绍
-			$("div.navigation").append(
-					"<div class='courseIntroduction'>"+courseInfo.description+"</div>"						
-			);
-		},
-		error:function()
-		{
-			alert("获取课程信息失败");
-		}
-		});
-	//获取成绩信息	
 	 $.ajax({			
-			url: "/group/"+id,
+			url: "/class/"+classId+"/classgroup",
 			type: "GET",
-			data: {},
+			data: {studentId: studentId},
 			async: false,
 			success: function(data)
 			{
@@ -40,13 +20,13 @@ function init(){
 				var members=data.members;                
 				//获取队长信息
 				$("tr#leader").append(
-						"<td>队长</td>"+"<td>"+leader.id+"</td>"+"<td>"+leader.name+"</td>");
+						"<td>队长</td>"+"<td>"+leader.number+"</td>"+"<td>"+leader.name+"</td>");
 				//获取队员信息
 				for(var i in members)
 					{
 					$("table#studenttable").append(
 							"<tr class='alt'><td>队员</td>"+
-							"<td>"+members[i].id+"</td>"+
+							"<td>"+members[i].number+"</td>"+
                             "<td>"+members[i].name+"</td></tr>");
 					}					   					
 			},

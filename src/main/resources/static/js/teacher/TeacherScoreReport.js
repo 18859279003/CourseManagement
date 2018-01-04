@@ -1,12 +1,16 @@
-window.onload=getGroupInfo;
-
+var groupId=1;
+window.onload = function(){
+	//************get groupId
+	groupId=localStorage.getItem("groupId");
+	getGroupInfo();
+}
 function score(){
-	var id=1;
+
 	if(!checkinput())
 		return;
 	var score=$("#score").val();
 	$.ajax({
-		url: "/group/"+id + "/grade/report",
+		url: "/group/"+groupId + "/grade/report",
 		type: "PUT",
 		data: {reportGrade:score},
 		async: false,
@@ -33,18 +37,17 @@ function checkinput(){
 	return true;
 }
 function getGroupInfo(){
-	var id=1;
+
 	$.ajax({
-		url: "/group/"+id,
+		url: "/group/"+groupId,
 		type: "GET",
 		data: {},
 		async: false,
 		success:function(data){
 			var groupinfo=data;	
 			$("#groupinfo").append(
-					"<label class='itemName'>"+groupinfo.topics[0].name+"</label>"+
-					"<label class='itemName'>"+groupinfo.name+"</label>"+
-					"<label class='itemName'>"+groupinfo.leader.name+"</label>"
+					'<label id=“seminarName" class="itemName">'+groupinfo.topic.name+"</label>"+
+					'<label id="leaderName" class="itemName">'+groupinfo.seminarGroup.leader.name+"</label>"
 			);
 		},
 		error:function(){

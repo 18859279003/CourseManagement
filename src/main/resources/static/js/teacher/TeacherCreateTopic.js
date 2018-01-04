@@ -1,8 +1,14 @@
+var seminarId=1;
+window.onload = function(){
+	//*****get seminarId
+	seminarId=localStorage.getItem("seminarId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
+}
 function createTopic(){
 
 	if(!checkinput())
 		return ;
-	var seminarId=1;
 
 	var newTopic={
 			name : $("#topicName").val(),

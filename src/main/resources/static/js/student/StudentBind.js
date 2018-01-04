@@ -1,6 +1,4 @@
-﻿/**
- * 
- */
+﻿//没用
 window.onload = function(){
 	getSchool();
 	getProvincelist();

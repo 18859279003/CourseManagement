@@ -182,29 +182,31 @@ public class FixGroupServiceImpl implements FixGroupService {
         }
     }
 
-    @Override
-    public FixGroup getFixedGroupById(BigInteger userId, BigInteger classId) throws IllegalArgumentException, ClassesNotFoundException, UserNotFoundException {
-        if(userId.intValue()<=0 || classId.intValue()<=0){
-            throw new IllegalArgumentException();
-        }
-        List<FixGroupMember> list=fixGroupMapper.listFixGroupMemberByUserId(userId);
-        if(list.isEmpty()){
-            throw new UserNotFoundException("");
-        }
-        List<FixGroup> list1=fixGroupMapper.listFixGroupById(list.get(0).getFixGroup().getId());
 
-        for(FixGroup temp:list1){
-            if(temp.getClassInfo().getId().intValue()==classId.intValue()){
-                FixGroup fixGroup = new FixGroup();
-                List<ClassInfo> classInfo = fixGroupMapper.listClassById(temp.getClassInfo().getId());
-                fixGroup.setClassInfo(classInfo.get(0));
-                List<User> leader = fixGroupMapper.listUsersById(temp.getLeader().getId());
-                fixGroup.setLeader(leader.get(0));
-                return fixGroup;
+    @Override
+        public FixGroup getFixedGroupById(BigInteger userId, BigInteger classId) throws IllegalArgumentException, ClassesNotFoundException, UserNotFoundException {
+            if(userId.intValue()<=0 || classId.intValue()<=0){
+                throw new IllegalArgumentException();
             }
+            List<FixGroupMember> list=fixGroupMapper.listFixGroupMemberByUserId(userId);
+            if(list.isEmpty()){
+                throw new UserNotFoundException("");
+            }
+            List<FixGroup> list1=fixGroupMapper.listFixGroupById(list.get(0).getFixGroup().getId());
+
+            for(FixGroup temp:list1){
+                if(temp.getClassInfo().getId().intValue()==classId.intValue()){
+                    FixGroup fixGroup = new FixGroup();
+                    List<ClassInfo> classInfo = fixGroupMapper.listClassById(temp.getClassInfo().getId());
+                    fixGroup.setClassInfo(classInfo.get(0));
+                    List<User> leader = fixGroupMapper.listUsersById(temp.getLeader().getId());
+                    fixGroup.setLeader(leader.get(0));
+                    fixGroup.setId(list.get(0).getFixGroup().getId());
+                    return fixGroup;
+                }
+            }
+            return null;
         }
-        return null;
-    }
 
     /*@Override
     public void updateSeminarGroupById(BigInteger groupId, SeminarGroup group) throws IllegalArgumentException, FixGroupNotFoundException {
@@ -265,5 +267,12 @@ public class FixGroupServiceImpl implements FixGroupService {
             }
         }
         fixGroupMapper.deleteFixGroupTopicByGroupId(fixedGroupId);
+    }
+
+    @Override
+    public void updateSeminarGroupById(BigInteger groupId, SeminarGroup group)
+            throws IllegalArgumentException, FixGroupNotFoundException {
+        // TODO Auto-generated method stub
+        
     }
 }

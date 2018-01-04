@@ -86,7 +86,7 @@ public class TopicServiceImpl implements TopicService
 		}
 		else
 		{
-			return new BigInteger(num.toString());
+			return topic.getId();
 		}
 			
 	}

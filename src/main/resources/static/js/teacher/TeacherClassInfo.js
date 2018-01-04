@@ -1,51 +1,33 @@
 ﻿/**
  * Created by lenovo on 2017/12/6.
  */
-
-//加载页面时，获取班级信息
+var classId=1;
 window.onload = function(){
-	getCourseInfo();
+	//************getclassId
+	classId=localStorage.getItem("classId");
+	$("#courseName").html(localStorage.getItem("courseName")) ;
+    $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));
 	getClassInfo();
-}
-
-//获取课程的具体信息
-function getCourseInfo() {
-	var courseId=1;
-    var course;
-    $.ajax({
-        url: "/course/"+courseId,
-        type: "GET",
-        success: function (data) {
-            course = data;
-            courseId = course.id;
-            $("#courseName").html(course.name) ;
-            $("#courseIntroduction").html(course.description);
-            alert("获取课程信息成功！");
-        },
-        error: function () {
-            alert("获取课程信息失败！");
-        }
-    });
 }
 
 //获取班级的具体信息
 function getClassInfo(){
-	var classId=1;
     var classInfo;
     $.ajax({
         url:"/class/"+classId,
         type:"GET",
         success:function(data){
             classInfo = data;
-            $("#className").html=classInfo.name;
-            $("#name").html=classInfo.name;
-            $("#address").html=classInfo.site;
-            $("#time").html=classInfo.time;
-            $("#presentation").html=classInfo.presentationPercentage;
-            $("#report").html=classInfo.reportPercentage;
-            $("#agrade").html=classInfo.fivePointPercentage;
-            $("#bgrade").html=classInfo.fourPointPercentage;
-            $("#cgrade").html=classInfo.threePointPercentage;
+            alert(JSON.stringify(classInfo));
+            $("#className").append(classInfo.name);
+            $("#name").append(classInfo.name);
+            $("#address").append(classInfo.site);
+            $("#time").append(classInfo.classTime);
+            $("#presentation").append(classInfo.presentationPercentage);
+            $("#report").append(classInfo.reportPercentage);
+            $("#agrade").append(classInfo.fivePointPercentage);
+            $("#bgrade").append(classInfo.fourPointPercentage);
+            $("#cgrade").append(classInfo.threePointPercentage);
             
             alert("获取班级信息成功！");
         },
@@ -71,7 +53,6 @@ function updateClass(){
 }
 //删除班级
 function deleteclass(){
-	var classId=1;
     $.ajax({
         url:"/class/"+classId,
         type:"DELETE",

@@ -50,8 +50,8 @@ public class CourseServiceImpl implements CourseService {
      * @throws IllegalArgumentException
      */
     @Override
-    public BigInteger insertCourseByUserId(BigInteger userId, Course course) throws IllegalArgumentException {
-        courseMapper.insertCourseByUserId(userId,course);
+    public BigInteger insertCourseByUserId(Course course) throws IllegalArgumentException {
+        courseMapper.insertCourseByUserId(course);
         return course.getId();
     }
 

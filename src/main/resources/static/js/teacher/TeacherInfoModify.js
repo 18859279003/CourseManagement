@@ -1,16 +1,22 @@
+var userId=1;
 window.onload=init;
 
 function init(){
+	//**************************get userId
+	userId=localStorage.getItem("userId");
 	var personinfo;
 	$.ajax({			
-		url:  "/me",
+		url:  "/me/"+userId,
 		type: "GET",
-		data: {},
 		async: false,
 		success: function(data)
 		{
 			personinfo=data;
-			var gender=personinfo.gender=="male"?"男":"女";
+			var gender=personinfo.gender=="0"?"男":"女";
+			var title;
+			if(personinfo.title=="1") title="教授";
+			else if(personinfo.title=="2") title="副教授";
+			else if(personinfo.title=="3") title="助理教授";
 			$("#personinfomodify").empty();
 			$("#personinfomodify").append(
 			        "<tr class='itemName'>" + 
@@ -23,7 +29,7 @@ function init(){
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
 			        "<td>学校：<input type='text' id='school' value='" + personinfo.school.name + "'/></td>" +
-			        "<td>职称：<input type='text' id='title' value='" + personinfo.title + "'/></td>" +
+			        "<td>职称：<input type='text' id='title' value='" + title + "'/></td>" +
 			        "</tr>" +
 			        "<tr class='itemName'>" + 
 			        "<td>E-mail：<input type='text' id='e-mail' value='" + personinfo.email + "'/></td>" +
@@ -44,22 +50,36 @@ function changePersonInfo(){
 
 	if(!checkinput())
 		return ;
-	var gender=transfersex($("#sex").val());
-	if(gender=="false") 
+	
+	var gender;
+	var sex=$("#sex").val();
+	if(sex=="男") gender=0;
+	else if(sex=="女") gender=1;
+	else{
+		alert("性别请输男或女。");
 		return ;
+	}
+	var title;
+	var t=$("#title").val();
+	if(t=="教授") title=1;
+	else if(t=="副教授") title=2;
+	else if(t=="助理教授") title=3;
+	else{
+		alert("请输入正确职称：教授、副教授或助理教授。");
+		return ;		
+	}
+	var school={name :$("#school").val()};
 	var modifyinfo={
-			"number":$("#idnum").val(),
-			"name":$("#name").val(),
-			"gender":gender,
-			"school":$("#school").val(),
-			"title":$("#sex").val(),
-			"email":$("#email").val(),
-			"phone":$("#phone").val()
+			number:$("#idnum").val(),
+			name:$("#name").val(),
+			gender:gender,
+			school:school,
+			title:title,
+			email:$("#email").val(),
+			phone:$("#phone").val()
 	};
-	var modifyinfo={"name": $("#name").val(), "phone": $("#phone").val()};
-
 	$.ajax({			
-		url:  "/me",
+		url:  "/me/"+userId,
 		type: "PUT",
 		contentType: "application/json",
 		data: JSON.stringify(modifyinfo),
@@ -96,21 +116,4 @@ function checkinput(){
         else
            return true;
     }
-}
-
-//转换性别
-function  transfersex() {
-    var sex = document.getElementById("sex").value;
-    var gender;
-    if (sex=="男") {
-        gender = "male";
-    }
-    else if(sex=="女"){
-        gender = "female";
-    }
-    else {
-    	alert("性别请输男或女。")
-    	gender = "false";
-    }
-    return gender;
 }

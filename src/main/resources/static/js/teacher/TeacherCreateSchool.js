@@ -10,14 +10,15 @@ window.onload = function(){
 function getProvince(){
     var provincelist;
     $.ajax({
-        url:"/school/province",
+        url:"http://apis.map.qq.com/ws/district/v1/list?key=7DFBZ-K4PWQ-TYK5Y-GL7XN-RBDSQ-XSB6M&output=jsonp",
         type:"GET",
+        dataType:"JSONP",
         success:function(data){
-            provincelist = data;
+            provincelist = data.result[0];
             for(var i in provincelist){
                 var item = provincelist[i];
                 $("#province").append("<option value='"
-                + item +"'>" + item +"</option>");
+                + item.id +"'>" + item.fullname +"</option>");
             }//end for
         },
         error:function(){
@@ -29,18 +30,20 @@ function getProvince(){
 //获取城市列表
 function getCity(){
     var citylist;
-    var province = document.getElementById("province").value;
-  //  alert(province);
+
     $.ajax({
-        url:"/school/city",
+        url:"http://apis.map.qq.com/ws/district/v1/list?key=7DFBZ-K4PWQ-TYK5Y-GL7XN-RBDSQ-XSB6M&output=jsonp",
         type:"GET",
-        data:{province:province},
+        dataType:"JSONP",
         success:function(data){
-            citylist = data;
+            citylist = data.result[1];
             for(var i in citylist){
-                var item = city[i];
-                $("#city").append("<option value='"
-                    + i +"'>" + item +"</option>");
+            	var item = citylist[i];          
+            	var regexp = "11[0-9]{4}";
+            	var result = item.id.match(regexp);                
+                if(result)
+                	$("#city").append("<option value='"
+                			+ item.fullname +"'>" + item.fullname +"</option>");
             }//end for
         },
         error:function(){
@@ -74,24 +77,28 @@ function createschool(){
 }
 //更新城市列表
 $("#province").change(function(){
-	var p = $("#province").val();
-	var citylist;
-	$.ajax({
-		url:"/school/city",
-		type:"GET",
-        data:{province:p},
-		success:function(data){
-			citylist = data;
-			$("#city").html("");
-			for(var i in citylist){
-				var item = citylist[i];
-				$("#city").append("<option value=\""
-						+ item + "\">"
-						+ item + "</option>")
-			}//end for
-		},
-		error:function(){
-			alert("获取城市列表失败！");
-		}
-	});
+    var citylist;
+    var pid = document.getElementById("province").value;
+    //alert(pid);
+    $.ajax({
+        url:"http://apis.map.qq.com/ws/district/v1/list?key=7DFBZ-K4PWQ-TYK5Y-GL7XN-RBDSQ-XSB6M&output=jsonp",
+        type:"GET",
+        dataType:"JSONP",
+        success:function(data){
+            citylist = data.result[1];
+            $("#city").html("");
+            for(var i in citylist){
+            	var item = citylist[i];          
+            	var regexp = pid[0]+pid[1]+"[0-9]{4}";
+            	var result = item.id.match(regexp);                
+                if(result){
+                	$("#city").append("<option value='"
+                			+ item.fullname +"'>" + item.fullname +"</option>");
+                }
+            }//end for
+        },
+        error:function(){
+            alert("获取城市列表失败！");
+        }
+    });
 });

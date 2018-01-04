@@ -19,6 +19,7 @@ import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.Course;
 import xmu.crms.entity.Seminar;
 import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.service.UserService;
 import xmu.crms.serviceimpl.ClassServiceImpl;
 import xmu.crms.serviceimpl.CourseServiceImpl;
 import xmu.crms.serviceimpl.SeminarImpl;
@@ -33,10 +34,12 @@ import xmu.crms.serviceimpl.SeminarImpl;
 public class CourseController {
 	@Autowired
     private CourseServiceImpl courseServiceImpl;
+	
+	@Autowired
+	private SeminarImpl seminarImpl;
+	
 	@Autowired
 	private ClassServiceImpl classServiceImpl;
-	@Autowired
-	private SeminarImpl seminarServiceImpl;
 	/**
 	 * 获取与当前用户相关联的课程列表
 	 * @return
@@ -45,8 +48,7 @@ public class CourseController {
 	 */
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public List<Course> getCourseList(BigInteger userId) throws IllegalArgumentException, CourseNotFoundException{
-		List<Course> courselist=courseServiceImpl.listCourseByUserId(userId);
-		return courselist;
+	    return courseServiceImpl.listCourseByUserId(userId);
 	}
 	
 	/**
@@ -55,9 +57,10 @@ public class CourseController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="", method=RequestMethod.POST)
-	public int createCourse(@RequestBody Course course,BigInteger userId, HttpServletResponse response){
-		return courseServiceImpl.insertCourseByUserId(userId, course).intValue();
+	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
+	public int createCourse(@RequestBody Course course, @PathVariable int userId){
+	    //TODO这里的逻辑有错误，没有传userid
+		return courseServiceImpl.insertCourseByUserId(course).intValue();
 	}
 	
 	/**
@@ -80,8 +83,8 @@ public class CourseController {
 	@RequestMapping(value="/{courseId}", method=RequestMethod.PUT)
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void updateCourseById(@PathVariable("courseId") int courseId, @RequestBody Course course){
-		courseServiceImpl.updateCourseByCourseId(new BigInteger(((Integer)courseId).toString()), course);
-	}
+        courseServiceImpl.updateCourseByCourseId(new BigInteger(((Integer)courseId).toString()), course);
+    }
 	
 	/**
 	 * 按ID删除课程，传入课程id
@@ -96,11 +99,11 @@ public class CourseController {
 	/**
 	 * 按ID获取课程的班级列表
 	 * @return
+	 * @throws CourseNotFoundException 
 	 */
 	@RequestMapping(value="/{courseId}/class", method=RequestMethod.GET)
-	public List<ClassInfo> getClassListByCourseId(){
-		List<ClassInfo> classList=new ArrayList<ClassInfo>();
-		return classList;
+	public List<ClassInfo> getClassListByCourseId(@PathVariable("courseId") int courseId) throws CourseNotFoundException{
+	    return classServiceImpl.listClassByCourseId(new BigInteger(((Integer)courseId).toString()));
 	}
 	
 	/**
@@ -112,8 +115,8 @@ public class CourseController {
 	 * @throws CourseNotFoundException 
 	 */
 	@RequestMapping(value="/{courseId}/class", method=RequestMethod.POST)
-	public BigInteger createClass(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response) throws CourseNotFoundException{	
-		return classServiceImpl.insertClassById(new BigInteger(((Integer)courseId).toString()), clas);
+	public int createClass(@PathVariable("courseId") int courseId, @RequestBody ClassInfo clas, HttpServletResponse response) throws CourseNotFoundException{	
+		return classServiceImpl.insertClassById(new BigInteger(((Integer)courseId).toString()), clas).intValue();
 	}
 
 	/**
@@ -121,11 +124,12 @@ public class CourseController {
 	 * @param courseId
 	 * @param embedGrade
 	 * @return
+	 * @throws CourseNotFoundException 
+	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{courseId}/seminar", method=RequestMethod.GET)
-	public List<Seminar> getSeminarList(@PathVariable("courseId") int courseId, boolean embedGrade){
-		List<Seminar> seminarlist=new ArrayList<Seminar>();
-		return seminarlist;
+	public List<Seminar> getSeminarList(@PathVariable("courseId") int courseId, boolean embedGrade) throws IllegalArgumentException, CourseNotFoundException{
+		return seminarImpl.listSeminarByCourseId(new BigInteger(((Integer)courseId).toString()));
 	}
     
 	/**
@@ -138,8 +142,8 @@ public class CourseController {
 	 * @throws IllegalArgumentException 
 	 */
 	@RequestMapping(value="/{courseId}/seminar", method=RequestMethod.POST)
-	public BigInteger createSeminar(@PathVariable("courseId") int courseId, @RequestBody Seminar seminar, HttpServletResponse response) throws IllegalArgumentException, CourseNotFoundException{
-		return seminarServiceImpl.insertSeminarByCourseId(new BigInteger(((Integer)courseId).toString()), seminar);
+	public int createSeminar(@PathVariable("courseId") int courseId, @RequestBody Seminar seminar, HttpServletResponse response) throws IllegalArgumentException, CourseNotFoundException{
+		return seminarImpl.insertSeminarByCourseId(new BigInteger(((Integer)courseId).toString()), seminar).intValue();
 	}
 	
 }

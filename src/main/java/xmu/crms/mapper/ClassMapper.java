@@ -18,6 +18,13 @@ import java.util.List;
 public interface ClassMapper {
 
     /**
+     * 
+     * 根据老师id获取课程
+     * @param teacherId
+     */
+    List<ClassInfo> listClassByTeacherId(BigInteger teacherId);
+    
+    /**
      * 根据课堂id删除CourseSelection中的选课记录。
      *
      * @param classId 课堂id
@@ -251,5 +258,11 @@ public interface ClassMapper {
      * @return
      */
     Seminar getSeminarById(@Param("seminarId") BigInteger seminarId);
+    
+    /**
+     * 获取所有班级
+     * @return
+     */
+    List<ClassInfo> listAllClass();
 
 }
