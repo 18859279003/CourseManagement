@@ -17,13 +17,34 @@ import java.util.List;
  * */
 public interface TimerMapper {
 
+	/**
+	 * 接口
+	 * @param event
+	 * @return
+	 */
     Integer insertEvent(Event event);
 
+    /**
+     *  接口
+     * @param eventId
+     */
     void deleteEvent(BigInteger eventId);
 
+    /**
+     *  接口 
+     * @param event
+     */
     void  updateEvent(Event event);
-
+/**
+ *  接口
+ * @return
+ */
     List<Event> listExecutableEvents();
 
+    /**
+     *  接口
+     * @param eventId
+     * @return
+     */
     Event getEventByEventId(BigInteger eventId);
 }

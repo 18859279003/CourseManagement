@@ -59,20 +59,11 @@ function changePersonInfo(){
 		alert("性别请输男或女。");
 		return ;
 	}
-	var title;
-	var t=$("#title").val();
-	if(t=="本科") title=1;
-	else if(t=="硕士研究生") title=2;
-	else if(t=="博士研究生") title=3;
-	else{
-		alert("请输入正确学历：本科、硕士研究生或博士研究生。");
-		return ;		
-	}
+	
 	var modifyinfo={
 			"number":$("#number").val(),
 			"name":$("#name").val(),
 			"gender":gender,
-			"title":title,
 			"email":$("#email").val(),
 			"phone":$("#phone").val()
 	};

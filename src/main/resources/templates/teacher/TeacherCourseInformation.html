@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>教师课程内页</title>
+ <link href="/css/teacher/TeacherCourseInformation.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="top">
+        	<div class="font">
+        		课堂管理系统
+        	</div>
+        	<div class="icon">
+        		<a href="/TeacherHomePage"><img src="/img/home.png">首页 </a>
+		<a href="###"><img src="/img/help.png">帮助 </a>
+		<a href="/AccountLoginPage"><img src="/img/exit.png">退出 </a>
+        	</div>
+        	<div class="clear"></div>
+    	</div>
+        <div class="body">
+            <div class="navigation">
+                <div class="courseName" id="courseName">OOAD</div>
+                <div class="line"></div>
+                <div class="courseIntroduction" id="courseIntroduction">ooad is xxx</div>
+            </div>
+            <div class="content">
+                <div class="classInfo">
+                    <div class="title">课程班级</div>
+                    <div class="returnButton" onclick="goback()">返回上一页</div>
+                    <div class="line"></div>
+                    <div class="blockBody" id="classlist">
+
+                         <div class="block">
+               <img class="addImg" src="/img/smalladd.png" alt="添加">
+            </div>
+
+                    </div>
+                </div>
+                <div class="seminarInfo">
+                    <div class="title">讨论课</div>
+                    <div class="line"></div>
+                    <div class="blockBody" id="seminarlist">
+
+                       <div class="block">
+                <img class="addImg" src="/img/smalladd.png" alt="添加" >
+            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/teacher/TeacherCourseInformation.js"></script>
+<script src="/js/jwt.js" type="text/javascript"></script>
+</body>
+</html>

@@ -40,7 +40,7 @@ function getSeminar(){
 
 //返回上一页按钮响应函数
 function goback(){
-	window.history.go(-1);  //返回上一页
+	window.location.href="/StudentCourseHome";  //返回上一页
 }
 
 function seminarinfo(id){

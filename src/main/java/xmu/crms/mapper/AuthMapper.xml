@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace用来指定该xml文件对应的interface  -->
+<!-- 默认idea对于该xml文件是几乎没有任何提示的，需要装一个叫 mybatis free plugins 的插件 -->
+<mapper namespace="xmu.crms.mapper.AuthMapper">
+    <!-- id 就是方法名称 -->
+    <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
+    <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
+    <select id="getUserByNumber" resultMap="userDetailsMap">
+        SELECT
+    id,
+    openid,
+    phone,
+    password,
+    type,
+    number,
+    name
+    FROM user_info
+    WHERE phone=#{phone};
+    </select>
+    <resultMap id="userDetailsMap" type="xmu.crms.security.UserDetailsImpl">
+        <id property="id" column="id"/>
+        <result property="openid" column="openid"/>
+       <result property="phone" column="phone"/>
+       <result property="password" column="password"/>
+       <result property="type" column="type"/>
+       <result property="number" column="number"/>
+       <result property="name" column="name"/>
+    </resultMap>
+</mapper>

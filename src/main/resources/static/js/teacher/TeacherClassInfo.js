@@ -39,7 +39,7 @@ function getClassInfo(){
 
 //返回上一页
 function goback(){
-    window.history.go(-1);  //返回上一页
+	window.location.href="/TeacherCourseInformation";  //返回上一页
 }
 
 //下载学生名单

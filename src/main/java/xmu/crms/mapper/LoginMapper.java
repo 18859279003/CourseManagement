@@ -58,14 +58,13 @@ public interface LoginMapper {
 		 */
 		 Integer signUpPhone( @Param(value = "user")User user);
 	 
-	/**
-	 * 用户解绑. 
-	 * <p>教师解绑账号(j2ee使用)<br>
-	 * @param userId - 用户id
-	 * @throws java.lang.IllegalArgumentException- 信息不合法，id格式错误
-	 * @throws UserNotFoundException- 未找到对应用户
-	 */
-		
+
+		/**
+		 *  用户解绑. 
+	     * <p>教师解绑账号(j2ee使用)<br>
+	     * @param userId - 用户id * @param userId
+		 * @return
+		 */
 		Integer deleteTeacherAccount( @Param(value = "userId") BigInteger userId);
 	
 	

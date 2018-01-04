@@ -46,8 +46,8 @@ function getGroupInfo(){
 		success:function(data){
 			var groupinfo=data;	
 			$("#groupinfo").append(
-					'<label id=“seminarName" class="itemName">'+groupinfo.topic.name+"</label>"+
-					'<label id="leaderName" class="itemName">'+groupinfo.seminarGroup.leader.name+"</label>"
+					'<label id=“seminarName" class="itemName">'+groupinfo.seminar.name+"</label>"+
+					'<label id="leaderName" class="itemName">'+groupinfo.leader.name+"</label>"
 			);
 		},
 		error:function(){

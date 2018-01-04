@@ -90,10 +90,9 @@ public interface CourseService {
     /**
      * 按课程名称获取班级列表.
      * <p>根据课程名获取课程ID，通过课程ID获取班级列表<br>
-     *
-     * @param courseName 课程名称
-     * @return list 班级列表
-     * @author YeXiaona
+     * @param courseName
+     * @return
+     * @throws CourseNotFoundException
      * @see CourseService #listCourseByCourseName(String courseName)
      * @see ClassService #listClassByCourseId(BigInteger courseId)
      */
@@ -110,6 +109,8 @@ public interface CourseService {
      * @see UserService #listUserIdByUserName(String userName)
      * @see CourseService #listCourseByUserId(BigInteger)
      * @see ClassService #listClassByCourseId(BigInteger)
+     * @throws UserNotFoundException
+     * @throws ClassesNotFoundException
      */
     List<ClassInfo> listClassByTeacherName(String teacherName) throws UserNotFoundException,ClassesNotFoundException;
 

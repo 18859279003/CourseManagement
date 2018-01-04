@@ -15,3 +15,8 @@ spring:
   configuration: 
   map-underscore-camel-case: true
   log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+jwt:
+  header: Authorization
+  secret: xmu
+  expiration: 604800
+  tokenHead: "Bearer "

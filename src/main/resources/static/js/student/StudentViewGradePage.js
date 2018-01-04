@@ -2,7 +2,7 @@ var seminarId=1;
 var studentId=3;
 window.onload = function(){
 	//*********getseminarId/studentid
-	studentId=localStorage.getItem("studentId");
+	studentId=localStorage.getItem("userId");
 	seminarId=localStorage.getItem("seminarId");
 	$("#courseName").html(localStorage.getItem("courseName")) ;
     $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));

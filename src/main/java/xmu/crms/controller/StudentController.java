@@ -29,8 +29,8 @@ public class StudentController {
 	 * @throws IOException
 	 */
     @RequestMapping(value="/StudentBindPage", method=RequestMethod.GET)
-    void studentBindPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentBindPage.html");
+   String studentBindPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentBindPage.html";
 	}
     /**
 	 * 学生选课
@@ -38,8 +38,8 @@ public class StudentController {
 	 * @throws IOException
 	 */
     @RequestMapping(value="/StudentChooseCoursePage", method=RequestMethod.GET)
-    void studentChooseCoursePage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentChooseCoursePage.html");
+   String studentChooseCoursePage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentChooseCoursePage.html";
 	}
     /**
 	 * 学生课程首页
@@ -47,8 +47,8 @@ public class StudentController {
 	 * @throws IOException
 	 */
     @RequestMapping(value="/StudentCourseHome", method=RequestMethod.GET)
-    void studentCourseHome(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentCourseHome.html");
+   String studentCourseHome(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentCourseHome.html";
 	}
   /**
    * 学生课程信息
@@ -56,8 +56,8 @@ public class StudentController {
    * @throws IOException
    */
     @RequestMapping(value="/StudentCourseInformation", method=RequestMethod.GET)
-    void studentCourseInformation(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentCourseInformation.html");
+   String studentCourseInformation(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentCourseInformation.html";
 	}
     /**
      * 学生固定分组讨论课
@@ -65,8 +65,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentSeminarPage(fixed)", method=RequestMethod.GET)
-    void studentFixedSemunarPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentSeminarPage(fixed).html");
+   String studentFixedSemunarPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentSeminarPage(fixed).html";
 	}
     /**
      * 学生个人信息首页
@@ -74,8 +74,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentHomePage", method=RequestMethod.GET)
-    void studentHomePage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentHomePage.html");
+   String studentHomePage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentHomePage.html";
 	}
     /**
      * 学生个人信息修改
@@ -83,8 +83,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentInfoModifyPage", method=RequestMethod.GET)
-    void studentInfoModifyPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentInfoModifyPage.html");
+   String studentInfoModifyPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentInfoModifyPage.html";
 	}
     /**
      * 学生管理分组
@@ -92,8 +92,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentManageGroupPage", method=RequestMethod.GET)
-    void studentManageGroupPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentManageGroupPage.html");
+   String studentManageGroupPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentManageGroupPage.html";
 	}
     /**
      * 学生修改分组
@@ -101,8 +101,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentModifyGroupPage", method=RequestMethod.GET)
-    void studentModifyGroupPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentModifyGroupPage.html");
+   String studentModifyGroupPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentModifyGroupPage.html";
 	}
     /**
      * 学生随机讨论课
@@ -110,8 +110,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentSeminarPage(random)", method=RequestMethod.GET)
-    void studentRandomSeminarPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentSeminarPage(random).html");
+   String studentRandomSeminarPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentSeminarPage(random).html";
 	}
     /**
      * 学生查看分数
@@ -119,8 +119,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentViewGradePage", method=RequestMethod.GET)
-    void studentViewGradePage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentViewGradePage.html");
+   String studentViewGradePage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentViewGradePage.html";
 	}
     /**
      * 学生查看分组
@@ -128,8 +128,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentViewGroupPage", method=RequestMethod.GET)
-    void studentViewGroupPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentViewGroupPage.html");
+   String studentViewGroupPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentViewGroupPage.html";
 	}
     /**
      * 学生查看话题（固定）
@@ -137,8 +137,8 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentViewTopicPage(fixed)", method=RequestMethod.GET)
-    void studentViewFixedTopicPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentViewTopicPage(fixed).html");
+   String studentViewFixedTopicPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentViewTopicPage(fixed).html";
 	}
     /**
      * 学生查看话题（随机）
@@ -146,7 +146,7 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping(value="/StudentViewTopicPage(random)", method=RequestMethod.GET)
-    void studentViewRandomTopicPage(HttpServletResponse response) throws IOException {
-    	response.sendRedirect("html/student/StudentViewTopicPage(random).html");
+   String studentViewRandomTopicPage(HttpServletResponse response) throws IOException {
+    	return "html/student/StudentViewTopicPage(random).html";
 	}
 }

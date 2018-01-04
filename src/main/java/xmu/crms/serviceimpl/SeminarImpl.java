@@ -1,6 +1,8 @@
 package xmu.crms.serviceimpl;
 
-
+/**
+ * @author R212-1
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xmu.crms.dao.SeminarDao;

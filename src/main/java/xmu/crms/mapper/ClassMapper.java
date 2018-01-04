@@ -17,11 +17,11 @@ import java.util.List;
 @Component
 public interface ClassMapper {
 
-    /**
-     * 
-     * 根据老师id获取课程
-     * @param teacherId
-     */
+	/**
+	 * 根据老师id获取课程
+	 * @param teacherId
+	 * @return
+	 */
     List<ClassInfo> listClassByTeacherId(BigInteger teacherId);
     
     /**

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>讨论课修改</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="/css/teacher/content.css">
+</head>
+<body>
+    
+        <div class="top">
+          <div class="font">
+            课堂管理系统
+          </div>
+          <div class="icon">
+           <a href="/TeacherHomePage"><img src="/img/home.png">首页 </a>
+        <a href="###"><img src="/img/help.png">帮助 </a>
+        <a href="/AccountLoginPage"><img src="/img/exit.png">退出 </a>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="body">
+            <div class="navigation">
+              <div class="courseName">OOAD</div>
+                <div class="line"></div>
+                <div class="courseIntroduction">ooad is xxx</div>
+            
+            </div>
+            <div class="content">
+                <div class="block">
+                    <div class="title">修改讨论课1</div>
+                    <div class="returnButton" style='cursor:pointer' onclick="window.location.href='/TeacherSeminarInfo'">返回上一页</div>
+                    <div class="line"></div>
+                    <div class="itemBody">
+                        <div class="item" id="name">
+                          <label class="itemName">讨论课名称:</label>
+                         
+                        </div>
+                        <div class="item" style="height:40%;" id="description">
+                          <label class="itemName">讨论课说明:</label>
+                        
+                        </div>
+                        <div class="item" id="GroupingMethod">
+                          <label class="itemName">分组方式: </label>
+                          <select class="bigSelect">
+                          <option   >固定分组</option>
+						  <option    selected = "selected" >随机分组</option >
+                          </select>
+                        </div>
+                        <div class="item" >
+                          <label class="itemName" >开始时间: </label>
+                          <input type="date" name="startTime" class="timeStyle" id="startTime">
+                          <label class="itemName" style="margin-left: 15%" >结束时间: </label>
+                          <input type="date" name="startTime" class="timeStyle" id="endTime">
+                        </div>
+
+                        <div class="item">
+                          <button class="submit" onclick="submit()">提 交</button>
+                          <button class="reset" onclick="reload()">重 置</button>
+                          <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+</body>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+		<script src="/js/teacher/TeacherUpdateSeminar.js"></script>
+		<script src="/js/jwt.js" type="text/javascript"></script>
+</html>

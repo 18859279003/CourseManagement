@@ -97,28 +97,84 @@ public interface GradeMapper {
      * @param grade
      */
     void updateGroupByGroupId(@Param("seminarGroupId") BigInteger seminarGroupId, @Param("grade") BigInteger grade);
+    
     /**
      * 定时器方法.
      * 讨论课结束后计算展示得分.
      * @param seminarId
-     * @throws IllegalArgumentException seminarId或seminarGroupId格式错误
+     * @return
      */
     List<BigInteger> getSeminarGroupIdBySeminarId(@Param("seminarId")BigInteger seminarId);
+    
+    /**
+     * 讨论课结束后计算展示得分.
+     * @param seminarGroupId
+     * @return
+     */
     List<BigInteger> getSeminarGroupTopicIdBySeminarGroupId(@Param("seminarGroupId")BigInteger seminarGroupId);
+    
+    /**
+     * 讨论课结束后计算展示得分.
+     * @param seminarGroupTopicId
+     * @return
+     */
     List<Integer> getGradeBySeminarGroupTopicId(@Param("seminarGroupTopicId")BigInteger seminarGroupTopicId);
+    /**
+     * 讨论课结束后计算展示得分.
+     * @param seminarGroupTopicId
+     * @param grade
+     */
     void updatePresentationGradeBySeminarGroupTopicId(@Param("seminarGroupTopicId")BigInteger seminarGroupTopicId,@Param("grade")int grade);
+    /**
+     * 讨论课结束后计算展示得分.
+     * @param seminarGroupId
+     * @param grade
+     */
     void updatePresentationGradeBySeminarGroupId(@Param("seminarGroupId")BigInteger seminarGroupId,@Param("grade")int grade);
+ 
     /**
      * 定时器方法.
      * 讨论课结束后计算本次讨论课得分.
      * <p>条件: 讨论课已结束，展示得分已算出<br>*GradeService<br>
-     * @throws IllegalArgumentException seminarId或seminarGroupId格式错误
+     * @param seminarGroupId
+     * @return
      */
     int getPresentationGradeBySeminarGroupId(@Param("seminarGroupId")BigInteger seminarGroupId);
+    
+    /**
+     * 定时器方法.
+     * @param seminarGroupId
+     * @return
+     */
     int getReportGradeBySeminarGroupId(@Param("seminarGroupId")BigInteger seminarGroupId);
+    /**
+     * 定时器方法.
+     * @param seminarId
+     * @return
+     */
     BigInteger getCourseIdBySeminarId(@Param("seminarId")BigInteger seminarId);
+    /**
+     * 定时器方法.
+     * @param courseId
+     * @return
+     */
     int getFivePercentageByCourseId(@Param("courseId")BigInteger courseId);
+    /**
+     * 定时器方法.
+     * @param courseId
+     * @return
+     */
     int getFourPercentageByCourseId(@Param("courseId")BigInteger courseId);
+    /**
+     * 定时器方法.
+     * @param courseId
+     * @return
+     */
     int getThreePercentageByCourseId(@Param("courseId")BigInteger courseId);
+    /**
+     * 定时器方法.
+     * @param seminarGroupId
+     * @param grade
+     */
     void updateFinalGradeBySeminarGroupId(@Param("seminarGroupId")BigInteger seminarGroupId,@Param("grade")int grade);
 }

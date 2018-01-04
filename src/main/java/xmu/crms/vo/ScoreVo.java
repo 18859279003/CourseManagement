@@ -1,5 +1,9 @@
 package xmu.crms.vo;
-
+/**
+ * 
+ * @author R212-1
+ *
+ */
 public class ScoreVo {
 
     private String topic;

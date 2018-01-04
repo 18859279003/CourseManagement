@@ -2,10 +2,10 @@ var classId=1;
 var studentId=3;
 window.onload = function(){
 	//*********getstudentId/classId
-	studentId=localStorage.getItem("studentId");
+	studentId=localStorage.getItem("userId");
 	classId=localStorage.getItem("classId");
-	$("#courseName").html(localStorage.getItem("courseName")) ;
-    $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));;
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
 	init();
 }
 function init(){

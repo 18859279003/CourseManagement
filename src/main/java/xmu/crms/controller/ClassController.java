@@ -61,9 +61,13 @@ public class ClassController {
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public List<ClassInfo> getClassList(String courseName, String teacherName) throws CourseNotFoundException, UserNotFoundException, ClassesNotFoundException{
 	    if(courseName==""&&teacherName=="")
-	        return classServiceImpl.listAllClass();
+	    {
+	    	return classServiceImpl.listAllClass();
+	    }
 	    else
+	    {
 	        return classServiceImpl.listClassByName(courseName,teacherName);
+	    }
 	}
 
 	/**

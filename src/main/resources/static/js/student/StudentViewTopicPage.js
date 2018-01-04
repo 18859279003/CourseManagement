@@ -3,8 +3,10 @@ var seminarId=1;
 var studentId=3;
 window.onload = function(){
 	//*********gettopicId/studentid/seminarid
-	//$("#courseName").html(?????) ;
-    //$("#courseIntroduction").html(?????);
+	studentId=localStorage.getItem("userId");
+	seminarId=localStorage.getItem("seminarId");
+	$(".courseName").html(localStorage.getItem("courseName")) ;
+    $(".courseIntroduction").html(localStorage.getItem("courseIntroduction"));
 	init();
 }
 function init(){

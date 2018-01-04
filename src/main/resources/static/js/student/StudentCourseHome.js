@@ -4,7 +4,7 @@
 var studentId=3;
 window.onload = function(){
 	//************getstudentId
-	studentId=localStorage.getItem("studentId");
+	studentId=localStorage.getItem("userId");
 	getClassInformation();
 }
 
@@ -68,5 +68,6 @@ function classinfo(id)
 {
 	//************save classId
 	localStorage.setItem("classId",id);
+	alert(id);
 	window.location.href='/StudentCourseInformation';
 }

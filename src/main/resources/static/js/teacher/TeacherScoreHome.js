@@ -27,7 +27,7 @@ function init(){
 					"<td>"+groupinfo.reportGrade+"</td>"+
 					"<td>"+groupinfo.grade+"</td>"+
 					"<td>" +
-						"<img src='../../Img/view.png' alt='预览' onclick='report("+groupinfo.id+")' style='cursor:pointer'>"+
+						"<img src='../../Img/view.png' alt='预览' onclick='report("+groupinfo.groupName+")' style='cursor:pointer'>"+
                         "<img src='../../Img/download.png' alt='下载'>"+
                     "</td></tr>"
 			);

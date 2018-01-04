@@ -9,7 +9,7 @@ var groupId=1;
 //页面加载时，获取固定分组名单
 window.onload = function(){
 	//*********getstudentid/classid
-	studentId=localStorage.getItem("studentId");
+	studentId=localStorage.getItem("userId");
 	classId=localStorage.getItem("classId");
 	$("#courseName").html(localStorage.getItem("courseName")) ;
     $("#courseIntroduction").html(localStorage.getItem("courseIntroduction"));

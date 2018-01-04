@@ -296,7 +296,8 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException {
 
-        if(userId.compareTo(new BigInteger("0")) <= 0) {
+    	String zero="o";
+        if(userId.compareTo(new BigInteger(zero)) <= 0) {
             throw new IllegalArgumentException(String.format("illegal userId format %d!", userId));
         }
 

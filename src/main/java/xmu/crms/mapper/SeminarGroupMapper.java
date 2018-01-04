@@ -167,8 +167,11 @@ public interface SeminarGroupMapper {
     Integer resignLeaderById(BigInteger seminarGroupId);
 
 
+ 
     /**
-     * 异常讨论课小组成员.
+     *  异常讨论课小组成员.
+     * @param seminarGroupMember
+     * @return
      */
     Integer deleteSeminarGroupMemberById(SeminarGroupMember seminarGroupMember);
 }

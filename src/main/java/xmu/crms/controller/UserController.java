@@ -1,11 +1,17 @@
 package xmu.crms.controller;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xmu.crms.entity.User;
 import xmu.crms.exception.UserNotFoundException;
+import xmu.crms.service.security.AuthServiceImpl;
 import xmu.crms.serviceimpl.LoginServiceImpl;
 import xmu.crms.serviceimpl.TopicServiceImpl;
 import xmu.crms.serviceimpl.UserServiceImpl;
@@ -29,6 +36,8 @@ public class UserController {
 	private UserServiceImpl userServiceImpl;
 	@Autowired
 	private LoginServiceImpl loginServiceImpl;
+	@Autowired
+	private AuthServiceImpl authServiceImpl;
     /**
      * 获得当前用户
      * @return User deleteNumber
@@ -36,8 +45,14 @@ public class UserController {
      * @throws IllegalArgumentException 
      */
 	@RequestMapping(value="/me/{userId}", method=RequestMethod.GET)
-	public User getUser(@PathVariable int userId) throws IllegalArgumentException, UserNotFoundException {
-		return userServiceImpl.getUserByUserId(new BigInteger(userId+""));
+	public User getUser() throws IllegalArgumentException, UserNotFoundException {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof String && ((String) principal).equals("anonymousUser")) {
+            throw new BadCredentialsException("Bad Credentials");
+        }
+
+        return userServiceImpl.getUserByUserId( (BigInteger)principal);
 	}
 	
 	 /**
@@ -59,8 +74,7 @@ public class UserController {
 	 */
 		@RequestMapping(value="/signin", method=RequestMethod.POST)
 		public User signinByPhone(@RequestBody User user) throws UserNotFoundException{
-			loginServiceImpl.signInPhone(user);
-			System.out.println(user);
+			String token=authServiceImpl.login(user.getPhone(), user.getPassword());
 			return loginServiceImpl.signInPhone(user);
 		}
 		

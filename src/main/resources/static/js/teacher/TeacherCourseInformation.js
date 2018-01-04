@@ -71,7 +71,7 @@ function seminarinfo(id){
 	window.location.href="/TeacherSeminarInfo";		
 }
 function goback(){
-	window.history.go(-1);  //返回上一页
+	window.location.href="/TeacherCourseHomePage";	  //返回上一页
 }
 
 function add()

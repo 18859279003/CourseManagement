@@ -7,7 +7,7 @@ window.onload = getAllClass;
 // 获取所有的班级信息
 function getAllClass() {
 	//**************get studentId
-	//studentId = localStorage.getItem("studentId");
+	studentId = localStorage.getItem("userId");
 	var classlist;
 	var courseName = $("#course").val();
 	var teacherName = $("#teacher").val();
